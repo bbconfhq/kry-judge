@@ -30,6 +30,7 @@ dependencies {
     testImplementation("org.springframework.boot:spring-boot-starter-test")
     testImplementation("org.springframework.kafka:spring-kafka-test")
     testImplementation("org.springframework.security:spring-security-test")
+    implementation("org.mariadb.jdbc:mariadb-java-client:2.1.2")
 }
 
 tasks.withType<KotlinCompile> {
