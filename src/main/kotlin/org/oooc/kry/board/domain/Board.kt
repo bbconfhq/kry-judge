@@ -13,6 +13,13 @@ data class Board (
     var name: String,
 
     @Column(columnDefinition = "INT(11) UNSIGNED")
-    var seq: Int
+    var seq: Int,
+
+
+
+    /* for bidirectional mapping */
+
+    @OneToMany(mappedBy = "board")
+    var articles: List<Article>
 
 )

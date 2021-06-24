@@ -34,6 +34,13 @@ data class Article (
     var upVote: Int,
 
     @Column(columnDefinition = "INT(11) UNSIGNED")
-    var downVote: Int
+    var downVote: Int,
 
-)
+
+
+    /* for bidirectional mapping */
+
+    @OneToMany(mappedBy = "article")
+    var comments: List<Comment>,
+
+    )
