@@ -4,9 +4,5 @@ import org.springframework.stereotype.Repository
 
 @Repository
 class JpaBoardRepository: BoardRepository {
-    
-    override fun getBoardList() {
-
-    }
 
 }

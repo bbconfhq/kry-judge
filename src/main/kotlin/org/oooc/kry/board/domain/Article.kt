@@ -41,6 +41,6 @@ data class Article (
     /* for bidirectional mapping */
 
     @OneToMany(mappedBy = "article")
-    var comments: List<Comment>,
+    var comments: List<Comment>
 
-    )
+)
