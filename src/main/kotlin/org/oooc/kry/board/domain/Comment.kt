@@ -1,5 +1,6 @@
 package org.oooc.kry.board.domain
 
+import java.time.OffsetDateTime
 import java.time.ZonedDateTime
 import javax.persistence.*
 
@@ -22,11 +23,9 @@ data class Comment (
     @Lob
     var content: String,
 
-    @Temporal(TemporalType.TIMESTAMP)
-    var created: ZonedDateTime,
+    var created: OffsetDateTime,
 
-    @Temporal(TemporalType.TIMESTAMP)
-    var modified: ZonedDateTime,
+    var modified: OffsetDateTime,
 
     @Column(columnDefinition = "INT(11) UNSIGNED")
     var upVote: Int,
