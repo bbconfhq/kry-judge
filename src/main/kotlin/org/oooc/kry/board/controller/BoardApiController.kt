@@ -5,7 +5,7 @@ import org.springframework.web.bind.annotation.*
 
 @RestController
 @RequestMapping("board")
-class BoardController(val boardService: BoardService) {
+class BoardApiController(val boardService: BoardService) {
 
     // CREATE BOARD
     @PostMapping("/")

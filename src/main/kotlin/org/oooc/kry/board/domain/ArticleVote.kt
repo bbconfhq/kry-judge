@@ -3,19 +3,20 @@ package org.oooc.kry.board.domain
 import javax.persistence.*
 
 @Entity
-data class Comment_Vote (
+data class ArticleVote (
+
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     var id: Long,
 
-    @ManyToOne
+    @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(columnDefinition = "INT(11) UNSIGNED")
-    var comment: Comment,
+    var article: Article,
 
 //    TODO: Mapping to User
-//    @ManyToOne
+//    @ManyToOne(fetch = FetchType.LAZY)
 //    @JoinColumn(columnDefinition = "INT(11) UNSIGNED")
-//    var user: User = User(),
+//    var user: User,
 
     var updown: Int
 
