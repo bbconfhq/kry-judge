@@ -1,4 +1,7 @@
 package org.oooc.kry.board.dto
 
-class BoardCreateRequestDto {
-}
+data class BoardCreateRequestDto (
+    val id: Long,
+    val name: String,
+    val seq: Long
+)

@@ -1,5 +1,6 @@
 package org.oooc.kry.board.controller
 
+import org.oooc.kry.board.dto.BoardCreateRequestDto
 import org.oooc.kry.board.service.BoardService
 import org.springframework.web.bind.annotation.*
 
@@ -9,8 +10,9 @@ class BoardController(val boardService: BoardService) {
 
     // CREATE BOARD
     @PostMapping("/")
-    fun postBoard(@RequestParam name: String, @RequestParam seq: Int) {
-
+    fun postBoard(@RequestBody boardCreateRequestDto: BoardCreateRequestDto): String {
+        boardService.createBoard(boardCreateRequestDto)
+        return "a"
     }
 
     // GET BOARD
