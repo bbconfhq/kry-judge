@@ -12,12 +12,10 @@ data class Comment (
     var id: Long,
 
     @ManyToOne(fetch = FetchType.LAZY)
-    @JoinColumn(columnDefinition = "INT(11) UNSIGNED")
     var article: Article,
 
 //    TODO: Mapping to User
 //    @ManyToOne
-//    @JoinColumn(columnDefinition = "INT(11) UNSIGNED")
 //    var user: User
 
     @Lob
@@ -27,10 +25,8 @@ data class Comment (
 
     var modified: OffsetDateTime,
 
-    @Column(columnDefinition = "INT(11) UNSIGNED")
-    var upVote: Int,
+    var upVote: Long,
 
-    @Column(columnDefinition = "INT(11) UNSIGNED")
-    var downVote: Int
+    var downVote: Long
 
 )

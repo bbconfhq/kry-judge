@@ -9,14 +9,12 @@ data class CommentVote (
     var id: Long,
 
     @ManyToOne
-    @JoinColumn(columnDefinition = "INT(11) UNSIGNED")
     var comment: Comment,
 
 //    TODO: Mapping to User
 //    @ManyToOne
-//    @JoinColumn(columnDefinition = "INT(11) UNSIGNED")
 //    var user: User = User(),
 
-    var updown: Int
+    var updown: Long
 
 )
