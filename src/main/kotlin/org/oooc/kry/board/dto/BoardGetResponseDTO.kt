@@ -6,5 +6,6 @@ data class BoardGetResponseDTO (
     val id: Long,
     val name: String,
     val seq: Long,
-    val articles: List<Article>
+    // TODO: return must include articles
+    // val articles: List<Article>
 )
