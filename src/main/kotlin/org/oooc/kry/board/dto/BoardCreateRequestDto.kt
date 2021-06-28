@@ -1,7 +1,12 @@
 package org.oooc.kry.board.dto
 
-data class BoardCreateRequestDto (
-    val id: Long,
+import org.oooc.kry.board.domain.Board
+
+data class BoardCreateRequestDTO (
     val name: String,
     val seq: Long
-)
+) {
+    fun toEntity(): Board {
+        return Board(name, seq)
+    }
+}
