@@ -8,6 +8,7 @@ data class CommentVote (
 
     @Id
     @ManyToOne
+    @JoinColumn
     var comment: Comment,
 
 //    TODO: Mapping to User

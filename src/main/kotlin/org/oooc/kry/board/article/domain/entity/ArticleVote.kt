@@ -8,6 +8,7 @@ data class ArticleVote (
 
     @Id
     @ManyToOne(fetch = FetchType.LAZY)
+    @JoinColumn
     var article: Article,
 
 //    TODO: Mapping to User
