@@ -1,6 +1,8 @@
 package org.oooc.kry.board.controller
 
 import org.oooc.kry.board.dto.BoardCreateRequestDTO
+import org.oooc.kry.board.dto.BoardGetRequestDTO
+import org.oooc.kry.board.dto.BoardGetResponseDTO
 import org.oooc.kry.board.service.BoardService
 import org.springframework.web.bind.annotation.*
 
@@ -16,8 +18,9 @@ class BoardController(val boardService: BoardService) {
 
     // GET BOARD
     @GetMapping("/{boardName}")
-    fun getBoard(@PathVariable("boardName") boardName: String) {
-
+    fun getBoard(@PathVariable boardName: String): BoardGetResponseDTO {
+        val boardGetRequestDTO = BoardGetRequestDTO(boardName)
+        return boardService.getBoard(boardGetRequestDTO)
     }
 
     // MODIFY BOARD
@@ -35,36 +38,6 @@ class BoardController(val boardService: BoardService) {
     // GET LIST OF BOARDS
     @GetMapping("/")
     fun getBoards() {
-
-    }
-
-    // CREATE ARTICLE
-    @PostMapping("/{boardName}/article")
-    fun postArticle() {
-
-    }
-
-    // GET ARTICLE
-    @GetMapping("/{boardName}/article/{articleNo}")
-    fun getArticle() {
-
-    }
-
-    // MODIFY ARTICLE
-    @PutMapping("/{boardName}/article/{articleNo}")
-    fun putArticle() {
-
-    }
-
-    // DELETE ARTICLE
-    @DeleteMapping("/{boardName}/article/{articleNo}")
-    fun deleteArticle() {
-
-    }
-
-    // GET LIST OF ARTICLES
-    @GetMapping("/{boardName}/article")
-    fun getArticles() {
 
     }
 
