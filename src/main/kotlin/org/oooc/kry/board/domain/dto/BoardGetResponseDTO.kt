@@ -1,6 +1,4 @@
-package org.oooc.kry.board.dto
-
-import org.oooc.kry.board.domain.Article
+package org.oooc.kry.board.domain.dto
 
 data class BoardGetResponseDTO (
     val id: Long,

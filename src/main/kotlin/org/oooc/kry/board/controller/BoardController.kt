@@ -1,8 +1,8 @@
 package org.oooc.kry.board.controller
 
-import org.oooc.kry.board.dto.BoardCreateRequestDTO
-import org.oooc.kry.board.dto.BoardGetRequestDTO
-import org.oooc.kry.board.dto.BoardGetResponseDTO
+import org.oooc.kry.board.domain.dto.BoardCreateRequestDTO
+import org.oooc.kry.board.domain.dto.BoardGetRequestDTO
+import org.oooc.kry.board.domain.dto.BoardGetResponseDTO
 import org.oooc.kry.board.service.BoardService
 import org.springframework.web.bind.annotation.*
 

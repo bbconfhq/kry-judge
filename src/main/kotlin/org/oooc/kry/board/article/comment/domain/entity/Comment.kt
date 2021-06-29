@@ -1,7 +1,7 @@
-package org.oooc.kry.board.domain
+package org.oooc.kry.board.article.comment.domain.entity
 
+import org.oooc.kry.board.article.domain.entity.Article
 import java.time.OffsetDateTime
-import java.time.ZonedDateTime
 import javax.persistence.*
 
 @Entity

@@ -1,6 +1,6 @@
-package org.oooc.kry.board.dto
+package org.oooc.kry.board.domain.dto
 
-import org.oooc.kry.board.domain.Board
+import org.oooc.kry.board.domain.entity.Board
 
 data class BoardCreateRequestDTO (
     val name: String,

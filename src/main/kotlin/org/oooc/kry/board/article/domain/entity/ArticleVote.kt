@@ -1,4 +1,4 @@
-package org.oooc.kry.board.domain
+package org.oooc.kry.board.article.domain.entity
 
 import javax.persistence.*
 
