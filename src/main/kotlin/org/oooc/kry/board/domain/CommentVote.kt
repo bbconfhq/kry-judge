@@ -4,6 +4,7 @@ import javax.persistence.*
 
 @Entity
 data class CommentVote (
+
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     var id: Long,

@@ -1,4 +1,4 @@
-package org.oooc.kry.board.controller
+package org.oooc.kry.board.article.controller
 
 import org.springframework.web.bind.annotation.*
 
