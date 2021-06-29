@@ -6,8 +6,6 @@ import org.oooc.kry.board.domain.dto.BoardGetResponseDTO
 
 interface BoardRepository: JpaRepository<Board, Long> {
 
-    fun save(board: Board)
-
     fun findByName(name: String): BoardGetResponseDTO
 
 }
