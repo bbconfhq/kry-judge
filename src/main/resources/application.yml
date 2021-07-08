@@ -1,0 +1,14 @@
+spring:
+  datasource:
+    driverClassName: org.mariadb.jdbc.Driver
+    url: jdbc:mariadb://${KRY_DB_IP}:${KRY_DB_PORT}/${KRY_DB}?useUnicode=true&characterEncoding=utf-8
+    username: ${KRY_DB_USERNAME}
+    password: ${KRY_DB_PASS}
+
+  jpa:
+    show-sql: true
+    properties:
+      hibernate:
+        format_sql: true
+    hibernate:
+      ddl_auto: create
