@@ -11,7 +11,9 @@ class Permgroup (
     @Column(nullable = false, unique = true, length = 191)
     val name: String = "",
 
-
     @OneToMany(mappedBy = "permgroup")
     val userPermgroups: List<UserPermgroup> = emptyList(),
+
+    @OneToMany(mappedBy = "permgroup")
+    val PermissionPermgroup: List<PermissionPermgroup> = emptyList(),
 )

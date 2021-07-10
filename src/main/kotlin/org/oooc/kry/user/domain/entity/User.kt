@@ -1,5 +1,6 @@
 package org.oooc.kry.user.domain.entity
 
+import org.oooc.global.entity.BaseEntity
 import java.time.OffsetDateTime
 import java.time.ZoneOffset
 import javax.persistence.*
@@ -33,5 +34,8 @@ class User (
 
     @OneToMany(mappedBy = "user")
     val userPermgroups: List<UserPermgroup> = emptyList(),
-)
+
+    @OneToMany(mappedBy = "user")
+    val userPermissions: List<UserPermission> = emptyList(),
+): BaseEntity()
 

@@ -1,9 +1,7 @@
 package org.oooc.kry.user.domain.entity
 
-import javax.persistence.Column
-import javax.persistence.GeneratedValue
-import javax.persistence.GenerationType
-import javax.persistence.Id
+import org.oooc.global.entity.BaseEntity
+import javax.persistence.*
 
 class Permission (
     @Id
@@ -12,4 +10,10 @@ class Permission (
 
     @Column(nullable = false, unique = true, length = 191)
     val name: String = "",
-)
+
+    @OneToMany(mappedBy = "permission")
+    val userPermissions: List<UserPermission> = emptyList(),
+
+    @OneToMany(mappedBy = "permgroup")
+    val PermissionPermgroup: List<PermissionPermgroup> = emptyList(),
+) : BaseEntity()
