@@ -1,8 +1,8 @@
 package org.oooc.kry.user.domain.entity
 
+import org.oooc.global.entity.BaseEntity
 import java.io.Serializable
 import javax.persistence.*
-import org.oooc.global.entity.BaseEntity as BaseEntity
 
 class UserPermissionId(
     val user: User = User(),

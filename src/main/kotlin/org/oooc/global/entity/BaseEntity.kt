@@ -1,6 +1,8 @@
 package org.oooc.global.entity
 
 import java.io.Serializable
+import javax.persistence.MappedSuperclass
 
-open class BaseEntity : Serializable{
+@MappedSuperclass
+open class BaseEntity: Serializable{
 }

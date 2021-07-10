@@ -3,6 +3,7 @@ package org.oooc.kry.user.domain.entity
 import org.oooc.global.entity.BaseEntity
 import javax.persistence.*
 
+@Entity
 class Permission (
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -16,4 +17,4 @@ class Permission (
 
     @OneToMany(mappedBy = "permgroup")
     val PermissionPermgroup: List<PermissionPermgroup> = emptyList(),
-) : BaseEntity()
+): BaseEntity()

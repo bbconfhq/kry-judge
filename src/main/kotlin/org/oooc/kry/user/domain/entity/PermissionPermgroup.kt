@@ -16,7 +16,7 @@ class PermissionPermgroup (
     @Id
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "permission_id")
-    val user: Permission= Permission(),
+    val permission: Permission= Permission(),
 
     @Id
     @ManyToOne(fetch = FetchType.LAZY)
