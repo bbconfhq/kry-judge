@@ -1,5 +1,6 @@
 package org.oooc.kry.problem.entity
 
+import java.io.Serializable
 import javax.persistence.*
 
 @Entity
@@ -17,7 +18,7 @@ class TestCase(
 
     @Column(nullable = false, columnDefinition = "text")
     val output: String = ""
-) {
+) : Serializable {
     override fun equals(other: Any?): Boolean {
         if (this === other) return true
         if (javaClass != other?.javaClass) return false
