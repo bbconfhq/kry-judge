@@ -40,28 +40,4 @@ class BoardController(val boardService: BoardService) {
     fun getBoards() {
 
     }
-
-    // CREATE COMMENT
-    @PostMapping("/{boardName}/article/{articleNo}/comment")
-    fun postComment() {
-
-    }
-
-    // GET COMMENT
-    @GetMapping("/{boardName}/article/{articleNo}/comment/{commentNo}")
-    fun getComment() {
-
-    }
-
-    // DELETE COMMENT
-    @DeleteMapping("/{boardName}/article/{articleNo}/comment/{commentNo}")
-    fun deleteComment() {
-
-    }
-
-    // GET LIST OF COMMENTS
-    @GetMapping("/{boardName}/article/{articleNo}/comment")
-    fun getComments() {
-
-    }
 }

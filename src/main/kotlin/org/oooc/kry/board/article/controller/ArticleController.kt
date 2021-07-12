@@ -3,6 +3,7 @@ package org.oooc.kry.board.article.controller
 import org.springframework.web.bind.annotation.*
 
 @RestController
+@RequestMapping("board")
 class ArticleController {
 
     // CREATE ARTICLE

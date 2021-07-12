@@ -3,40 +3,47 @@ package org.oooc.kry.board.article.domain.entity
 import org.oooc.kry.board.domain.entity.Board
 import org.oooc.kry.board.article.comment.domain.entity.Comment
 import java.time.OffsetDateTime
+import java.time.ZoneOffset
 import javax.persistence.*
 
 @Entity
-data class Article (
+class Article (
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    var id: Long,
+    val id: Long = 0,
 
     @ManyToOne(fetch = FetchType.LAZY)
-    var board: Board,
+    val board: Board = Board(),
 
 //    TODO: Mapping to User
 //    @ManyToOne
-//    var user: User,
+//    val user: User = User(),
 
-    var title: String,
+    val title: String = "",
 
     @Lob
-    var content: String,
+    @Column(nullable = false)
+    val content: String = "",
 
-    var created: OffsetDateTime,
+    @Column(nullable = false)
+    val created: OffsetDateTime = OffsetDateTime.now(ZoneOffset.of("+09:00")),
 
-    var modified: OffsetDateTime,
+    @Column(nullable = false)
+    val modified: OffsetDateTime = OffsetDateTime.now(ZoneOffset.of("+09:00")),
 
-    var upvote: Long,
+    @Column(nullable = false)
+    val upvote: Long = 0,
 
-    var downvote: Long,
+    @Column(nullable = false)
+    val downvote: Long = 0,
 
 
 
     /* for bidirectional mapping */
 
     @OneToMany(mappedBy = "article")
-    var comments: List<Comment>
+    @Column(nullable = false)
+    val comments: List<Comment> = emptyList()
 
 )

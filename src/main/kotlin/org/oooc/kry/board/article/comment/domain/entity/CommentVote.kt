@@ -4,19 +4,19 @@ import javax.persistence.*
 
 @Entity
 @IdClass(CommentVoteId::class)
-data class CommentVote (
+class CommentVote (
 
     @Id
     @ManyToOne
     @JoinColumn
-    var comment: Comment,
+    val comment: Comment = Comment(),
 
 //    TODO: Mapping to User
 //    @ManyToOne
 //    @Id
-//    var user: User = User(),
+//    val user: User = User(),
 
     @Id
-    var updown: Long
+    val updown: Long = 0
 
 )

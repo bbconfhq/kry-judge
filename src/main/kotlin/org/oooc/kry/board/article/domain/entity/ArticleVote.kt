@@ -4,19 +4,19 @@ import javax.persistence.*
 
 @Entity
 @IdClass(ArticleVoteId::class)
-data class ArticleVote (
+class ArticleVote (
 
     @Id
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn
-    var article: Article,
+    val article: Article = Article(),
 
 //    TODO: Mapping to User
 //    @Id
 //    @ManyToOne(fetch = FetchType.LAZY)
-//    var user: User,
+//    val user: User = User(),
 
     @Id
-    var updown: Byte
+    val updown: Byte = 0
 
 )

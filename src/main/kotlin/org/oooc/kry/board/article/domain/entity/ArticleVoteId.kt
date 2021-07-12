@@ -1,9 +1,17 @@
 package org.oooc.kry.board.article.domain.entity
 
 import java.io.Serializable
+import javax.persistence.Column
 
-data class ArticleVoteId (
-    var article: Article,
-    // var user: User,
-    var updown: Byte
+class ArticleVoteId (
+
+    @Column(nullable = false)
+    val article: Article = Article(),
+
+    // @Column(nullable = false)
+    // val user: User = User(),
+
+    @Column(nullable = false)
+    val updown: Byte = 0
+
 ): Serializable

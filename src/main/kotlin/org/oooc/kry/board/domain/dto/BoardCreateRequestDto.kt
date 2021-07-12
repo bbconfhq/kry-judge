@@ -7,6 +7,6 @@ data class BoardCreateRequestDTO (
     val seq: Long
 ) {
     fun toEntity(): Board {
-        return Board(name, seq)
+        return Board(name = name, seq = seq)
     }
 }
