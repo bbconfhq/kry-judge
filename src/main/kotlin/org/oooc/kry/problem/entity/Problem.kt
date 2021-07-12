@@ -1,5 +1,6 @@
 package org.oooc.kry.problem.entity
 
+import java.io.Serializable
 import java.time.OffsetDateTime
 import java.time.ZoneOffset
 import javax.persistence.*
@@ -13,7 +14,7 @@ class Problem(
     /**
      * TODO: Mapping to User
      * @ManyToOne
-     * var user: User
+     * val user: User
      */
 
     @OneToMany(mappedBy = "problem")
@@ -51,4 +52,19 @@ class Problem(
 
     @Column(nullable = false)
     val acceptCount: Int = 0
-)
+) : Serializable {
+    override fun equals(other: Any?): Boolean {
+        if (this === other) return true
+        if (javaClass != other?.javaClass) return false
+
+        other as Problem
+
+        if (id != other.id) return false
+
+        return true
+    }
+
+    override fun hashCode(): Int {
+        return id.hashCode()
+    }
+}
