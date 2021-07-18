@@ -22,8 +22,7 @@ class Article (
 
     val title: String = "",
 
-    @Lob
-    @Column(nullable = false)
+    @Column(nullable = false, columnDefinition = "text")
     val content: String = "",
 
     @Column(nullable = false)

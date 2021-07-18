@@ -20,8 +20,7 @@ class Comment (
 //    @ManyToOne
 //    val user: User = User()
 
-    @Lob
-    @Column(nullable = false)
+    @Column(nullable = false, columnDefinition = "text")
     val content: String = "",
 
     @Column(nullable = false)
