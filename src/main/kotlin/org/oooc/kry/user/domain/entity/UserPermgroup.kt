@@ -1,6 +1,5 @@
 package org.oooc.kry.user.domain.entity
 
-import org.oooc.kry.global.entity.BaseEntity
 import java.io.Serializable
 import javax.persistence.*
 
@@ -21,4 +20,4 @@ class UserPermgroup (
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "permgroup_id")
     val permgroup: Permgroup = Permgroup()
-): BaseEntity()
+): Serializable

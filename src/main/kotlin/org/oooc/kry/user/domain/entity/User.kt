@@ -1,6 +1,6 @@
 package org.oooc.kry.user.domain.entity
 
-import org.oooc.kry.global.entity.BaseEntity
+import java.io.Serializable
 import java.time.OffsetDateTime
 import java.time.ZoneOffset
 import javax.persistence.*
@@ -54,4 +54,4 @@ class User (
     // TODO: 2021/07/10 join comment vote entity
 //    @OneToMany(mappedBy = "user")
 //    val commentVotes: List<CommentVote> = emptyList(),
-): BaseEntity()
+): Serializable

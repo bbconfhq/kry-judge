@@ -1,6 +1,6 @@
 package org.oooc.kry.user.domain.entity
 
-import org.oooc.kry.global.entity.BaseEntity
+import java.io.Serializable
 import javax.persistence.*
 
 @Entity
@@ -17,4 +17,4 @@ class Permission (
 
     @OneToMany(mappedBy = "permgroup")
     val PermissionPermgroup: List<PermissionPermgroup> = emptyList(),
-): BaseEntity()
+): Serializable
