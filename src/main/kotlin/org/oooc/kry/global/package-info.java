@@ -1,0 +1,1 @@
+package org.oooc.kry.global;
