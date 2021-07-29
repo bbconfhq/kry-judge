@@ -1,4 +1,4 @@
-package org.oooc.kry.user.service
+package org.oooc.kry.user.domain.service
 
 import org.springframework.stereotype.Service
 

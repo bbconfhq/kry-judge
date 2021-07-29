@@ -1,4 +1,4 @@
-package org.oooc.kry.user.repository
+package org.oooc.kry.user.domain.repository
 
 import org.springframework.stereotype.Repository
 
