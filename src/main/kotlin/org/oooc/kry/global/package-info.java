@@ -1,1 +1,1 @@
-package org.oooc.global;
+package org.oooc.kry.global;

@@ -1,6 +1,6 @@
 package org.oooc.kry.user.domain.entity
 
-import org.oooc.global.entity.BaseEntity
+import org.oooc.kry.global.entity.BaseEntity
 import java.time.OffsetDateTime
 import java.time.ZoneOffset
 import javax.persistence.*
