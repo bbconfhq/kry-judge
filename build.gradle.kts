@@ -31,6 +31,8 @@ dependencies {
     testImplementation("org.springframework.kafka:spring-kafka-test")
     testImplementation("org.springframework.security:spring-security-test")
     implementation("org.mariadb.jdbc:mariadb-java-client:2.1.2")
+    implementation ("io.springfox:springfox-boot-starter:3.0.0")
+    implementation ("io.springfox:springfox-swagger-ui:3.0.0")
 }
 
 tasks.withType<KotlinCompile> {
