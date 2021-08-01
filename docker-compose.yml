@@ -9,7 +9,6 @@ services:
       #- ./db/var/lib/mysql:/var/lib/mysql
       - ./db/initdb.d:/docker-entrypoint-initdb.d
     env_file: .env
-    command: ["--character-set-server=utf8mb4", "--collation-server=utf8mb4_unicode_ci"]
     ports:
       - "3306:3306"
   
@@ -21,6 +20,9 @@ services:
     container_name: kry-kun
     command: ["./wait-for", "database:3306", "--", "java", "-jar", "/app.jar"]
     env_file: .env
+    environment:
+      - KRY_DB_IP=database
+      - KRY_DB_PORT=3306
     ports:
       - "8080:8080"
     depends_on:
