@@ -1,0 +1,33 @@
+version: "3.8"
+
+services:
+  database:
+    image: mariadb:10.6.3
+    container_name: maria-chan
+    volumes:
+      - ./db/etc/mysql/conf.d:/etc/mysql/conf.d
+      #- ./db/var/lib/mysql:/var/lib/mysql
+      - ./db/initdb.d:/docker-entrypoint-initdb.d
+    environment:
+      - MYSQL_ROOT_PASSWORD=1234
+      - MYSQL_DATABASE=kry
+      - LC_ALL=C.UTF-8
+    command: ["--character-set-server=utf8mb4", "--collation-server=utf8mb4_unicode_ci"]
+    ports:
+      - "3306:3306"
+  
+  application:
+    build:
+      context: .
+      dockerfile: ./Dockerfile
+    image: kry
+    container_name: kry-kun
+    command: ["./wait-for", "database:3306", "--", "java", "-jar", "/app.jar"]
+    environment:
+      - SPRING_DATASOURCE_URL=jdbc:mariadb://database:3306/kry?useUnicode=true&characterEncoding=utf-8
+      - SPRING_DATASOURCE_USERNAME=root
+      - SPRING_DATASOURCE_PASSWORD=1234
+    ports:
+      - "8080:8080"
+    depends_on:
+      - database
