@@ -13,7 +13,6 @@ class Comment (
     val id: Long = 0,
 
     @ManyToOne(fetch = FetchType.LAZY)
-    @Column(nullable = false)
     val article: Article = Article(),
 
 //    TODO: Mapping to User

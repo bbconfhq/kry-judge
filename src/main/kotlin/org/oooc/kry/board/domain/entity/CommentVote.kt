@@ -8,7 +8,6 @@ class CommentVote (
 
     @Id
     @ManyToOne
-    @JoinColumn
     val comment: Comment = Comment(),
 
 //    TODO: Mapping to User
