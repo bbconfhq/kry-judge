@@ -1,9 +1,10 @@
-package org.oooc.kry.board.article.comment.domain.entity
+package org.oooc.kry.board.domain.entity
 
+import java.io.Serializable
 import javax.persistence.*
 
 @Entity
-@IdClass(CommentVoteId::class)
+//@IdClass(CommentVoteId::class)
 class CommentVote (
 
     @Id
@@ -18,4 +19,4 @@ class CommentVote (
     @Id
     val updown: Long = 0
 
-)
+): Serializable

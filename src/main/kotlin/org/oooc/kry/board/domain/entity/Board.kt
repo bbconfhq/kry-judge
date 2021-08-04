@@ -1,6 +1,6 @@
 package org.oooc.kry.board.domain.entity
 
-import org.oooc.kry.board.article.domain.entity.Article
+import java.io.Serializable
 import javax.persistence.*
 
 @Entity
@@ -24,4 +24,4 @@ class Board (
     @Column(nullable = false)
     val articles: List<Article> = emptyList()
 
-)
+): Serializable

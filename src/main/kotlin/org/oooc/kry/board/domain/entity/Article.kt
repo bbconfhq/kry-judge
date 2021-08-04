@@ -1,7 +1,6 @@
-package org.oooc.kry.board.article.domain.entity
+package org.oooc.kry.board.domain.entity
 
-import org.oooc.kry.board.domain.entity.Board
-import org.oooc.kry.board.article.comment.domain.entity.Comment
+import java.io.Serializable
 import java.time.OffsetDateTime
 import java.time.ZoneOffset
 import javax.persistence.*
@@ -45,4 +44,4 @@ class Article (
     @Column(nullable = false)
     val comments: List<Comment> = emptyList()
 
-)
+): Serializable

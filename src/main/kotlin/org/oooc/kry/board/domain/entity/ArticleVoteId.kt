@@ -1,4 +1,4 @@
-package org.oooc.kry.board.article.domain.entity
+package org.oooc.kry.board.domain.entity
 
 import java.io.Serializable
 import javax.persistence.Column

@@ -11,4 +11,4 @@ spring:
       hibernate:
         format_sql: true
     hibernate:
-      ddl_auto: create
+      ddl_auto: none

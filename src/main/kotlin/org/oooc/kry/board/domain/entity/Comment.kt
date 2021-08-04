@@ -1,6 +1,7 @@
-package org.oooc.kry.board.article.comment.domain.entity
+package org.oooc.kry.board.domain.entity
 
-import org.oooc.kry.board.article.domain.entity.Article
+import org.oooc.kry.board.domain.entity.Article
+import java.io.Serializable
 import java.time.OffsetDateTime
 import java.time.ZoneOffset
 import javax.persistence.*
@@ -34,4 +35,4 @@ class Comment (
     @Column(nullable = false)
     val downVote: Long = 0
 
-)
+): Serializable
