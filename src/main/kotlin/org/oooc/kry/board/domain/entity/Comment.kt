@@ -24,10 +24,10 @@ class Comment (
     val content: String = "",
 
     @Column(nullable = false)
-    val created: OffsetDateTime = OffsetDateTime.now(ZoneOffset.of("+09:00")),
+    val created: OffsetDateTime = OffsetDateTime.now(ZoneOffset.of("+00:00")),
 
     @Column(nullable = false)
-    val modified: OffsetDateTime = OffsetDateTime.now(ZoneOffset.of("+09:00")),
+    val modified: OffsetDateTime = OffsetDateTime.now(ZoneOffset.of("+00:00")),
 
     @Column(nullable = false)
     val upVote: Long = 0,
