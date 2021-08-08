@@ -1,6 +1,5 @@
 package org.oooc.kry.user.domain.entity
 
-import org.oooc.kry.problem.entity.ProblemTagId
 import java.io.Serializable
 import javax.persistence.*
 
