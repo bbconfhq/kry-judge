@@ -6,7 +6,6 @@ import org.oooc.kry.user.domain.entity.User
 import org.oooc.kry.user.web.UserService
 import org.springframework.beans.factory.annotation.Autowired
 import org.springframework.boot.test.context.SpringBootTest
-import java.util.*
 
 @SpringBootTest
 class UserTest {
@@ -15,13 +14,21 @@ class UserTest {
 
     @Test
     fun saveUser() {
-        val user = User(name="user01", pw="1234", nick="nick_name01", bio="Hello world!", )
-        userService.saveUser(user)
+        val seq = "05"
+        val user = User(name="user$seq", pw="1234", nick="nick_name$seq", bio="Hello world!", email= "user$seq@email.com")
+        userService.createUser(user)
     }
 
-//    @Test
+    @Test
     fun getUserById() {
-        val user = userService.getUserById(123)
-        assertThat(user.orElse(User(name="no user found")).id).isEqualTo(123)
+        val user = userService.getUser("user01")
+        assertThat(user?.id).isEqualTo(1)
+    }
+
+    @Test
+    fun delete() {
+        userService.deleteUser("user01")
+        val user = userService.getUser("user01")
+        assertThat(user).isNull()
     }
 }
