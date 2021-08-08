@@ -16,5 +16,5 @@ class Permission (
     val userPermissions: List<UserPermission> = emptyList(),
 
     @OneToMany(mappedBy = "permgroup")
-    val PermissionPermgroup: List<PermissionPermgroup> = emptyList(),
+    val PermissionPermgroups: List<PermissionPermgroup> = emptyList(),
 ): Serializable
