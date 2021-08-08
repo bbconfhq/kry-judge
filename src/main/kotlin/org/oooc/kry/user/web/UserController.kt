@@ -14,5 +14,5 @@ class UserController(private val userService: UserService) {
         userService.getUserById(userId)
 
     @PostMapping("")
-    fun createUser(@RequestBody payload: User): User = userService.createUser(payload)
+    fun createUser(@RequestBody payload: User): User = userService.saveUser(payload)
 }
