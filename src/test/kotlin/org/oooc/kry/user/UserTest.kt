@@ -2,6 +2,7 @@ package org.oooc.kry.user
 
 import org.assertj.core.api.Assertions.assertThat
 import org.junit.jupiter.api.Test
+import org.oooc.kry.user.domain.dto.UserDto
 import org.oooc.kry.user.domain.entity.User
 import org.oooc.kry.user.web.service.UserService
 import org.springframework.beans.factory.annotation.Autowired
@@ -14,21 +15,21 @@ class UserTest {
 
     @Test
     fun saveUser() {
-        val seq = "05"
-        val user = User(name="user$seq", pw="1234", nick="nick_name$seq", bio="Hello world!", email= "user$seq@email.com")
-        userService.createUser(user)
+        val seq = "06"
+        val userDto = UserDto(name="user$seq", pw="1234", nick="nick_name$seq", bio="Hello world!", email= "user$seq@email.com")
+        userService.createUser(User(userDto))
     }
 
     @Test
     fun getUserById() {
-        val user = userService.getUser("user01")
+        val user = userService.getUserByName("user01")
         assertThat(user?.id).isEqualTo(1)
     }
 
     @Test
     fun delete() {
         userService.deleteUser("user01")
-        val user = userService.getUser("user01")
+        val user = userService.getUserByName("user01")
         assertThat(user).isNull()
     }
 }

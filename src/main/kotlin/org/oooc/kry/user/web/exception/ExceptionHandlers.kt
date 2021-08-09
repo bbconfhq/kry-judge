@@ -9,6 +9,6 @@ import java.util.*
 @ControllerAdvice
 class ExceptionHandlers (val messageSource: MessageSource) {
     @ExceptionHandler(UserNotFoundException::class)
-    fun forumException(exception: UserNotFoundException, locale: Locale) =
+    fun userNotFound(exception: UserNotFoundException, locale: Locale) =
         ErrorResponseEntity.badReqeust(messageSource.getMessage(exception, locale))
 }
