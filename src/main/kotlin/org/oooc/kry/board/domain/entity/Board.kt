@@ -11,7 +11,7 @@ class Board (
     val id: Long = 0,
 
     @Column(nullable = false)
-    val name: String = "",
+    var name: String = "",
 
     @Column(nullable = false)
     val seq: Long = 0,
@@ -20,7 +20,7 @@ class Board (
 
     /* for bidirectional mapping */
 
-    @OneToMany(mappedBy = "board")
+    @OneToMany
     val articles: List<Article> = emptyList()
 
 ): Serializable {

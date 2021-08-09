@@ -5,6 +5,7 @@ import org.junit.jupiter.api.Test
 import org.oooc.kry.board.domain.dto.BoardCreateRequestDTO
 import org.oooc.kry.board.domain.dto.BoardGetRequestDTO
 import org.oooc.kry.board.domain.entity.Article
+import org.oooc.kry.board.domain.entity.Board
 import org.oooc.kry.board.web.repository.BoardRepository
 import org.springframework.beans.factory.annotation.Autowired
 import org.springframework.boot.test.context.SpringBootTest
@@ -13,36 +14,39 @@ import org.springframework.transaction.annotation.Transactional
 
 @SpringBootTest
 class BoardServiceTest(
-    @Autowired var boardRepository: BoardRepository,
-    @Autowired var boardService: BoardService
+    @Autowired var boardService: BoardService,
 ) {
+
+    val boardRepository = boardService.boardRepository
+
     @Test
     fun create_board_test() {
+        val boardRepository = boardService.boardRepository
+
         // given
-        var boardCreateRequestDTO = BoardCreateRequestDTO(name = "board1", seq = 1)
+        boardService.createBoard("board1", 10)
 
         // when
-        boardService.createBoard(boardCreateRequestDTO)
+        val board = Board(name="board1", seq=10)
 
         // then
-        var boardGetRequestDTO = BoardGetRequestDTO(boardName = "board1")
-        var boardGetResponseDTO = boardService.getBoard(boardGetRequestDTO)
-        Assertions.assertThat(boardGetResponseDTO.name).isEqualTo(boardCreateRequestDTO.name)
+        Assertions.assertThat(board.name)
+            .isEqualTo(boardRepository.findByName("board1")!!.name)
+        Assertions.assertThat(board.seq)
+            .isEqualTo(boardRepository.findByName("board1")!!.seq)
     }
 
     @Test
-    @Commit
+    //@Commit
     @Transactional
             /**
              * ArticleController 구현 후 재작성 및 테스트 필요
              */
     fun MANUAL_TEST_get_board_test() {
         // given
-//        boardService.createBoard(BoardCreateRequestDTO(name = "board2", seq = 2))
-        var boardGetRequestDTO = BoardGetRequestDTO("board2")
 
         // when
-        var resp = boardService.getBoard(boardGetRequestDTO)
+        var resp = boardService.getBoard("board2")
 
         // then
         println(resp.id)
@@ -51,5 +55,28 @@ class BoardServiceTest(
         for (item:Article in resp.articles) {
             println(item.content)
         }
+    }
+
+    @Test
+    fun modifyBoardTest() {
+        val board4 = Board(name="board4", seq=200)
+        boardRepository.save(board4)
+
+        boardService.modifyBoard("board4", "board5", 500)
+
+        val board3 = boardRepository.findByName("board5")
+        Assertions.assertThat(board3.name).isEqualTo("board5")
+    }
+
+    @Test
+    @Commit
+    fun MANUAL_TEST_deleteBoardTest() {
+
+        val board9 = Board(name="board9", seq=900)
+        val board10 = Board(name="board10", seq=1000)
+        boardRepository.save(board9)
+        boardRepository.save(board10)
+
+        boardService.deleteBoard("board10")
     }
 }

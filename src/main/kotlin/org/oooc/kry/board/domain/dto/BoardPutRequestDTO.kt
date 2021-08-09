@@ -1,5 +1,6 @@
 package org.oooc.kry.board.domain.dto
 
-data class BoardGetRequestDTO (
-    val boardName: String
+data class BoardPutRequestDTO (
+    val name: String,
+    val seq: Long
 )

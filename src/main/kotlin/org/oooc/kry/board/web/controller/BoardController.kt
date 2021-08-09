@@ -3,6 +3,7 @@ package org.oooc.kry.board.web.controller
 import org.oooc.kry.board.domain.dto.BoardCreateRequestDTO
 import org.oooc.kry.board.domain.dto.BoardGetRequestDTO
 import org.oooc.kry.board.domain.dto.BoardGetResponseDTO
+import org.oooc.kry.board.domain.dto.BoardPutRequestDTO
 import org.oooc.kry.board.web.service.BoardService
 import org.springframework.web.bind.annotation.*
 
@@ -13,26 +14,25 @@ class BoardController(val boardService: BoardService) {
     // CREATE BOARD
     @PostMapping("/")
     fun postBoard(@RequestBody boardCreateRequestDTO: BoardCreateRequestDTO) {
-        boardService.createBoard(boardCreateRequestDTO)
+        boardService.createBoard(boardCreateRequestDTO.name, boardCreateRequestDTO.seq)
     }
 
     // GET BOARD
     @GetMapping("/{boardName}")
     fun getBoard(@PathVariable boardName: String): BoardGetResponseDTO {
-        val boardGetRequestDTO = BoardGetRequestDTO(boardName)
-        return boardService.getBoard(boardGetRequestDTO)
+        return boardService.getBoard(boardName)
     }
 
     // MODIFY BOARD
     @PutMapping("/{boardName}")
-    fun putBoard() {
-
+    fun putBoard(@PathVariable boardName: String, @RequestBody boardPutRequestDTO: BoardPutRequestDTO) {
+        boardService.modifyBoard(boardName, boardPutRequestDTO.name, boardPutRequestDTO.seq)
     }
 
     // DELETE BOARD
     @DeleteMapping("/{boardName}")
-    fun deleteBoard() {
-
+    fun deleteBoard(@PathVariable boardName: String) {
+        boardService.deleteBoard(boardName)
     }
 
     // GET LIST OF BOARDS

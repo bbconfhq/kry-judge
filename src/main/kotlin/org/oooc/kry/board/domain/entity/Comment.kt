@@ -40,7 +40,7 @@ class Comment (
 
     /* for bidirectional mapping */
 
-    @OneToMany(mappedBy = "comment_vote")
+    @OneToMany
     val commentVotes: List<CommentVote> = emptyList()
 
 ): Serializable {
