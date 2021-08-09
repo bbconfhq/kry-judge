@@ -37,4 +37,8 @@ class BoardService(val boardRepository: BoardRepository) {
         }
     }
 
+    fun getBoardList(): List<Board> {
+        return boardRepository.findAll()
+    }
+
 }

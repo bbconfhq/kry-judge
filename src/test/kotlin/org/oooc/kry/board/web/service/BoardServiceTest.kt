@@ -58,6 +58,7 @@ class BoardServiceTest(
     }
 
     @Test
+    @Transactional
     fun modifyBoardTest() {
         val board4 = Board(name="board4", seq=200)
         boardRepository.save(board4)
@@ -69,7 +70,8 @@ class BoardServiceTest(
     }
 
     @Test
-    @Commit
+    @Transactional
+//    @Commit
     fun MANUAL_TEST_deleteBoardTest() {
 
         val board9 = Board(name="board9", seq=900)
@@ -78,5 +80,20 @@ class BoardServiceTest(
         boardRepository.save(board10)
 
         boardService.deleteBoard("board10")
+    }
+
+    @Test
+    @Transactional
+    fun boardListTest() {
+        val board1 = Board(name="board11",seq=110)
+        val board2 = Board(name="board12",seq=120)
+        val board3 = Board(name="board13",seq=130)
+        boardRepository.save(board1)
+        boardRepository.save(board2)
+        boardRepository.save(board3)
+
+        val boardList = boardService.getBoardList()
+
+        Assertions.assertThat(boardList.size).isEqualTo(3)
     }
 }

@@ -6,4 +6,5 @@ interface BoardRepository {
     fun save(board: Board)
     fun delete(board: Board)
     fun findByName(name: String): Board
+    fun findAll(): List<Board>
 }

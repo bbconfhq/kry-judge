@@ -1,9 +1,6 @@
 package org.oooc.kry.board.web.controller
 
-import org.oooc.kry.board.domain.dto.BoardCreateRequestDTO
-import org.oooc.kry.board.domain.dto.BoardGetRequestDTO
-import org.oooc.kry.board.domain.dto.BoardGetResponseDTO
-import org.oooc.kry.board.domain.dto.BoardPutRequestDTO
+import org.oooc.kry.board.domain.dto.*
 import org.oooc.kry.board.web.service.BoardService
 import org.springframework.web.bind.annotation.*
 
@@ -37,7 +34,8 @@ class BoardController(val boardService: BoardService) {
 
     // GET LIST OF BOARDS
     @GetMapping("/")
-    fun getBoards() {
-
+    fun getBoards(): BoardsGetResponseDTO {
+        val boardsList = boardService.getBoardList()
+        return BoardsGetResponseDTO(boardsList)
     }
 }
