@@ -1,6 +1,8 @@
-package org.oooc.kry.user.web
+package org.oooc.kry.user.web.controller
 
 import org.oooc.kry.user.domain.entity.User
+import org.oooc.kry.user.web.exception.UserNotFoundException
+import org.oooc.kry.user.web.service.UserService
 import org.springframework.web.bind.annotation.*
 
 @RestController
@@ -21,4 +23,9 @@ class UserController(private val userService: UserService) {
     @DeleteMapping("")
     fun deleteUser(@RequestParam name: String) =
         userService.deleteUser(name)
+
+    @ExceptionHandler(UserNotFoundException::class)
+    fun handleUserNotFound(exception: UserNotFoundException) {
+
+    }
 }
