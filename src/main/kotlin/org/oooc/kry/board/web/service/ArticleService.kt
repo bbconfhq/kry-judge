@@ -10,11 +10,9 @@ import java.time.OffsetDateTime
 @Service
 @Transactional
 class ArticleService(
-    @Autowired
     val articleRepository: ArticleRepository,
-    @Autowired
     val boardService: BoardService
-    ) {
+) {
     fun createArticle(boardName: String, title: String, content: String, created: OffsetDateTime) {
         val board = boardService.getBoard(boardName)
         val article = Article(board = board,
@@ -23,6 +21,10 @@ class ArticleService(
             created = created
         )
         articleRepository.save(article)
+    }
+
+    fun getArticle(boardName: String, articleNo: Long) {
+        
     }
 
 }

@@ -19,8 +19,8 @@ class ArticleController(val articleService: ArticleService) {
 
     // GET ARTICLE
     @GetMapping("/{boardName}/article/{articleNo}")
-    fun getArticle() {
-
+    fun getArticle(@PathVariable boardName: String, @PathVariable articleNo: Long) {
+        return articleService.getArticle(boardName, articleNo)
     }
 
     // MODIFY ARTICLE

@@ -1,10 +1,8 @@
 package org.oooc.kry.board.web.repository
 
 import org.oooc.kry.board.domain.entity.Board
+import org.springframework.data.jpa.repository.JpaRepository
 
-interface BoardRepository {
-    fun save(board: Board)
-    fun delete(board: Board)
+interface BoardRepository: JpaRepository<Board, Long> {
     fun findByName(name: String): Board
-    fun findAll(): List<Board>
 }
