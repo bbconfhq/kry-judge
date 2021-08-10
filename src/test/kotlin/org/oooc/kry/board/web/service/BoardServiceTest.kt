@@ -2,24 +2,25 @@ package org.oooc.kry.board.web.service
 
 import org.assertj.core.api.Assertions
 import org.junit.jupiter.api.Test
-import org.oooc.kry.board.domain.dto.BoardCreateRequestDTO
-import org.oooc.kry.board.domain.dto.BoardGetRequestDTO
 import org.oooc.kry.board.domain.entity.Article
 import org.oooc.kry.board.domain.entity.Board
-import org.oooc.kry.board.web.repository.BoardRepository
 import org.springframework.beans.factory.annotation.Autowired
 import org.springframework.boot.test.context.SpringBootTest
-import org.springframework.test.annotation.Commit
 import org.springframework.transaction.annotation.Transactional
+
 
 @SpringBootTest
 class BoardServiceTest(
-    @Autowired var boardService: BoardService,
+
+    @Autowired
+    val boardService: BoardService
+
 ) {
 
     val boardRepository = boardService.boardRepository
 
     @Test
+    @Transactional
     fun create_board_test() {
         val boardRepository = boardService.boardRepository
 
@@ -31,9 +32,9 @@ class BoardServiceTest(
 
         // then
         Assertions.assertThat(board.name)
-            .isEqualTo(boardRepository.findByName("board1")!!.name)
+            .isEqualTo(boardRepository.findByName("board1").name)
         Assertions.assertThat(board.seq)
-            .isEqualTo(boardRepository.findByName("board1")!!.seq)
+            .isEqualTo(boardRepository.findByName("board1").seq)
     }
 
     @Test
@@ -52,7 +53,7 @@ class BoardServiceTest(
         println(resp.id)
         println(resp.name)
         println(resp.seq)
-        for (item:Article in resp.articles) {
+        for (item: Article in resp.articles) {
             println(item.content)
         }
     }

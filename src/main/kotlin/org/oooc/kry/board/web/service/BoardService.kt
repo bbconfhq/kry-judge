@@ -18,9 +18,8 @@ class BoardService(val boardRepository: BoardRepository) {
         boardRepository.save(board)
     }
 
-    fun getBoard(name: String): BoardGetResponseDTO {
-        val board = boardRepository.findByName(name)
-        return BoardGetResponseDTO(id = board.id, name = board.name, seq = board.seq, articles = board.articles)
+    fun getBoard(name: String): Board {
+        return boardRepository.findByName(name)
     }
 
     fun modifyBoard(name: String, newName: String, newSeq: Long) {

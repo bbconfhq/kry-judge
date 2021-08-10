@@ -17,7 +17,8 @@ class BoardController(val boardService: BoardService) {
     // GET BOARD
     @GetMapping("/{boardName}")
     fun getBoard(@PathVariable boardName: String): BoardGetResponseDTO {
-        return boardService.getBoard(boardName)
+        val board = boardService.getBoard(boardName)
+        return BoardGetResponseDTO(id = board.id, name = board.name, seq = board.seq, articles = board.articles)
     }
 
     // MODIFY BOARD

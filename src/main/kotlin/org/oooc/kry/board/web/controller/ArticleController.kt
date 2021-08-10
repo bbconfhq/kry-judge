@@ -1,15 +1,20 @@
 package org.oooc.kry.board.web.controller
 
+import org.oooc.kry.board.domain.dto.ArticleCreateRequestDTO
+import org.oooc.kry.board.web.service.ArticleService
 import org.springframework.web.bind.annotation.*
 
 @RestController
 @RequestMapping("board")
-class ArticleController {
+class ArticleController(val articleService: ArticleService) {
 
     // CREATE ARTICLE
     @PostMapping("/{boardName}/article")
-    fun postArticle() {
-
+    fun postArticle(@PathVariable boardName: String, @RequestBody articleCreateRequestDTO: ArticleCreateRequestDTO) {
+        articleService.createArticle(boardName,
+            articleCreateRequestDTO.title,
+            articleCreateRequestDTO.content,
+            articleCreateRequestDTO.created)
     }
 
     // GET ARTICLE
