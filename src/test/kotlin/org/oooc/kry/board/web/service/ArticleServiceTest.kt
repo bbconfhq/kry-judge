@@ -1,5 +1,6 @@
 package org.oooc.kry.board.web.service
 
+import org.assertj.core.api.Assertions
 import org.junit.jupiter.api.Test
 
 import org.junit.jupiter.api.Assertions.*
@@ -30,6 +31,11 @@ internal class ArticleServiceTest(
 
     @Test
     fun getArticleRepository() {
+        boardService.createBoard("board2", 2)
+        val article1 = articleService.createArticle("board2", "title1", "hello1", OffsetDateTime.now())
+        val findArticle = articleService.getArticle(article1.board.name, article1.id)
+        Assertions.assertThat(article1.title).isEqualTo(findArticle.get().title)
+        Assertions.assertThat(article1.content).isEqualTo(findArticle.get().content)
     }
 
     @Test
