@@ -14,14 +14,14 @@ class Board (
     var name: String = "",
 
     @Column(nullable = false)
-    val seq: Long = 0,
+    var seq: Long = 0,
 
 
 
     /* for bidirectional mapping */
 
     @OneToMany
-    val articles: List<Article> = emptyList()
+    var articles: List<Article> = emptyList()
 
 ): Serializable {
     override fun equals(other: Any?): Boolean {

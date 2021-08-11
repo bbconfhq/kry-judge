@@ -14,7 +14,7 @@ class Article (
 
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "board_id")
-    val board: Board = Board(),
+    var board: Board = Board(),
 
 //    TODO: Mapping to User
 //    @ManyToOne(fetch = FetchType.LAZY)
@@ -22,32 +22,32 @@ class Article (
 //    val user: User = User(),
 
     @Column(nullable = false, columnDefinition = "varchar(191)")
-    val title: String = "",
+    var title: String = "",
 
     @Column(nullable = false, columnDefinition = "text")
-    val content: String = "",
+    var content: String = "",
 
     @Column(nullable = false)
-    val created: OffsetDateTime = OffsetDateTime.now(ZoneOffset.of("+00:00")),
+    var created: OffsetDateTime = OffsetDateTime.now(ZoneOffset.of("+00:00")),
 
     @Column(nullable = false)
-    val modified: OffsetDateTime = OffsetDateTime.now(ZoneOffset.of("+00:00")),
+    var modified: OffsetDateTime = OffsetDateTime.now(ZoneOffset.of("+00:00")),
 
     @Column(nullable = false)
-    val upvote: Long = 0,
+    var upvote: Long = 0,
 
     @Column(nullable = false)
-    val downvote: Long = 0,
+    var downvote: Long = 0,
 
 
 
     /* for bidirectional mapping */
 
     @OneToMany
-    val comments: List<Comment> = emptyList(),
+    var comments: List<Comment> = emptyList(),
 
     @OneToMany
-    val articleVotes: List<ArticleVote> = emptyList()
+    var articleVotes: List<ArticleVote> = emptyList()
 
 ): Serializable {
     override fun equals(other: Any?): Boolean {
