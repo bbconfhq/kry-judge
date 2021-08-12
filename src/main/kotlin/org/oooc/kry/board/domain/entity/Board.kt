@@ -20,8 +20,8 @@ class Board (
 
     /* for bidirectional mapping */
 
-    @OneToMany
-    var articles: List<Article> = emptyList()
+    @OneToMany(mappedBy = "board")
+    var articles: MutableList<Article> = mutableListOf()
 
 ): Serializable {
     override fun equals(other: Any?): Boolean {

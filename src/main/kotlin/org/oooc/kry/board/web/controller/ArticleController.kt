@@ -49,8 +49,8 @@ class ArticleController(val articleService: ArticleService) {
 
     // DELETE ARTICLE
     @DeleteMapping("/{boardName}/article/{articleNo}")
-    fun deleteArticle(@PathVariable articleNo: Long) {
-        articleService.deleteArticle(articleNo)
+    fun deleteArticle(@PathVariable boardName: String, @PathVariable articleNo: Long) {
+        articleService.deleteArticle(boardName, articleNo)
     }
 
     // GET LIST OF ARTICLES

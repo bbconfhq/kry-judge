@@ -43,10 +43,10 @@ class Article (
 
     /* for bidirectional mapping */
 
-    @OneToMany
+    @OneToMany(mappedBy = "article")
     var comments: List<Comment> = emptyList(),
 
-    @OneToMany
+    @OneToMany(mappedBy = "article")
     var articleVotes: List<ArticleVote> = emptyList()
 
 ): Serializable {

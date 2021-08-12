@@ -23,6 +23,7 @@ class ArticleService(
             content = content,
             created = created
         )
+        board.articles.add(article)
         return articleRepository.save(article)
     }
 
@@ -38,8 +39,11 @@ class ArticleService(
         article.modified = modified
     }
 
-    fun deleteArticle(articleNo: Long) {
-        articleRepository.deleteById(articleNo)
+    fun deleteArticle(boardName: String, articleNo: Long) {
+        val board = boardService.getBoard(boardName)
+        val article = articleRepository.findById(articleNo).get()
+        articleRepository.delete(article)
+        board.articles.remove(article)
     }
 
     fun getArticleList(): List<Article> {
