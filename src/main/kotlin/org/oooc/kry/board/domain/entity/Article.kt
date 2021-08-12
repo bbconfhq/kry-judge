@@ -44,10 +44,10 @@ class Article (
     /* for bidirectional mapping */
 
     @OneToMany(mappedBy = "article")
-    var comments: List<Comment> = emptyList(),
+    var comments: MutableList<Comment> = mutableListOf(),
 
     @OneToMany(mappedBy = "article")
-    var articleVotes: List<ArticleVote> = emptyList()
+    var articleVotes: MutableList<ArticleVote> = mutableListOf()
 
 ): Serializable {
     override fun equals(other: Any?): Boolean {

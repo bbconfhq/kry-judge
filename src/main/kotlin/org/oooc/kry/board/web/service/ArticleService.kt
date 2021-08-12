@@ -1,14 +1,11 @@
 package org.oooc.kry.board.web.service
 
 import org.oooc.kry.board.domain.entity.Article
-import org.oooc.kry.board.domain.entity.ArticleVoteId
 import org.oooc.kry.board.domain.entity.Board
 import org.oooc.kry.board.web.repository.ArticleRepository
-import org.springframework.beans.factory.annotation.Autowired
 import org.springframework.stereotype.Service
 import org.springframework.transaction.annotation.Transactional
 import java.time.OffsetDateTime
-import java.util.*
 
 @Service
 @Transactional
@@ -48,6 +45,11 @@ class ArticleService(
 
     fun getArticleList(): List<Article> {
         return articleRepository.findAll()
+    }
+
+    fun getArticleList(boardName: String): List<Article> {
+        val board = boardService.getBoard(boardName)
+        return board.articles
     }
 
 }

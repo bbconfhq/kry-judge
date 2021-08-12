@@ -1,6 +1,8 @@
 package org.oooc.kry.board.web.controller
 
 import org.oooc.kry.board.domain.dto.CommentCreateRequestDTO
+import org.oooc.kry.board.domain.dto.CommentGetResponseDTO
+import org.oooc.kry.board.domain.dto.CommentsGetResponseDTO
 import org.oooc.kry.board.web.service.CommentService
 import org.springframework.web.bind.annotation.*
 
@@ -23,20 +25,36 @@ class CommentController(val commentService: CommentService) {
 
     // GET COMMENT
     @GetMapping("/{boardName}/article/{articleNo}/comment/{commentNo}")
-    fun getComment() {
-
+    fun getComment(@PathVariable boardName: String,
+        @PathVariable articleNo: Long,
+        @PathVariable commentNo: Long): CommentGetResponseDTO {
+        val comment = commentService.getComment(boardName, articleNo, commentNo)
+        return CommentGetResponseDTO(
+            id = comment.id,
+            article = comment.article,
+            content = comment.content,
+            created = comment.created,
+            modified = comment.modified,
+            upVote = comment.upVote,
+            downVote = comment.downVote,
+            commentVotes = comment.commentVotes
+        )
     }
 
     // DELETE COMMENT
     @DeleteMapping("/{boardName}/article/{articleNo}/comment/{commentNo}")
-    fun deleteComment() {
-
+    fun deleteComment(@PathVariable boardName: String,
+        @PathVariable articleNo: Long,
+        @PathVariable commentNo: Long) {
+        commentService.deleteComment(boardName, articleNo, commentNo)
     }
 
     // GET LIST OF COMMENTS
     @GetMapping("/{boardName}/article/{articleNo}/comment")
-    fun getComments() {
-
+    fun getComments(@PathVariable boardName: String,
+        @PathVariable articleNo: Long): CommentsGetResponseDTO {
+        val commentsList = commentService.getCommentsList(boardName, articleNo)
+        return CommentsGetResponseDTO(commentsList)
     }
 
 }

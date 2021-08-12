@@ -1,14 +1,9 @@
 package org.oooc.kry.board.web.service
 
-import org.oooc.kry.board.domain.dto.BoardCreateRequestDTO
-import org.oooc.kry.board.domain.dto.BoardGetRequestDTO
-import org.oooc.kry.board.domain.dto.BoardGetResponseDTO
-import org.oooc.kry.board.domain.dto.BoardPutRequestDTO
 import org.oooc.kry.board.domain.entity.Board
 import org.oooc.kry.board.web.repository.BoardRepository
 import org.springframework.stereotype.Service
 import org.springframework.transaction.annotation.Transactional
-import kotlin.math.E
 
 @Service
 @Transactional

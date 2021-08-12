@@ -69,4 +69,20 @@ internal class ArticleServiceTest(
         Assertions.assertThat(articleList.size).isEqualTo(2)
     }
 
+    @Test
+    @Transactional
+    fun getArticleListWithBoardNameTest() {
+        val board1 = boardService.createBoard("board1", 1)
+        val board2 = boardService.createBoard("board2", 2)
+        val article1 = articleService.createArticle("board1", "title1", "content1", OffsetDateTime.now())
+        val article2 = articleService.createArticle("board1", "title2", "content2", OffsetDateTime.now())
+        val article3 = articleService.createArticle("board2", "title3", "content3", OffsetDateTime.now())
+        val article4 = articleService.createArticle("board2", "title4", "content4", OffsetDateTime.now())
+        val article5 = articleService.createArticle("board2", "title5", "content5", OffsetDateTime.now())
+        val articleList = articleService.getArticleList("board2")
+
+        Assertions.assertThat(articleList.size).isEqualTo(3)
+
+    }
+
 }
