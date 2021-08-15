@@ -2,6 +2,7 @@ package org.oooc.kry.problem.dto
 
 import org.oooc.kry.problem.entity.Problem
 import org.oooc.kry.problem.entity.Tag
+import org.oooc.kry.problem.entity.Testcase
 import java.time.OffsetDateTime
 
 data class ProblemDTO(
@@ -17,10 +18,15 @@ data class ProblemDTO(
     val memoryLimit: Int,
     val submitCount: Int,
     val acceptCount: Int,
+    val testcases: List<Testcase>,
     val tags: List<Tag>,
 ) {
     companion object {
-        fun of(problem: Problem, tags: List<Tag> = emptyList()) = ProblemDTO(
+        fun of(
+            problem: Problem,
+            testcases: List<Testcase> = emptyList(),
+            tags: List<Tag> = emptyList()
+        ) = ProblemDTO(
             id = problem.id,
             title = problem.title,
             content = problem.content,
@@ -33,6 +39,7 @@ data class ProblemDTO(
             memoryLimit = problem.memoryLimit,
             submitCount = problem.submitCount,
             acceptCount = problem.acceptCount,
+            testcases = testcases,
             tags = tags
         )
     }
