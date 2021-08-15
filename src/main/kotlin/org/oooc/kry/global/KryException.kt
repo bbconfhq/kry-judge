@@ -12,8 +12,7 @@ abstract class KryException: RuntimeException, MessageSourceResolvable {
     override fun getDefaultMessage(): String?  = message
 }
 
-// Example
-class ResourceNotFoundException(val name: String): KryException("resource(name: $name) not found.") {
+class ResourceNotFoundException(val text: String = "Resource not found"): KryException(text) {
     override fun getCodes(): Array<out String> = arrayOf("error.ResourceNotFound")
-    override fun getArguments(): Array<out Any> = arrayOf(name)
+//    override fun getArguments(): Array<out Any> = arrayOf()
 }

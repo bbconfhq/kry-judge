@@ -1,11 +1,9 @@
 package org.oooc.kry.user.web.controller
 
-import org.oooc.kry.global.ErrorResponseEntity
 import org.oooc.kry.user.domain.dto.UserDto
 import org.oooc.kry.user.domain.entity.User
 import org.oooc.kry.user.web.service.UserService
 import org.springframework.web.bind.annotation.*
-import org.springframework.context.MessageSource
 
 @RestController
 @RequestMapping("/user")
@@ -39,6 +37,5 @@ class UserController(private val userService: UserService) {
 
     @GetMapping("/error-test")
     fun errorTest(@RequestParam payload: String): Nothing =
-        userService.errorTest(payload)
-
+        userService.errorTest1(payload)
 }

@@ -2,30 +2,26 @@ package org.oooc.kry.global
 
 import org.springframework.http.HttpStatus
 import org.springframework.http.ResponseEntity
-import org.springframework.util.MultiValueMap
 import java.util.*
 
-data class ErrorResponse(val status:HttpStatus
-                         , val error:String
-                         , val message:String
-                         , val timestamp: Date
-                         , val bindingErrors: List<String>) {
+data class ErrorBody(
+    val status:String,
+    val message:String,
+    val timestamp: Date
+)
 
-    constructor(status:HttpStatus, message:String, bindingErrors: List<String>) : this(status, status.reasonPhrase, message, Date(), bindingErrors)
-    constructor(status:HttpStatus, error:String, message:String) : this(status, error, message, Date(), ArrayList<String>())
-    constructor(status:HttpStatus, message:String) : this(status, status.reasonPhrase, message, Date(), ArrayList<String>())
-
-}
-
-class ErrorResponseEntity: ResponseEntity<ErrorResponse> {
-
-    constructor(body:ErrorResponse) : super(body, body.status)
-    constructor(body:ErrorResponse, headers: MultiValueMap<String, String>) : super(body, headers, body.status)
+class ErrorResponse: ResponseEntity<ErrorBody> {
+    constructor(body: ErrorBody, httpStatus: HttpStatus) : super(body, httpStatus)
 
     companion object {
-        fun badRequest(message:String) = ErrorResponseEntity(ErrorResponse(HttpStatus.BAD_REQUEST, message))
-        fun badRequest(message:String, bindingErrors:List<String>) = ErrorResponseEntity(ErrorResponse(HttpStatus.BAD_REQUEST, message, bindingErrors))
-        fun notFound(message:String) = ErrorResponseEntity(ErrorResponse(HttpStatus.NOT_FOUND, message))
-        fun serverError(message:String) = ErrorResponseEntity(ErrorResponse(HttpStatus.INTERNAL_SERVER_ERROR, message))
+        fun badReqeust(message:String): ErrorResponse {
+            val status = HttpStatus.BAD_REQUEST
+            return ErrorResponse(ErrorBody(status.value().toString(), message, Date()), status)
+        }
+
+        fun notFound(message:String): ErrorResponse {
+            val status = HttpStatus.NOT_FOUND
+            return ErrorResponse(ErrorBody(status.value().toString(), message, Date()), status)
+        }
     }
 }
