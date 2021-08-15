@@ -3,10 +3,14 @@ package org.oooc.kry.board.domain.entity
 import java.io.Serializable
 import javax.persistence.*
 
+/**
+ * https://www.logicbig.com/tutorials/java-ee-tutorial/jpa/id-class-with-many-to-one-relation.html
+ */
+
 class ArticleVoteId (
-    val article: Article = Article(),
+    var article: Long = 0,
     // val user: User = User(),
-    val updown: Byte = 0
+    var updown: Byte = 0
 ): Serializable {
     override fun equals(other: Any?): Boolean {
         if (this === other) return true
@@ -33,8 +37,7 @@ class ArticleVote (
 
     @Id
     @ManyToOne(fetch = FetchType.LAZY)
-    @JoinColumn(name = "article_id")
-    val article: Article = Article(),
+    var article: Article = Article(),
 
 //    TODO: Mapping to User
 //    @Id
@@ -43,6 +46,6 @@ class ArticleVote (
 //    val user: User = User(),
 
     @Id
-    val updown: Byte = 0
+    var updown: Byte = 0
 
 ): Serializable
