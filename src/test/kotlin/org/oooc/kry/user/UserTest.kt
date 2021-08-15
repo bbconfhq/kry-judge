@@ -14,22 +14,36 @@ class UserTest {
     private lateinit var userService: UserService
 
     @Test
-    fun saveUser() {
+    fun createUser() {
         val seq = "06"
-        val userDto = UserDto(name="user$seq", pw="1234", nick="nick_name$seq", bio="Hello world!", email= "user$seq@email.com")
-        userService.createUser(User(userDto))
+
+        val user = User(
+            name="user$seq",
+            pw="1234",
+            nick="nick_name$seq",
+            bio="Hello world!",
+            email= "user$seq@email.com"
+        )
+
+        userService.createUser(user)
     }
 
     @Test
-    fun getUserById() {
-        val user = userService.getUserByName("user01")
-        assertThat(user?.id).isEqualTo(1)
+    fun getUserByName() {
+        var seq = "01"
+        val payload = "user$seq"
+        val user = userService.getUserByName(payload)
+        assertThat(user?.name).isEqualTo(payload)
     }
 
     @Test
     fun delete() {
-        userService.deleteUser("user01")
-        val user = userService.getUserByName("user01")
+        var seq = "01"
+        val payload = "user$seq"
+
+        userService.deleteUser(payload)
+
+        val user = userService.getUserByName(payload)
         assertThat(user).isNull()
     }
 }

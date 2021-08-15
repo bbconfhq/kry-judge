@@ -1,16 +1,15 @@
-package org.oooc.kry.user.domain.entity
+package org.oooc.kry.auth.domain.entity
 
-import org.oooc.kry.auth.domain.entity.Permgroup
 import java.io.Serializable
 import javax.persistence.*
 
 @Entity
-@IdClass(UserPermgroupId::class)
-class UserPermgroup (
+@IdClass(PermissionPermgroupId::class)
+class PermissionPermgroup (
     @Id
     @ManyToOne(fetch = FetchType.LAZY)
-    @JoinColumn(name = "user_id")
-    val user: User = User(),
+    @JoinColumn(name = "permission_id")
+    val permission: Permission = Permission(),
 
     @Id
     @ManyToOne(fetch = FetchType.LAZY)
@@ -21,23 +20,22 @@ class UserPermgroup (
         if (this === other) return true
         if (javaClass != other?.javaClass) return false
 
-        other as UserPermgroup
+        other as PermissionPermgroup
 
-        if (user != other.user) return false
+        if (permission != other.permission) return false
         if (permgroup!= other.permgroup) return false
 
         return true
     }
 
     override fun hashCode(): Int {
-        var result = user.hashCode()
+        var result = permission.hashCode()
         result = 31 * result + permgroup.hashCode()
         return result
     }
 }
 
-class UserPermgroupId(
-    val user: User = User(),
-    val permgroup: Permgroup = Permgroup()
+class PermissionPermgroupId(
+    val permission: Permission = Permission(),
+    val permgroup: Permgroup = Permgroup(),
 ) : Serializable
-

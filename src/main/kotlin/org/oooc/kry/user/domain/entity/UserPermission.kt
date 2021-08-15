@@ -1,5 +1,6 @@
 package org.oooc.kry.user.domain.entity
 
+import org.oooc.kry.auth.domain.entity.Permission
 import java.io.Serializable
 import javax.persistence.*
 
