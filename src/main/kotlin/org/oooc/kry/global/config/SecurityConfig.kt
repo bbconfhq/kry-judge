@@ -1,4 +1,4 @@
-package org.oooc.kry.global
+package org.oooc.kry.global.config
 
 import org.springframework.security.config.annotation.web.builders.HttpSecurity
 import org.springframework.security.config.annotation.web.configuration.EnableWebSecurity
