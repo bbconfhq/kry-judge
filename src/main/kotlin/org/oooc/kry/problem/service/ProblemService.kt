@@ -20,4 +20,11 @@ class ProblemService(
 
         return problemDTOs
     }
+
+    fun getProblem(problemId: Long): ProblemDTO {
+        val problem = problemRepository.findById(problemId).get()
+        val tags = problemTagRepository.findAllByProblem(problem).map { it.tag }
+
+        return ProblemDTO.of(problem, tags)
+    }
 }
