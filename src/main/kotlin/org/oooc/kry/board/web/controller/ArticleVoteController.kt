@@ -1,6 +1,7 @@
 package org.oooc.kry.board.web.controller
 
 import org.oooc.kry.board.domain.dto.ArticleVoteCreateRequestDTO
+import org.oooc.kry.board.domain.dto.ArticleVoteDeleteRequestDTO
 import org.oooc.kry.board.domain.entity.ArticleVote
 import org.oooc.kry.board.web.service.ArticleVoteService
 import org.springframework.web.bind.annotation.*
@@ -19,8 +20,11 @@ class ArticleVoteController(val articleVoteService: ArticleVoteService) {
 
     // DELETE ARTICLE_VOTE
     @DeleteMapping("/{boardName}/article/{articleNo}/vote")
-    fun deleteArticleVote(@PathVariable boardName: String, @PathVariable articleNo: Long, @RequestParam updown: Byte) {
-
+    fun deleteArticleVote(@PathVariable boardName: String,
+                          @PathVariable articleNo: Long,
+                          @RequestBody articleVoteDeleteRequestDTO: ArticleVoteDeleteRequestDTO
+    ) {
+        articleVoteService.deleteArticleVote(boardName, articleNo, articleVoteDeleteRequestDTO.updown)
     }
 
 }

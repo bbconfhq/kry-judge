@@ -1,5 +1,7 @@
 package org.oooc.kry.board.web.controller
 
+import org.oooc.kry.board.domain.dto.CommentVoteCreateRequestDTO
+import org.oooc.kry.board.domain.dto.CommentVoteDeleteRequestDTO
 import org.oooc.kry.board.web.service.CommentVoteService
 import org.springframework.web.bind.annotation.*
 
@@ -12,8 +14,8 @@ class CommentVoteController(val commentVoteService: CommentVoteService) {
     fun createCommentVote(@PathVariable boardName: String,
                           @PathVariable articleNo: Long,
                           @PathVariable commentNo: Long,
-                          @RequestParam updown: Byte) {
-
+                          @RequestBody commentVoteCreateRequestDTO: CommentVoteCreateRequestDTO) {
+        commentVoteService.createCommentVote(boardName, articleNo, commentNo, commentVoteCreateRequestDTO.updown)
     }
 
     // DELETE COMMENT_VOTE
@@ -21,8 +23,8 @@ class CommentVoteController(val commentVoteService: CommentVoteService) {
     fun deleteCommentVote(@PathVariable boardName: String,
                           @PathVariable articleNo: Long,
                           @PathVariable commentNo: Long,
-                          @RequestParam updown: Byte) {
-
+                          @RequestBody commentVoteDeleteRequestDTO: CommentVoteDeleteRequestDTO) {
+        commentVoteService.deleteCommentVote(boardName, articleNo, commentNo, commentVoteDeleteRequestDTO.updown)
     }
 
 }

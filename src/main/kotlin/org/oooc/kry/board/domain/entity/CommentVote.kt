@@ -4,7 +4,7 @@ import java.io.Serializable
 import javax.persistence.*
 
 class CommentVoteId (
-    val comment: Comment = Comment(),
+    val comment: Long = 0,
     // val user: User = User(),
     val updown: Byte = 0
 ): Serializable {
@@ -33,7 +33,6 @@ class CommentVote (
 
     @Id
     @ManyToOne(fetch = FetchType.LAZY)
-    @JoinColumn(name = "comment_id")
     val comment: Comment = Comment(),
 
 //    TODO: Mapping to User
@@ -43,6 +42,6 @@ class CommentVote (
 //    val user: User = User(),
 
     @Id
-    val updown: Long = 0
+    val updown: Byte = 0
 
 ): Serializable

@@ -41,7 +41,7 @@ class Comment (
     /* for bidirectional mapping */
 
     @OneToMany(mappedBy = "comment")
-    val commentVotes: List<CommentVote> = emptyList()
+    val commentVotes: MutableList<CommentVote> = mutableListOf()
 
 ): Serializable {
     override fun equals(other: Any?): Boolean {

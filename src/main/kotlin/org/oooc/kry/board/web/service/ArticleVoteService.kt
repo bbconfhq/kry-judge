@@ -10,12 +10,20 @@ import org.springframework.transaction.annotation.Transactional
 class ArticleVoteService(val articleVoteRepository: ArticleVoteRepository,
                          val articleService: ArticleService,
                          val boardService: BoardService
-                         ) {
+) {
+
     fun createArticleVote(boardName: String, articleNo: Long, updown: Byte) {
         val article = articleService.getArticle(boardName, articleNo)
         val articleVote = ArticleVote(article = article, updown = updown)
         article.articleVotes.add(articleVote)
         articleVoteRepository.save(articleVote)
+    }
+
+    fun deleteArticleVote(boardName: String, articleNo: Long, updown: Byte) {
+        val article = articleService.getArticle(boardName, articleNo)
+        val articleVote = ArticleVote(article = article, updown = updown)
+        article.articleVotes.remove(articleVote)
+        articleVoteRepository.delete(articleVote)
     }
 
 }
