@@ -18,7 +18,7 @@ class Problem(
      */
 
     @OneToMany(mappedBy = "problem")
-    val testcases: List<TestCase> = emptyList(),
+    val testcases: List<Testcase> = emptyList(),
 
     @Column(nullable = false, unique = true, length = 191)
     val title: String = "",

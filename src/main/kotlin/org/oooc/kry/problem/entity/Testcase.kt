@@ -4,10 +4,13 @@ import java.io.Serializable
 import javax.persistence.*
 
 @Entity
-class TestCase(
+class Testcase(
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     val id: Long = 0,
+
+    @Column(nullable = false)
+    val isExample: Boolean = false,
 
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "problem_id")
@@ -23,7 +26,7 @@ class TestCase(
         if (this === other) return true
         if (javaClass != other?.javaClass) return false
 
-        other as TestCase
+        other as Testcase
 
         if (id != other.id) return false
 
