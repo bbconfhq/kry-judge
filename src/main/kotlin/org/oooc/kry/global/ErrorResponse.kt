@@ -23,8 +23,8 @@ class ErrorResponseEntity: ResponseEntity<ErrorResponse> {
     constructor(body:ErrorResponse, headers: MultiValueMap<String, String>) : super(body, headers, body.status)
 
     companion object {
-        fun badReqeust(message:String) = ErrorResponseEntity(ErrorResponse(HttpStatus.BAD_REQUEST, message))
-        fun badReqeust(message:String, bindingErrors:List<String>) = ErrorResponseEntity(ErrorResponse(HttpStatus.BAD_REQUEST, message, bindingErrors))
+        fun badRequest(message:String) = ErrorResponseEntity(ErrorResponse(HttpStatus.BAD_REQUEST, message))
+        fun badRequest(message:String, bindingErrors:List<String>) = ErrorResponseEntity(ErrorResponse(HttpStatus.BAD_REQUEST, message, bindingErrors))
         fun notFound(message:String) = ErrorResponseEntity(ErrorResponse(HttpStatus.NOT_FOUND, message))
         fun serverError(message:String) = ErrorResponseEntity(ErrorResponse(HttpStatus.INTERNAL_SERVER_ERROR, message))
     }

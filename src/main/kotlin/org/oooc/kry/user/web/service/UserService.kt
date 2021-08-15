@@ -1,6 +1,7 @@
 package org.oooc.kry.user.web.service
 
 import javassist.NotFoundException
+import org.oooc.kry.global.ResourceNotFoundException
 import org.oooc.kry.user.domain.entity.User
 import org.oooc.kry.user.domain.repository.UserRepository
 import org.oooc.kry.user.web.exception.UserNotFoundException
@@ -18,4 +19,6 @@ class UserService(private val userRepository: UserRepository) {
         val id = userRepository.findByName(name)?.id ?: throw UserNotFoundException(name)
         userRepository.deleteById(id)
     }
+
+    fun errorTest(payload: String): Nothing = throw ResourceNotFoundException(payload)
 }
