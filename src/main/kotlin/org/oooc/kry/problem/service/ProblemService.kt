@@ -34,7 +34,7 @@ class ProblemService(
         return ProblemDTO.of(problem, testcases, tags)
     }
 
-    fun addProblem(problemDTO: ProblemDTO): CheckDTO {
+    fun addProblem(problemDTO: ProblemDTO): ProblemDTO {
         val problem = Problem(
             testcases = problemDTO.testcases,
             title = problemDTO.title,
@@ -50,6 +50,6 @@ class ProblemService(
 
         problemRepository.save(problem)
 
-        return CheckDTO(isSuccess = true)
+        return problemDTO
     }
 }

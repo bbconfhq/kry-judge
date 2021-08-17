@@ -23,7 +23,7 @@ class ProblemController(
     @PostMapping("")
     fun addProblem(
         @RequestBody problemDTO: ProblemDTO
-    ): APIResponse<CheckDTO> {
+    ): APIResponse<ProblemDTO> {
         return APIResponse(
             result = problemService.addProblem(problemDTO)
         )
