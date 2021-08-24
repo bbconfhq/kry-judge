@@ -1,5 +1,6 @@
 package org.oooc.kry.problem.service
 
+import org.oooc.kry.global.dto.CheckDTO
 import org.oooc.kry.problem.dto.ProblemAddDTO
 import org.oooc.kry.problem.dto.ProblemDTO
 import org.oooc.kry.problem.dto.ProblemUpdateDTO
@@ -87,5 +88,12 @@ class ProblemService(
             testcases = testcases,
             tags = tags
         )
+    }
+
+    fun deleteProblem(problemId: Long): CheckDTO {
+        val problem = problemRepository.findByIdOrNull(problemId) ?: throw ProblemNotFoundException()
+        problemRepository.delete(problem)
+
+        return CheckDTO(true)
     }
 }

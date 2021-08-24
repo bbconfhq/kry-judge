@@ -2,8 +2,10 @@ package org.oooc.kry.problem.service
 
 import org.assertj.core.api.Assertions.assertThat
 import org.junit.jupiter.api.Test
-import org.oooc.kry.problem.dto.ProblemDTO
-import org.oooc.kry.problem.entity.Problem
+import org.junit.jupiter.api.assertThrows
+import org.oooc.kry.problem.dto.ProblemAddDTO
+import org.oooc.kry.problem.dto.ProblemUpdateDTO
+import org.oooc.kry.problem.exception.ProblemNotFoundException
 import org.springframework.beans.factory.annotation.Autowired
 import org.springframework.boot.test.context.SpringBootTest
 import org.springframework.transaction.annotation.Transactional
@@ -50,5 +52,15 @@ class ProblemServiceTest {
 
         val findProblem = problemService.getProblem(1000)
         assertThat(findProblem.title).isEqualTo("업데이트된 A+B")
+    }
+
+    @Test
+    @Transactional
+    fun deleteProblem() {
+        problemService.deleteProblem(1000)
+
+        assertThrows<ProblemNotFoundException> {
+            problemService.getProblem(1000)
+        }
     }
 }
