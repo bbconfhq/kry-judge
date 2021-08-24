@@ -1,7 +1,7 @@
 package org.oooc.kry.problem.controller
 
 import org.oooc.kry.global.dto.APIResponse
-import org.oooc.kry.global.dto.CheckDTO
+import org.oooc.kry.problem.dto.ProblemAddDTO
 import org.oooc.kry.problem.dto.ProblemDTO
 import org.oooc.kry.problem.service.ProblemService
 import org.springframework.web.bind.annotation.*
@@ -22,10 +22,10 @@ class ProblemController(
 
     @PostMapping("")
     fun addProblem(
-        @RequestBody problemDTO: ProblemDTO
+        @RequestBody problemAddDTO: ProblemAddDTO
     ): APIResponse<ProblemDTO> {
         return APIResponse(
-            data = problemService.updateProblem(problemId, problemUpdateDTO)
+            data = problemService.addProblem(problemAddDTO)
         )
     }
 }

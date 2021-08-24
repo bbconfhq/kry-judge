@@ -23,16 +23,16 @@ class ProblemServiceTest {
     @Test
     @Transactional
     fun addProblem() {
-        val problem = Problem(
+        val problemAddDto = ProblemAddDTO(
             title = "테스트 문제",
             content = "이 문제는 테스트 문제입니다.",
             input = "3이 입력된다.",
             output = "5를 출력한다."
         )
 
-        problemService.addProblem(ProblemDTO.of(problem))
+        problemService.addProblem(problemAddDto)
 
-        val findProblem = problemService.getProblem(1006)
+        val findProblem = problemService.getProblem("테스트 문제")
         assertThat(findProblem.input).isEqualTo("3이 입력된다.")
     }
 }
