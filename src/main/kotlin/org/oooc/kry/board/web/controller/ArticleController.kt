@@ -13,7 +13,10 @@ class ArticleController(val articleService: ArticleService) {
 
     // CREATE ARTICLE
     @PostMapping("/{boardName}/article")
-    fun postArticle(@PathVariable boardName: String, @RequestBody articleCreateRequestDTO: ArticleCreateRequestDTO) {
+    fun postArticle(
+        @PathVariable boardName: String,
+        @RequestBody articleCreateRequestDTO: ArticleCreateRequestDTO
+    ) {
         articleService.createArticle(boardName,
             articleCreateRequestDTO.title,
             articleCreateRequestDTO.content,
@@ -22,7 +25,10 @@ class ArticleController(val articleService: ArticleService) {
 
     // GET ARTICLE
     @GetMapping("/{boardName}/article/{articleNo}")
-    fun getArticle(@PathVariable boardName: String, @PathVariable articleNo: Long): ArticleGetResponseDTO {
+    fun getArticle(
+        @PathVariable boardName: String,
+        @PathVariable articleNo: Long
+    ): ArticleGetResponseDTO {
         val article = articleService.getArticle(boardName, articleNo)
         return ArticleGetResponseDTO(id = article.id,
             board = article.board,
@@ -38,7 +44,10 @@ class ArticleController(val articleService: ArticleService) {
 
     // MODIFY ARTICLE
     @PutMapping("/{boardName}/article/{articleNo}")
-    fun putArticle(@PathVariable articleNo: Long, @RequestBody articlePutRequestDTO: ArticlePutRequestDTO) {
+    fun putArticle(
+        @PathVariable articleNo: Long,
+        @RequestBody articlePutRequestDTO: ArticlePutRequestDTO
+    ) {
         articleService.modifyArticle(articleNo,
             articlePutRequestDTO.board,
             articlePutRequestDTO.title,
@@ -49,7 +58,10 @@ class ArticleController(val articleService: ArticleService) {
 
     // DELETE ARTICLE
     @DeleteMapping("/{boardName}/article/{articleNo}")
-    fun deleteArticle(@PathVariable boardName: String, @PathVariable articleNo: Long) {
+    fun deleteArticle(
+        @PathVariable boardName: String,
+        @PathVariable articleNo: Long)
+    {
         articleService.deleteArticle(boardName, articleNo)
     }
 

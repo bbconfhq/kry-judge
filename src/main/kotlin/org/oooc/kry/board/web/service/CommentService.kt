@@ -12,7 +12,12 @@ class CommentService(
     val commentRepository: CommentRepository
 ) {
 
-    fun createComment(boardName: String, articleNo: Long, content: String, created: OffsetDateTime): Comment {
+    fun createComment(
+        boardName: String,
+        articleNo: Long,
+        content: String,
+        created: OffsetDateTime
+    ): Comment {
         val article = articleService.getArticle(boardName, articleNo)
         val comment = Comment(article = article,
             content = content,
@@ -22,18 +27,29 @@ class CommentService(
         return commentRepository.save(comment)
     }
 
-    fun getComment(boardName: String, articleNo: Long, commentNo: Long): Comment {
+    fun getComment(
+        boardName: String,
+        articleNo: Long,
+        commentNo: Long
+    ): Comment {
         return commentRepository.findById(commentNo).get()
     }
 
-    fun deleteComment(boardName: String, articleNo: Long, commentNo: Long) {
+    fun deleteComment(
+        boardName: String,
+        articleNo: Long,
+        commentNo: Long
+    ) {
         val article = articleService.getArticle(boardName, articleNo)
         val comment = commentRepository.findById(commentNo).get()
         commentRepository.deleteById(commentNo)
         article.comments.remove(comment)
     }
 
-    fun getCommentsList(boardName: String, articleNo: Long): MutableList<Comment> {
+    fun getCommentsList(
+        boardName: String,
+        articleNo: Long
+    ): MutableList<Comment> {
         val article = articleService.getArticle(boardName, articleNo)
         return article.comments
     }

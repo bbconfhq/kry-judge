@@ -13,14 +13,24 @@ class CommentVoteService (val boardService: BoardService,
                           val commentVoteRepository: CommentVoteRepository
 ){
 
-    fun createCommentVote(boardName: String, articleNo: Long, commentNo: Long, updown: Byte) {
+    fun createCommentVote(
+        boardName: String,
+        articleNo: Long,
+        commentNo: Long,
+        updown: Byte
+    ) {
         val comment = commentService.getComment(boardName, articleNo, commentNo)
         val commentVote = CommentVote(comment, updown)
         comment.commentVotes.add(commentVote)
         commentVoteRepository.save(commentVote)
     }
 
-    fun deleteCommentVote(boardName: String, articleNo: Long, commentNo: Long, updown: Byte) {
+    fun deleteCommentVote(
+        boardName: String,
+        articleNo: Long,
+        commentNo: Long,
+        updown: Byte
+    ) {
         val comment = commentService.getComment(boardName, articleNo, commentNo)
         val commentVote = CommentVote(comment, updown)
         comment.commentVotes.remove(commentVote)

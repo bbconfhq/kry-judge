@@ -12,14 +12,22 @@ class ArticleVoteService(val articleVoteRepository: ArticleVoteRepository,
                          val boardService: BoardService
 ) {
 
-    fun createArticleVote(boardName: String, articleNo: Long, updown: Byte) {
+    fun createArticleVote(
+        boardName: String,
+        articleNo: Long,
+        updown: Byte
+    ) {
         val article = articleService.getArticle(boardName, articleNo)
         val articleVote = ArticleVote(article = article, updown = updown)
         article.articleVotes.add(articleVote)
         articleVoteRepository.save(articleVote)
     }
 
-    fun deleteArticleVote(boardName: String, articleNo: Long, updown: Byte) {
+    fun deleteArticleVote(
+        boardName: String,
+        articleNo: Long,
+        updown: Byte
+    ) {
         val article = articleService.getArticle(boardName, articleNo)
         val articleVote = ArticleVote(article = article, updown = updown)
         article.articleVotes.remove(articleVote)

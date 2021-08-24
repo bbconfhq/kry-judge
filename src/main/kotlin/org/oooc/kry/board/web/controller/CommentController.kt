@@ -12,7 +12,8 @@ class CommentController(val commentService: CommentService) {
 
     // CREATE COMMENT
     @PostMapping("/{boardName}/article/{articleNo}/comment")
-    fun postComment(@PathVariable boardName: String,
+    fun postComment(
+        @PathVariable boardName: String,
         @PathVariable articleNo: Long,
         @RequestBody commentCreateRequestDTO: CommentCreateRequestDTO
     ) {
@@ -25,9 +26,11 @@ class CommentController(val commentService: CommentService) {
 
     // GET COMMENT
     @GetMapping("/{boardName}/article/{articleNo}/comment/{commentNo}")
-    fun getComment(@PathVariable boardName: String,
+    fun getComment(
+        @PathVariable boardName: String,
         @PathVariable articleNo: Long,
-        @PathVariable commentNo: Long): CommentGetResponseDTO {
+        @PathVariable commentNo: Long
+    ): CommentGetResponseDTO {
         val comment = commentService.getComment(boardName, articleNo, commentNo)
         return CommentGetResponseDTO(
             id = comment.id,
@@ -43,16 +46,20 @@ class CommentController(val commentService: CommentService) {
 
     // DELETE COMMENT
     @DeleteMapping("/{boardName}/article/{articleNo}/comment/{commentNo}")
-    fun deleteComment(@PathVariable boardName: String,
+    fun deleteComment(
+        @PathVariable boardName: String,
         @PathVariable articleNo: Long,
-        @PathVariable commentNo: Long) {
+        @PathVariable commentNo: Long
+    ) {
         commentService.deleteComment(boardName, articleNo, commentNo)
     }
 
     // GET LIST OF COMMENTS
     @GetMapping("/{boardName}/article/{articleNo}/comment")
-    fun getComments(@PathVariable boardName: String,
-        @PathVariable articleNo: Long): CommentsGetResponseDTO {
+    fun getComments(
+        @PathVariable boardName: String,
+        @PathVariable articleNo: Long
+    ): CommentsGetResponseDTO {
         val commentsList = commentService.getCommentsList(boardName, articleNo)
         return CommentsGetResponseDTO(commentsList)
     }

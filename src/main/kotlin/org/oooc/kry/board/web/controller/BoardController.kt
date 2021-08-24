@@ -10,26 +10,35 @@ class BoardController(val boardService: BoardService) {
 
     // CREATE BOARD
     @PostMapping("/")
-    fun postBoard(@RequestBody boardCreateRequestDTO: BoardCreateRequestDTO) {
+    fun postBoard(
+        @RequestBody boardCreateRequestDTO: BoardCreateRequestDTO
+    ) {
         boardService.createBoard(boardCreateRequestDTO.name, boardCreateRequestDTO.seq)
     }
 
     // GET BOARD
     @GetMapping("/{boardName}")
-    fun getBoard(@PathVariable boardName: String): BoardGetResponseDTO {
+    fun getBoard(
+        @PathVariable boardName: String
+    ): BoardGetResponseDTO {
         val board = boardService.getBoard(boardName)
         return BoardGetResponseDTO(id = board.id, name = board.name, seq = board.seq, articles = board.articles)
     }
 
     // MODIFY BOARD
     @PutMapping("/{boardName}")
-    fun putBoard(@PathVariable boardName: String, @RequestBody boardPutRequestDTO: BoardPutRequestDTO) {
+    fun putBoard(
+        @PathVariable boardName: String,
+        @RequestBody boardPutRequestDTO: BoardPutRequestDTO
+    ) {
         boardService.modifyBoard(boardName, boardPutRequestDTO.name, boardPutRequestDTO.seq)
     }
 
     // DELETE BOARD
     @DeleteMapping("/{boardName}")
-    fun deleteBoard(@PathVariable boardName: String) {
+    fun deleteBoard(
+        @PathVariable boardName: String
+    ) {
         boardService.deleteBoard(boardName)
     }
 

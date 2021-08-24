@@ -13,7 +13,12 @@ class ArticleService(
     val articleRepository: ArticleRepository,
     val boardService: BoardService
 ) {
-    fun createArticle(boardName: String, title: String, content: String, created: OffsetDateTime): Article {
+    fun createArticle(
+        boardName: String,
+        title: String,
+        content: String,
+        created: OffsetDateTime
+    ): Article {
         val board = boardService.getBoard(boardName)
         val article = Article(board = board,
             title = title,
@@ -24,11 +29,20 @@ class ArticleService(
         return articleRepository.save(article)
     }
 
-    fun getArticle(boardName: String, articleNo: Long): Article {
+    fun getArticle(
+        boardName: String,
+        articleNo: Long
+    ): Article {
         return articleRepository.findById(articleNo).get()
     }
 
-    fun modifyArticle(articleNo: Long, board: Board, title: String, content: String, modified: OffsetDateTime) {
+    fun modifyArticle(
+        articleNo: Long,
+        board: Board,
+        title: String,
+        content: String,
+        modified: OffsetDateTime
+    ) {
         val article = articleRepository.findById(articleNo).get()
         article.board = board
         article.title = title
@@ -36,7 +50,10 @@ class ArticleService(
         article.modified = modified
     }
 
-    fun deleteArticle(boardName: String, articleNo: Long) {
+    fun deleteArticle(
+        boardName: String,
+        articleNo: Long
+    ) {
         val board = boardService.getBoard(boardName)
         val article = articleRepository.findById(articleNo).get()
         articleRepository.delete(article)
@@ -47,7 +64,9 @@ class ArticleService(
         return articleRepository.findAll()
     }
 
-    fun getArticleList(boardName: String): List<Article> {
+    fun getArticleList(
+        boardName: String
+    ): List<Article> {
         val board = boardService.getBoard(boardName)
         return board.articles
     }
