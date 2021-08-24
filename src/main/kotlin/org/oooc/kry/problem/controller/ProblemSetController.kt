@@ -25,7 +25,7 @@ class ProblemSetController(
         }
 
         return APIResponse(
-            result = problemService.getProblemList(PageRequest.of(page ?: 0, num))
+            data = problemService.getProblemList(PageRequest.of(page ?: 0, num))
         )
     }
 }

@@ -16,7 +16,7 @@ class ProblemController(
         @PathVariable(name = "problem_id") problemId: Long
     ): APIResponse<ProblemDTO> {
         return APIResponse(
-            result = problemService.getProblem(problemId)
+            data = problemService.getProblem(problemId)
         )
     }
 
@@ -25,7 +25,7 @@ class ProblemController(
         @RequestBody problemDTO: ProblemDTO
     ): APIResponse<ProblemDTO> {
         return APIResponse(
-            result = problemService.addProblem(problemDTO)
+            data = problemService.updateProblem(problemId, problemUpdateDTO)
         )
     }
 }
