@@ -1,5 +1,6 @@
 package org.oooc.kry.problem.entity
 
+import com.fasterxml.jackson.annotation.JsonManagedReference
 import java.io.Serializable
 import java.time.OffsetDateTime
 import java.time.ZoneOffset
@@ -18,34 +19,35 @@ class Problem(
      */
 
     @OneToMany(mappedBy = "problem")
-    val testcases: List<Testcase> = emptyList(),
+    @JsonManagedReference
+    var testcases: List<Testcase> = emptyList(),
 
     @Column(nullable = false, unique = true, length = 191)
-    val title: String = "",
+    var title: String = "",
 
     @Column(nullable = false, columnDefinition = "text")
-    val content: String = "",
+    var content: String = "",
 
     @Column(nullable = false)
     val created: OffsetDateTime = OffsetDateTime.now(ZoneOffset.of("+00:00")),
 
     @Column(nullable = false)
-    val modified: OffsetDateTime = OffsetDateTime.now(ZoneOffset.of("+00:00")),
+    var modified: OffsetDateTime = OffsetDateTime.now(ZoneOffset.of("+00:00")),
 
     @Column(nullable = false, columnDefinition = "text")
-    val input: String = "",
+    var input: String = "",
 
     @Column(nullable = false, columnDefinition = "text")
-    val output: String = "",
+    var output: String = "",
 
     @Column(nullable = false, columnDefinition = "text")
-    val note: String = "",
+    var note: String = "",
 
     @Column(nullable = false, columnDefinition = "decimal(7, 5)")
-    val timeLimit: Double = 1.0,
+    var timeLimit: Double = 1.0,
 
     @Column(nullable = false)
-    val memoryLimit: Int = 256,
+    var memoryLimit: Int = 256,
 
     @Column(nullable = false)
     val submitCount: Int = 0,

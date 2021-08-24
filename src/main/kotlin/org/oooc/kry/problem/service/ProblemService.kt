@@ -2,6 +2,7 @@ package org.oooc.kry.problem.service
 
 import org.oooc.kry.problem.dto.ProblemAddDTO
 import org.oooc.kry.problem.dto.ProblemDTO
+import org.oooc.kry.problem.dto.ProblemUpdateDTO
 import org.oooc.kry.problem.entity.Problem
 import org.oooc.kry.problem.exception.ProblemNotFoundException
 import org.oooc.kry.problem.repository.ProblemRepository
@@ -62,6 +63,29 @@ class ProblemService(
             problem = problemRepository.save(problem),
             testcases = problemAddDTO.testcases,
             tags = problemAddDTO.tags
+        )
+    }
+
+    fun updateProblem(problemId: Long, problemUpdateDTO: ProblemUpdateDTO): ProblemDTO {
+        val problem = problemRepository.findByIdOrNull(problemId) ?: throw ProblemNotFoundException()
+        val updatedProblem = problem.apply {
+            title = problemUpdateDTO.title
+            content = problemUpdateDTO.content
+            input = problemUpdateDTO.input
+            output = problemUpdateDTO.output
+            note = problemUpdateDTO.note
+            timeLimit = problemUpdateDTO.timeLimit
+            memoryLimit = problemUpdateDTO.memoryLimit
+            testcases = problemUpdateDTO.testcases
+        }
+
+        val tags = problemTagRepository.findAllByProblem(problem).map { it.tag }
+        val testcases = testcaseRepository.findAllByProblem(problem)
+
+        return ProblemDTO.of(
+            problem = updatedProblem,
+            testcases = testcases,
+            tags = tags
         )
     }
 }

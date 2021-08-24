@@ -8,4 +8,6 @@ import org.springframework.stereotype.Repository
 @Repository
 interface TestcaseRepository : JpaRepository<Testcase, Long> {
     fun findAllByProblemAndExampleIsTrue(problem: Problem): List<Testcase>
+
+    fun findAllByProblem(problem: Problem): List<Testcase>
 }

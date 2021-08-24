@@ -1,5 +1,6 @@
 package org.oooc.kry.problem.entity
 
+import com.fasterxml.jackson.annotation.JsonBackReference
 import java.io.Serializable
 import javax.persistence.*
 
@@ -14,6 +15,7 @@ class Testcase(
 
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "problem_id")
+    @JsonBackReference
     val problem: Problem = Problem(),
 
     @Column(nullable = false, columnDefinition = "text")
