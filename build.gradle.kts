@@ -33,6 +33,7 @@ dependencies {
     implementation("org.mariadb.jdbc:mariadb-java-client:2.1.2")
     implementation ("io.springfox:springfox-boot-starter:3.0.0")
     implementation ("io.springfox:springfox-swagger-ui:3.0.0")
+    implementation("com.fasterxml.jackson.datatype:jackson-datatype-jsr310")
 }
 
 tasks.withType<KotlinCompile> {

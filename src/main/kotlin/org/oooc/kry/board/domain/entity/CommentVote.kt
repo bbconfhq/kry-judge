@@ -1,5 +1,6 @@
 package org.oooc.kry.board.domain.entity
 
+import com.fasterxml.jackson.annotation.JsonBackReference
 import java.io.Serializable
 import javax.persistence.*
 
@@ -31,6 +32,7 @@ class CommentVoteId (
 @IdClass(CommentVoteId::class)
 class CommentVote (
 
+    @JsonBackReference
     @Id
     @ManyToOne(fetch = FetchType.LAZY)
     val comment: Comment = Comment(),

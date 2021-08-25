@@ -1,5 +1,6 @@
 package org.oooc.kry.board.domain.entity
 
+import com.fasterxml.jackson.annotation.JsonManagedReference
 import java.io.Serializable
 import javax.persistence.*
 
@@ -20,6 +21,7 @@ class Board (
 
     /* for bidirectional mapping */
 
+    @JsonManagedReference
     @OneToMany(mappedBy = "board")
     var articles: MutableList<Article> = mutableListOf()
 

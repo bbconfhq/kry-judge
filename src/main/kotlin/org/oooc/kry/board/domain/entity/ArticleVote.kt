@@ -1,5 +1,6 @@
 package org.oooc.kry.board.domain.entity
 
+import com.fasterxml.jackson.annotation.JsonBackReference
 import java.io.Serializable
 import javax.persistence.*
 
@@ -35,6 +36,7 @@ class ArticleVoteId (
 @IdClass(ArticleVoteId::class)
 class ArticleVote (
 
+    @JsonBackReference
     @Id
     @ManyToOne(fetch = FetchType.LAZY)
     var article: Article = Article(),

@@ -1,5 +1,16 @@
 package org.oooc.kry.board.domain.entity
 
+import com.fasterxml.jackson.annotation.JsonBackReference
+import com.fasterxml.jackson.annotation.JsonFormat
+import com.fasterxml.jackson.annotation.JsonManagedReference
+import com.fasterxml.jackson.annotation.JsonProperty
+import com.fasterxml.jackson.databind.DeserializationFeature
+import com.fasterxml.jackson.databind.annotation.JsonDeserialize
+import com.fasterxml.jackson.databind.annotation.JsonSerialize
+import com.fasterxml.jackson.datatype.jsr310.deser.key.OffsetDateTimeKeyDeserializer
+import com.fasterxml.jackson.datatype.jsr310.ser.OffsetDateTimeSerializer
+import org.oooc.kry.global.json.OffsetDateTimeCustomDeserializer
+import org.oooc.kry.global.json.OffsetDateTimeCustomSerializer
 import java.io.Serializable
 import java.time.OffsetDateTime
 import java.time.ZoneOffset
@@ -12,6 +23,7 @@ class Article (
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     val id: Long = 0,
 
+    @JsonBackReference
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "board_id")
     var board: Board = Board(),
@@ -27,9 +39,15 @@ class Article (
     @Column(nullable = false, columnDefinition = "text")
     var content: String = "",
 
+    @JsonProperty("created")
+    @JsonSerialize(using = OffsetDateTimeCustomSerializer::class)
+    @JsonDeserialize(using = OffsetDateTimeCustomDeserializer::class)
     @Column(nullable = false)
     var created: OffsetDateTime = OffsetDateTime.now(ZoneOffset.of("+00:00")),
 
+    @JsonProperty("modified")
+    @JsonSerialize(using = OffsetDateTimeCustomSerializer::class)
+    @JsonDeserialize(using = OffsetDateTimeCustomDeserializer::class)
     @Column(nullable = false)
     var modified: OffsetDateTime = OffsetDateTime.now(ZoneOffset.of("+00:00")),
 
@@ -43,9 +61,11 @@ class Article (
 
     /* for bidirectional mapping */
 
+    @JsonManagedReference
     @OneToMany(mappedBy = "article")
     var comments: MutableList<Comment> = mutableListOf(),
 
+    @JsonManagedReference
     @OneToMany(mappedBy = "article")
     var articleVotes: MutableList<ArticleVote> = mutableListOf()
 

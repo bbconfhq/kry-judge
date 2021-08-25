@@ -18,11 +18,11 @@ class CommentVoteService (
         articleNo: Long,
         commentNo: Long,
         updown: Byte
-    ) {
+    ): CommentVote {
         val comment = commentService.getComment(boardName, articleNo, commentNo)
         val commentVote = CommentVote(comment, updown)
         comment.commentVotes.add(commentVote)
-        commentVoteRepository.save(commentVote)
+        return commentVoteRepository.save(commentVote)
     }
 
     fun deleteCommentVote(

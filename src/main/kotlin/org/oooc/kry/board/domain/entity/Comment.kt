@@ -1,5 +1,12 @@
 package org.oooc.kry.board.domain.entity
 
+import com.fasterxml.jackson.annotation.JsonBackReference
+import com.fasterxml.jackson.annotation.JsonManagedReference
+import com.fasterxml.jackson.annotation.JsonProperty
+import com.fasterxml.jackson.databind.annotation.JsonDeserialize
+import com.fasterxml.jackson.databind.annotation.JsonSerialize
+import org.oooc.kry.global.json.OffsetDateTimeCustomDeserializer
+import org.oooc.kry.global.json.OffsetDateTimeCustomSerializer
 import java.io.Serializable
 import java.time.OffsetDateTime
 import java.time.ZoneOffset
@@ -12,6 +19,7 @@ class Comment (
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     val id: Long = 0,
 
+    @JsonBackReference
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "article_id")
     val article: Article = Article(),
@@ -24,9 +32,15 @@ class Comment (
     @Column(nullable = false, columnDefinition = "text")
     val content: String = "",
 
+    @JsonProperty("created")
+    @JsonSerialize(using = OffsetDateTimeCustomSerializer::class)
+    @JsonDeserialize(using = OffsetDateTimeCustomDeserializer::class)
     @Column(nullable = false)
     val created: OffsetDateTime = OffsetDateTime.now(ZoneOffset.of("+00:00")),
 
+    @JsonProperty("modified")
+    @JsonSerialize(using = OffsetDateTimeCustomSerializer::class)
+    @JsonDeserialize(using = OffsetDateTimeCustomDeserializer::class)
     @Column(nullable = false)
     val modified: OffsetDateTime = OffsetDateTime.now(ZoneOffset.of("+00:00")),
 
@@ -40,6 +54,7 @@ class Comment (
 
     /* for bidirectional mapping */
 
+    @JsonManagedReference
     @OneToMany(mappedBy = "comment")
     val commentVotes: MutableList<CommentVote> = mutableListOf()
 
