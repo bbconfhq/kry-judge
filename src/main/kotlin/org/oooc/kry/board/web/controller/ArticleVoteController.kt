@@ -8,7 +8,9 @@ import org.springframework.web.bind.annotation.*
 
 @RestController
 @RequestMapping("board")
-class ArticleVoteController(val articleVoteService: ArticleVoteService) {
+class ArticleVoteController(
+    val articleVoteService: ArticleVoteService
+) {
 
     // CREATE ARTICLE_VOTE
     @PostMapping("/{boardName}/article/{articleNo}/vote")

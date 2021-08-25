@@ -7,7 +7,7 @@ class CommentVoteId (
     val comment: Long = 0,
     // val user: User = User(),
     val updown: Byte = 0
-): Serializable {
+) : Serializable {
     override fun equals(other: Any?): Boolean {
         if (this === other) return true
         if (javaClass != other?.javaClass) return false
@@ -44,4 +44,4 @@ class CommentVote (
     @Id
     val updown: Byte = 0
 
-): Serializable
+) : Serializable

@@ -11,7 +11,6 @@ class CommentService(
     val articleService: ArticleService,
     val commentRepository: CommentRepository
 ) {
-
     fun createComment(
         boardName: String,
         articleNo: Long,
@@ -53,5 +52,4 @@ class CommentService(
         val article = articleService.getArticle(boardName, articleNo)
         return article.comments
     }
-
 }

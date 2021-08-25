@@ -49,7 +49,7 @@ class Article (
     @OneToMany(mappedBy = "article")
     var articleVotes: MutableList<ArticleVote> = mutableListOf()
 
-): Serializable {
+) : Serializable {
     override fun equals(other: Any?): Boolean {
         if (this === other) return true
         if (javaClass != other?.javaClass) return false

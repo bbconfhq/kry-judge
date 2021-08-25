@@ -7,11 +7,11 @@ import org.springframework.transaction.annotation.Transactional
 
 @Service
 @Transactional
-class ArticleVoteService(val articleVoteRepository: ArticleVoteRepository,
-                         val articleService: ArticleService,
-                         val boardService: BoardService
+class ArticleVoteService(
+    val articleVoteRepository: ArticleVoteRepository,
+    val articleService: ArticleService,
+    val boardService: BoardService
 ) {
-
     fun createArticleVote(
         boardName: String,
         articleNo: Long,
@@ -33,5 +33,4 @@ class ArticleVoteService(val articleVoteRepository: ArticleVoteRepository,
         article.articleVotes.remove(articleVote)
         articleVoteRepository.delete(articleVote)
     }
-
 }

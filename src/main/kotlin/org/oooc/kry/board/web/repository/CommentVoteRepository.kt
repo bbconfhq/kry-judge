@@ -4,6 +4,6 @@ import org.oooc.kry.board.domain.entity.CommentVote
 import org.oooc.kry.board.domain.entity.CommentVoteId
 import org.springframework.data.jpa.repository.JpaRepository
 
-interface CommentVoteRepository: JpaRepository<CommentVote, CommentVoteId> {
+interface CommentVoteRepository : JpaRepository<CommentVote, CommentVoteId> {
 
 }

@@ -11,7 +11,7 @@ class ArticleVoteId (
     var article: Long = 0,
     // val user: User = User(),
     var updown: Byte = 0
-): Serializable {
+) : Serializable {
     override fun equals(other: Any?): Boolean {
         if (this === other) return true
         if (javaClass != other?.javaClass) return false
@@ -48,4 +48,4 @@ class ArticleVote (
     @Id
     var updown: Byte = 0
 
-): Serializable
+) : Serializable

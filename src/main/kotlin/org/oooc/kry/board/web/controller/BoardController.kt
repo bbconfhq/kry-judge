@@ -6,7 +6,9 @@ import org.springframework.web.bind.annotation.*
 
 @RestController
 @RequestMapping("board")
-class BoardController(val boardService: BoardService) {
+class BoardController(
+    val boardService: BoardService
+) {
 
     // CREATE BOARD
     @PostMapping("/")
@@ -48,4 +50,5 @@ class BoardController(val boardService: BoardService) {
         val boardsList = boardService.getBoardList()
         return BoardsGetResponseDTO(boardsList)
     }
+
 }

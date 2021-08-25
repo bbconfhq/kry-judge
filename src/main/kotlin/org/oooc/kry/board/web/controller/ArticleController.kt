@@ -9,7 +9,9 @@ import org.springframework.web.bind.annotation.*
 
 @RestController
 @RequestMapping("board")
-class ArticleController(val articleService: ArticleService) {
+class ArticleController(
+    val articleService: ArticleService
+) {
 
     // CREATE ARTICLE
     @PostMapping("/{boardName}/article")

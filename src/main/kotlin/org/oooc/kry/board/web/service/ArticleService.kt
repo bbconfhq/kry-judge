@@ -70,5 +70,4 @@ class ArticleService(
         val board = boardService.getBoard(boardName)
         return board.articles
     }
-
 }

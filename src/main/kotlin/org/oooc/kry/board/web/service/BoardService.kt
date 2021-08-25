@@ -7,8 +7,9 @@ import org.springframework.transaction.annotation.Transactional
 
 @Service
 @Transactional
-class BoardService(val boardRepository: BoardRepository) {
-
+class BoardService(
+    val boardRepository: BoardRepository
+) {
     fun createBoard(
         name: String,
         seq: Long
@@ -43,5 +44,4 @@ class BoardService(val boardRepository: BoardRepository) {
     fun getBoardList(): List<Board> {
         return boardRepository.findAll()
     }
-
 }

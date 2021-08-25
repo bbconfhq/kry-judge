@@ -43,7 +43,7 @@ class Comment (
     @OneToMany(mappedBy = "comment")
     val commentVotes: MutableList<CommentVote> = mutableListOf()
 
-): Serializable {
+) : Serializable {
     override fun equals(other: Any?): Boolean {
         if (this === other) return true
         if (javaClass != other?.javaClass) return false
