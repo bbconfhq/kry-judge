@@ -27,7 +27,7 @@ CREATE TABLE testcase (
     visible BOOLEAN NOT NULL DEFAULT false,
     input TEXT NOT NULL DEFAULT "",
     output TEXT NOT NULL DEFAULT "",
-    problem_id BIGINT,
+    problem_id BIGINT NOT NULL,
     PRIMARY KEY (id),
     FOREIGN KEY (problem_id) REFERENCES problem (id)
 ) ENGINE = InnoDB;
