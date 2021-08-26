@@ -13,7 +13,7 @@ class UserService(private val userRepository: UserRepository) {
     fun findAll(sort: Sort) = userRepository.findAll(sort)
 
     fun getUserPublic(nick: String): UserPublicDTO {
-        val user = userRepository.findByNickOrNull(nick) ?: throw UserNotFoundException()
+        val user = userRepository.findByNick(nick) ?: throw UserNotFoundException()
         return UserPublicDTO(
             user.nick,
             user.email,
@@ -24,8 +24,8 @@ class UserService(private val userRepository: UserRepository) {
     fun getUserPrivate(): UserPrivateDTO {
         val user = User()
 
-        /** TODO(Jerry): 2021-08-26
-         * Session check
+        /** TODO(Jerry): 2021-08-26 Session check
+         * 유저 개인정보는 세션에서 가져올 것
          */
 
         return  UserPrivateDTO(
@@ -40,6 +40,9 @@ class UserService(private val userRepository: UserRepository) {
         val user = userRepository.save(
             User(
                 name = userAddDTO.name,
+                /** TODO(Jerry): 2021-08-26 hashing password
+                 * DB에 저장될 password는 메시지 다이제스트
+                 */
                 pw = userAddDTO.pw,
                 nick = userAddDTO.nick,
                 email = userAddDTO.email,
@@ -55,10 +58,10 @@ class UserService(private val userRepository: UserRepository) {
     }
 
     fun updateUser(userUpdateDTO: UserUpdateDTO): UserPrivateDTO {
-        var newUser = userRepository.findByNameOrNull(userUpdateDTO.name) ?: throw UserNotFoundException()
+        var newUser = userRepository.findByName(userUpdateDTO.name) ?: throw UserNotFoundException()
 
-        /** TODO(Jerry): 2021-08-26
-         * Session check
+        /** TODO(Jerry): 2021-08-26 Session check
+         * 세션의 유저와 업데이트할 유저가 동일한지 확인
          */
 
         newUser.apply {
@@ -76,10 +79,10 @@ class UserService(private val userRepository: UserRepository) {
     }
 
     fun deleteUser(userDeleteDTO: UserDeleteDTO): CheckDTO{
-        val user = userRepository.findByNameOrNull(userDeleteDTO.name) ?: throw UserNotFoundException()
+        val user = userRepository.findByName(userDeleteDTO.name) ?: throw UserNotFoundException()
 
-        /** TODO(Jerry): 2021-08-26
-         * Session check
+        /** TODO(Jerry): 2021-08-26 Session check
+         * 세션의 유저와 삭제될 유저가 동일한지 확인
          */
 
         userRepository.deleteById(user.id)

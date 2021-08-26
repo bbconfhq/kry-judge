@@ -1,17 +1,22 @@
-package org.oooc.kry.user
+package org.oooc.kry.user.service
 
 import org.assertj.core.api.Assertions.assertThat
+import org.junit.jupiter.api.Assertions.assertTrue
 import org.junit.jupiter.api.Test
 import org.oooc.kry.user.domain.dto.UserAddDTO
 import org.oooc.kry.user.domain.dto.UserDeleteDTO
 import org.oooc.kry.user.web.service.UserService
 import org.springframework.beans.factory.annotation.Autowired
 import org.springframework.boot.test.context.SpringBootTest
+import org.springframework.security.crypto.password.PasswordEncoder
 
 @SpringBootTest
-class UserTest {
+class UserServiceTest {
     @Autowired
     private lateinit var userService: UserService
+
+    @Autowired
+    private lateinit var passwordEncoder: PasswordEncoder
 
     @Test
     fun addUser() {
@@ -54,5 +59,14 @@ class UserTest {
         val result = userService.deleteUser(payload)
 
         assertThat(result.success).isEqualTo(true)
+    }
+
+    @Test
+    fun encoder() {
+        val plainText = "12345678"
+        val digest: String = passwordEncoder.encode(plainText)
+
+        print(digest)
+        assertTrue(passwordEncoder.matches(plainText, digest))
     }
 }
