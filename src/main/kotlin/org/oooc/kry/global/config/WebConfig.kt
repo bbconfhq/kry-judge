@@ -1,4 +1,4 @@
-package org.oooc.kry.global
+package org.oooc.kry.global.config
 
 import org.springframework.context.annotation.Bean
 import org.springframework.context.annotation.Configuration

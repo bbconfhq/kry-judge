@@ -25,7 +25,7 @@ class UserTest {
             email= "user$seq@email.com"
         )
 
-        userService.createUser(user)
+        userService.addUser(user)
     }
 
     @Test
