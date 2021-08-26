@@ -5,11 +5,15 @@ import org.oooc.kry.user.domain.dto.*
 import org.oooc.kry.user.domain.entity.User
 import org.oooc.kry.user.domain.repository.UserRepository
 import org.oooc.kry.user.web.exception.UserNotFoundException
+import org.oooc.kry.user.web.exception.WrongPasswordException
 import org.springframework.data.domain.Sort
+import org.springframework.security.crypto.password.PasswordEncoder
 import org.springframework.stereotype.Service
 
 @Service
-class UserService(private val userRepository: UserRepository) {
+class UserService(private val userRepository: UserRepository,
+                  private val passwordEncoder: PasswordEncoder
+) {
     fun findAll(sort: Sort) = userRepository.findAll(sort)
 
     fun getUserPublic(nick: String): UserPublicDTO {
@@ -41,7 +45,7 @@ class UserService(private val userRepository: UserRepository) {
             User(
                 name = userAddDTO.name,
                 /** TODO(Jerry): 2021-08-26 hashing password
-                 * DB에 저장될 password는 메시지 다이제스트
+                 * pw = passwordEncoder.encode(userAddDTO.pw)
                  */
                 pw = userAddDTO.pw,
                 nick = userAddDTO.nick,
@@ -65,6 +69,9 @@ class UserService(private val userRepository: UserRepository) {
          */
 
         newUser.apply {
+            /** TODO(Jerry): 2021-08-26 hashing password
+             * pw = passwordEncoder.encode(userUpdateDTO.pw)
+             */
             pw = userUpdateDTO.pw
             nick = userUpdateDTO.nick
             bio = userUpdateDTO.bio
@@ -80,6 +87,13 @@ class UserService(private val userRepository: UserRepository) {
 
     fun deleteUser(userDeleteDTO: UserDeleteDTO): CheckDTO{
         val user = userRepository.findByName(userDeleteDTO.name) ?: throw UserNotFoundException()
+
+        /** TODO(Jerry): 2021-08-27
+         * 비밀번호 일치 확인
+         */
+//        if(!passwordEncoder.matches(userDeleteDTO.pw, user.pw))
+//            throw WrongPasswordException()
+
 
         /** TODO(Jerry): 2021-08-26 Session check
          * 세션의 유저와 삭제될 유저가 동일한지 확인
