@@ -74,6 +74,7 @@ class ProblemService(
         val updatedProblem = problem.apply {
             title = problemUpdateDTO.title
             content = problemUpdateDTO.content
+            modified = OffsetDateTime.now(ZoneOffset.of("+00:00"))
             input = problemUpdateDTO.input
             output = problemUpdateDTO.output
             note = problemUpdateDTO.note
