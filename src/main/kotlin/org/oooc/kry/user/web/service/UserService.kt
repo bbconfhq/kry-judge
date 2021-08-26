@@ -12,7 +12,7 @@ import org.springframework.stereotype.Service
 class UserService(private val userRepository: UserRepository) {
     fun findAll(sort: Sort) = userRepository.findAll(sort)
 
-    fun getUserByNick(nick: String): UserPublicDTO {
+    fun getUserPublic(nick: String): UserPublicDTO {
         val user = userRepository.findByNickOrNull(nick) ?: throw UserNotFoundException()
         return UserPublicDTO(
             user.nick,
@@ -21,8 +21,13 @@ class UserService(private val userRepository: UserRepository) {
         )
     }
 
-    fun getUserByName(name: String): UserPrivateDTO {
-        val user = userRepository.findByNameOrNull(name)  ?: throw UserNotFoundException()
+    fun getUserPrivate(): UserPrivateDTO {
+        val user = User()
+
+        /** TODO(Jerry): 2021-08-26
+         * Session check
+         */
+
         return  UserPrivateDTO(
             user.name,
             user.nick,
@@ -51,6 +56,11 @@ class UserService(private val userRepository: UserRepository) {
 
     fun updateUser(userUpdateDTO: UserUpdateDTO): UserPrivateDTO {
         var newUser = userRepository.findByNameOrNull(userUpdateDTO.name) ?: throw UserNotFoundException()
+
+        /** TODO(Jerry): 2021-08-26
+         * Session check
+         */
+
         newUser.apply {
             pw = userUpdateDTO.pw
             nick = userUpdateDTO.nick
@@ -69,7 +79,7 @@ class UserService(private val userRepository: UserRepository) {
         val user = userRepository.findByNameOrNull(userDeleteDTO.name) ?: throw UserNotFoundException()
 
         /** TODO(Jerry): 2021-08-26
-         * 권한 체크
+         * Session check
          */
 
         userRepository.deleteById(user.id)

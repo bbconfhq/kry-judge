@@ -2,8 +2,8 @@ package org.oooc.kry.user
 
 import org.assertj.core.api.Assertions.assertThat
 import org.junit.jupiter.api.Test
-import org.oooc.kry.user.domain.dto.UserDto
-import org.oooc.kry.user.domain.entity.User
+import org.oooc.kry.user.domain.dto.UserAddDTO
+import org.oooc.kry.user.domain.dto.UserDeleteDTO
 import org.oooc.kry.user.web.service.UserService
 import org.springframework.beans.factory.annotation.Autowired
 import org.springframework.boot.test.context.SpringBootTest
@@ -14,10 +14,10 @@ class UserTest {
     private lateinit var userService: UserService
 
     @Test
-    fun createUser() {
+    fun addUser() {
         val seq = "06"
 
-        val user = User(
+        val payload = UserAddDTO(
             name="user$seq",
             pw="1234",
             nick="nick_name$seq",
@@ -25,25 +25,34 @@ class UserTest {
             email= "user$seq@email.com"
         )
 
-//       userService.addUser(user)
+        val user = userService.addUser(payload)
+
+        assertThat(user.nick).isEqualTo(payload.nick)
+        assertThat(user.bio).isEqualTo(payload.bio)
+        assertThat(user.email).isEqualTo(payload.email)
     }
 
     @Test
-    fun getUserByName() {
+    fun getUserPublic() {
         var seq = "01"
         val payload = "user$seq"
-        val user = userService.getUserByName(payload)
-        assertThat(user?.name).isEqualTo(payload)
+        val user = userService.getUserPublic(payload)
+
+        assertThat(user?.nick).isEqualTo(payload)
+        assertThat(user?.bio).isEqualTo(payload)
+        assertThat(user?.email).isEqualTo(payload)
     }
 
     @Test
     fun delete() {
         var seq = "01"
-        val payload = "user$seq"
+        val payload = UserDeleteDTO(
+            name =    "user$seq",
+            pw = "1234"
+        )
 
-        userService.deleteUser(payload)
+        val result = userService.deleteUser(payload)
 
-        val user = userService.getUserByName(payload)
-        assertThat(user).isNull()
+        assertThat(result.success).isEqualTo(true)
     }
 }

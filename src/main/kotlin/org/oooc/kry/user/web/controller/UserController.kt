@@ -11,16 +11,16 @@ class UserController(private val userService: UserService) {
 
     // 공개된 정보는 닉네임을 통해 조회. username은 로그인 할 때만 사용합니다.
     @GetMapping("/{nick}")
-    fun getUserByNick(@PathVariable("nick") nick: String): APIResponse<UserPublicDTO>{
+    fun getUserPublic(@PathVariable("nick") nick: String): APIResponse<UserPublicDTO>{
         return APIResponse(
-            data = userService.getUserByNick(nick)
+            data = userService.getUserPublic(nick)
         )
     }
 
-    @GetMapping("/{name}")
-    fun getUserByName(@PathVariable("name") name: String): APIResponse<UserPrivateDTO> {
+    @GetMapping("")
+    fun getUserPrivate(): APIResponse<UserPrivateDTO> {
         return APIResponse(
-            data = userService.getUserByName(name)
+            data = userService.getUserPrivate()
         )
     }
 
