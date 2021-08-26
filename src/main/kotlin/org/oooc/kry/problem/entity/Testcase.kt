@@ -10,8 +10,8 @@ class Testcase(
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     val id: Long = 0,
 
-    @Column(nullable = false, name = "is_example")
-    val example: Boolean = false,
+    @Column(nullable = false)
+    val visible: Boolean = false,
 
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "problem_id")

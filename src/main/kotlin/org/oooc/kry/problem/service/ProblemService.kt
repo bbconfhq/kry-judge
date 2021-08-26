@@ -13,6 +13,8 @@ import org.springframework.data.domain.Pageable
 import org.springframework.data.repository.findByIdOrNull
 import org.springframework.stereotype.Service
 import org.springframework.transaction.annotation.Transactional
+import java.time.OffsetDateTime
+import java.time.ZoneOffset
 
 @Service
 @Transactional
@@ -24,7 +26,7 @@ class ProblemService(
     fun getProblemList(pageable: Pageable): List<ProblemDTO> {
         val problems = problemRepository.findAll(pageable).content
         val problemDTOs = problems.map { problem ->
-            val testcases = testcaseRepository.findAllByProblemAndExampleIsTrue(problem)
+            val testcases = testcaseRepository.findAllByProblemAndVisibleIsTrue(problem)
             val tags = problemTagRepository.findAllByProblem(problem).map { it.tag }
             ProblemDTO.of(problem, testcases, tags)
         }
@@ -34,7 +36,7 @@ class ProblemService(
 
     fun getProblem(problemId: Long): ProblemDTO {
         val problem = problemRepository.findByIdOrNull(problemId) ?: throw ProblemNotFoundException()
-        val testcases = testcaseRepository.findAllByProblemAndExampleIsTrue(problem)
+        val testcases = testcaseRepository.findAllByProblemAndVisibleIsTrue(problem)
         val tags = problemTagRepository.findAllByProblem(problem).map { it.tag }
 
         return ProblemDTO.of(problem, testcases, tags)
@@ -42,7 +44,7 @@ class ProblemService(
 
     fun getProblem(title: String): ProblemDTO {
         val problem = problemRepository.findByTitle(title) ?: throw ProblemNotFoundException()
-        val testcases = testcaseRepository.findAllByProblemAndExampleIsTrue(problem)
+        val testcases = testcaseRepository.findAllByProblemAndVisibleIsTrue(problem)
         val tags = problemTagRepository.findAllByProblem(problem).map { it.tag }
 
         return ProblemDTO.of(problem, testcases, tags)
