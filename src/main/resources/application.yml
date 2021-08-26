@@ -16,3 +16,7 @@ spring:
         format_sql: true
     hibernate:
       ddl-auto: none
+
+server:
+  error:
+    include-stacktrace: never
