@@ -16,16 +16,16 @@ class User (
     val name: String = "",
 
     @Column(nullable = false, length = 512)
-    val pw: String = "",
+    var pw: String = "",
 
     @Column(nullable = false, unique = true, length = 30)
-    val nick: String = "",
+    var nick: String = "",
 
     @Column(nullable = false, unique = true, length = 191)
     val email: String = "",
 
     @Column(nullable = false, length = 512)
-    val bio: String = "",
+    var bio: String = "",
 
     @Column(nullable = false)
     val created: OffsetDateTime = OffsetDateTime.now(ZoneOffset.of("+00:00")),
