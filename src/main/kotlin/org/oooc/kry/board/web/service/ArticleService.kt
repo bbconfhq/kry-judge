@@ -42,12 +42,13 @@ class ArticleService(
         title: String,
         content: String,
         modified: OffsetDateTime
-    ) {
+    ): Article {
         val article = articleRepository.findById(articleNo).get()
         article.board = board
         article.title = title
         article.content = content
         article.modified = modified
+        return article
     }
 
     fun deleteArticle(

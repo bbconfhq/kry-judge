@@ -1,10 +1,9 @@
 package org.oooc.kry.board.web.controller
 
-import org.oooc.kry.board.domain.dto.ArticleCreateRequestDTO
-import org.oooc.kry.board.domain.dto.ArticleGetResponseDTO
-import org.oooc.kry.board.domain.dto.ArticlePutRequestDTO
-import org.oooc.kry.board.domain.dto.ArticlesGetResponseDTO
+import org.oooc.kry.board.domain.dto.*
 import org.oooc.kry.board.web.service.ArticleService
+import org.oooc.kry.global.dto.APIResponse
+import org.oooc.kry.global.dto.CheckDTO
 import org.springframework.web.bind.annotation.*
 
 @RestController
@@ -18,11 +17,26 @@ class ArticleController(
     fun postArticle(
         @PathVariable boardName: String,
         @RequestBody articleCreateRequestDTO: ArticleCreateRequestDTO
-    ) {
-        articleService.createArticle(boardName,
+    ): APIResponse<ArticleCreateResponseDTO> {
+        val article = articleService.createArticle(
+            boardName,
             articleCreateRequestDTO.title,
             articleCreateRequestDTO.content,
-            articleCreateRequestDTO.created)
+            articleCreateRequestDTO.created
+        )
+        val respDTO = ArticleCreateResponseDTO(
+            article.id,
+            article.board.name,
+            article.title,
+            article.content,
+            article.created,
+            article.modified,
+            article.upvote,
+            article.downvote
+        )
+        return APIResponse(
+            data = respDTO
+        )
     }
 
     // GET ARTICLE
@@ -30,10 +44,11 @@ class ArticleController(
     fun getArticle(
         @PathVariable boardName: String,
         @PathVariable articleNo: Long
-    ): ArticleGetResponseDTO {
+    ): APIResponse<ArticleGetResponseDTO> {
         val article = articleService.getArticle(boardName, articleNo)
-        return ArticleGetResponseDTO(id = article.id,
-            board = article.board,
+        val respDTO = ArticleGetResponseDTO(
+            id = article.id,
+            boardName = article.board.name,
             title = article.title,
             content = article.content,
             created = article.created,
@@ -42,6 +57,9 @@ class ArticleController(
             downvote = article.downvote,
             comments = article.comments
         )
+        return APIResponse(
+            data = respDTO
+        )
     }
 
     // MODIFY ARTICLE
@@ -49,12 +67,26 @@ class ArticleController(
     fun putArticle(
         @PathVariable articleNo: Long,
         @RequestBody articlePutRequestDTO: ArticlePutRequestDTO
-    ) {
-        articleService.modifyArticle(articleNo,
+    ): APIResponse<ArticlePutResponseDTO> {
+        val article = articleService.modifyArticle(
+            articleNo,
             articlePutRequestDTO.board,
             articlePutRequestDTO.title,
             articlePutRequestDTO.content,
             articlePutRequestDTO.modified
+        )
+        val respDTO = ArticlePutResponseDTO(
+            id = article.id,
+            boardName = article.board.name,
+            title = article.title,
+            content = article.content,
+            created = article.created,
+            modified = article.modified,
+            upvote = article.upvote,
+            downvote = article.downvote
+        )
+        return APIResponse(
+            data = respDTO
         )
     }
 
@@ -62,16 +94,25 @@ class ArticleController(
     @DeleteMapping("/{boardName}/article/{articleNo}")
     fun deleteArticle(
         @PathVariable boardName: String,
-        @PathVariable articleNo: Long)
-    {
+        @PathVariable articleNo: Long
+    ): APIResponse<CheckDTO> {
         articleService.deleteArticle(boardName, articleNo)
+        return APIResponse(
+            data = CheckDTO(
+                success = true)
+        )
     }
 
     // GET LIST OF ARTICLES
     @GetMapping("/{boardName}/article")
-    fun getArticles(): ArticlesGetResponseDTO {
-        val articlesList = articleService.getArticleList()
-        return ArticlesGetResponseDTO(articlesList)
+    fun getArticles(
+        @PathVariable boardName: String
+    ): APIResponse<ArticlesGetResponseDTO> {
+        val articlesList = articleService.getArticleList(boardName)
+        val respDTO = ArticlesGetResponseDTO(articlesList)
+        return APIResponse(
+            data = respDTO
+        )
     }
 
 }

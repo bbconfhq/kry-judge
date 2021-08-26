@@ -6,7 +6,7 @@ import java.time.OffsetDateTime
 
 class ArticleGetResponseDTO (
     var id: Long,
-    var board: Board,
+    var boardName: String,
     var title: String,
     var content: String,
     var created: OffsetDateTime,
