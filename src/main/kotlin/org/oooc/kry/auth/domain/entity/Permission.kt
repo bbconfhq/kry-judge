@@ -17,7 +17,7 @@ class Permission (
     val userPermissions: List<UserPermission> = emptyList(),
 
     @OneToMany(mappedBy = "permgroup")
-    val PermissionPermgroups: List<PermissionPermgroup> = emptyList(),
+    val permgroupPermission: List<PermgroupPermission> = emptyList(),
 ): Serializable {
     override fun equals(other: Any?): Boolean {
         if (this === other) return true

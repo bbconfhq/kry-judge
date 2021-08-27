@@ -4,38 +4,38 @@ import java.io.Serializable
 import javax.persistence.*
 
 @Entity
-@IdClass(PermissionPermgroupId::class)
-class PermissionPermgroup (
-    @Id
-    @ManyToOne(fetch = FetchType.LAZY)
-    @JoinColumn(name = "permission_id")
-    val permission: Permission = Permission(),
-
+@IdClass(PermgroupPermissionId::class)
+class PermgroupPermission (
     @Id
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "permgroup_id")
-    val permgroup: Permgroup = Permgroup()
+    val permgroup: Permgroup = Permgroup(),
+
+    @Id
+    @ManyToOne(fetch = FetchType.LAZY)
+    @JoinColumn(name = "permission_id")
+    val permission: Permission = Permission()
 ): Serializable {
     override fun equals(other: Any?): Boolean {
         if (this === other) return true
         if (javaClass != other?.javaClass) return false
 
-        other as PermissionPermgroup
+        other as PermgroupPermission
 
-        if (permission != other.permission) return false
         if (permgroup!= other.permgroup) return false
+        if (permission != other.permission) return false
 
         return true
     }
 
     override fun hashCode(): Int {
-        var result = permission.hashCode()
-        result = 31 * result + permgroup.hashCode()
+        var result = permgroup.hashCode()
+        result = 31 * result + permission.hashCode()
         return result
     }
 }
 
-class PermissionPermgroupId(
-    val permission: Permission = Permission(),
+class PermgroupPermissionId(
     val permgroup: Permgroup = Permgroup(),
+    val permission: Permission = Permission(),
 ) : Serializable
