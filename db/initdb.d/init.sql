@@ -60,7 +60,7 @@ CREATE TABLE `article` (
     `board_id` BIGINT NOT NULL,
     `user_id` BIGINT NOT NULL,
     `title` VARCHAR(191) NOT NULL,
-    `content` MEDIUMTEXT NOT NULL,
+    `content` TEXT NOT NULL,
     `created` datetime(6) NOT NULL,
     `modified` datetime(6) NOT NULL,
     `upvote` BIGINT NOT NULL,
