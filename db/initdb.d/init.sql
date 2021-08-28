@@ -16,8 +16,8 @@ CREATE TABLE problem (
     memory_limit INTEGER NOT NULL DEFAULT 128,
     submit_count INTEGER NOT NULL DEFAULT 0,
     accept_count INTEGER NOT NULL DEFAULT 0,
-    PRIMARY KEY (id),
-    UNIQUE KEY (title)
+    CONSTRAINT PRIMARY KEY (id),
+    CONSTRAINT UNIQUE KEY (title)
 ) ENGINE = InnoDB;
 
 ALTER TABLE problem AUTO_INCREMENT = 1000;
@@ -28,22 +28,22 @@ CREATE TABLE testcase (
     input TEXT NOT NULL DEFAULT "",
     output TEXT NOT NULL DEFAULT "",
     problem_id BIGINT NOT NULL,
-    PRIMARY KEY (id),
-    FOREIGN KEY (problem_id) REFERENCES problem (id)
+    CONSTRAINT PRIMARY KEY (id),
+    CONSTRAINT FOREIGN KEY (problem_id) REFERENCES problem (id)
 ) ENGINE = InnoDB;
 
 CREATE TABLE tag (
     id BIGINT NOT NULL AUTO_INCREMENT,
     name VARCHAR(191) NOT NULL DEFAULT "",
-    PRIMARY KEY (id)
+    CONSTRAINT PRIMARY KEY (id)
 ) ENGINE = InnoDB;
 
 CREATE TABLE problem_tag (
     problem_id BIGINT NOT NULL,
     tag_id BIGINT NOT NULL,
-    PRIMARY KEY (problem_id, tag_id),
-    FOREIGN KEY (problem_id) REFERENCES problem (id),
-    FOREIGN KEY (tag_id) REFERENCES tag (id)
+    CONSTRAINT PRIMARY KEY (problem_id, tag_id),
+    CONSTRAINT FOREIGN KEY (problem_id) REFERENCES problem (id),
+    CONSTRAINT FOREIGN KEY (tag_id) REFERENCES tag (id)
 ) ENGINE = InnoDB;
 
 CREATE TABLE `board` (
