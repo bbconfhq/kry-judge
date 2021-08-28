@@ -5,17 +5,17 @@ USE kry;
 
 CREATE TABLE problem (
     id BIGINT NOT NULL AUTO_INCREMENT,
-    title VARCHAR(191) NOT NULL DEFAULT "",
-    content TEXT NOT NULL DEFAULT "",
-    created DATETIME(6) NOT NULL DEFAULT NOW(),
-    modified DATETIME(6) NOT NULL DEFAULT NOW(),
-    input TEXT NOT NULL DEFAULT "",
-    output TEXT NOT NULL DEFAULT "",
-    note TEXT NOT NULL DEFAULT "",
-    time_limit DECIMAL(7, 5) NOT NULL DEFAULT 1.0,
-    memory_limit INTEGER NOT NULL DEFAULT 128,
-    submit_count INTEGER NOT NULL DEFAULT 0,
-    accept_count INTEGER NOT NULL DEFAULT 0,
+    title VARCHAR(191) NOT NULL,
+    content TEXT NOT NULL,
+    created DATETIME(6) NOT NULL,
+    modified DATETIME(6) NOT NULL,
+    input TEXT NOT NULL,
+    output TEXT NOT NULL,
+    note TEXT NOT NULL,
+    time_limit DECIMAL(7, 5) NOT NULL,
+    memory_limit INTEGER NOT NULL,
+    submit_count INTEGER NOT NULL,
+    accept_count INTEGER NOT NULL,
     PRIMARY KEY (id),
     UNIQUE KEY (title)
 ) ENGINE = InnoDB;
@@ -24,9 +24,9 @@ ALTER TABLE problem AUTO_INCREMENT = 1000;
 
 CREATE TABLE testcase (
     id BIGINT NOT NULL AUTO_INCREMENT,
-    visible BOOLEAN NOT NULL DEFAULT false,
-    input TEXT NOT NULL DEFAULT "",
-    output TEXT NOT NULL DEFAULT "",
+    visible BOOLEAN NOT NULL,
+    input TEXT NOT NULL,
+    output TEXT NOT NULL,
     problem_id BIGINT NOT NULL,
     PRIMARY KEY (id),
     FOREIGN KEY (problem_id) REFERENCES problem (id)
@@ -34,7 +34,7 @@ CREATE TABLE testcase (
 
 CREATE TABLE tag (
     id BIGINT NOT NULL AUTO_INCREMENT,
-    name VARCHAR(191) NOT NULL DEFAULT "",
+    name VARCHAR(191) NOT NULL,
     PRIMARY KEY (id)
 ) ENGINE = InnoDB;
 
@@ -48,8 +48,8 @@ CREATE TABLE problem_tag (
 
 CREATE TABLE `board` (
     `id` BIGINT NOT NULL AUTO_INCREMENT,
-    `name` VARCHAR(191) NOT NULL DEFAULT "",
-    `seq` BIGINT NOT NULL DEFAULT 0,
+    `name` VARCHAR(191) NOT NULL,
+    `seq` BIGINT NOT NULL,
     PRIMARY KEY (`id`),
     UNIQUE KEY (`name`),
     UNIQUE KEY (`seq`)
@@ -59,12 +59,12 @@ CREATE TABLE `article` (
     `id` BIGINT NOT NULL AUTO_INCREMENT,
     `board_id` BIGINT NOT NULL,
     `user_id` BIGINT NOT NULL,
-    `title` VARCHAR(191) NOT NULL DEFAULT "",
-    `content` TEXT NOT NULL DEFAULT "",
-    `created` datetime(6) NOT NULL DEFAULT NOW(),
-    `modified` datetime(6) NOT NULL DEFAULT NOW(),
-    `upvote` BIGINT NOT NULL DEFAULT 0,
-    `downvote` BIGINT NOT NULL DEFAULT 0,
+    `title` VARCHAR(191) NOT NULL,
+    `content` TEXT NOT NULL,
+    `created` datetime(6) NOT NULL,
+    `modified` datetime(6) NOT NULL,
+    `upvote` BIGINT NOT NULL,
+    `downvote` BIGINT NOT NULL,
     PRIMARY KEY (`id`),
     FOREIGN KEY (`board_id`) REFERENCES `board` (`id`),
     FOREIGN KEY (`user_id`) REFERENCES `user` (`id`)
@@ -74,11 +74,11 @@ CREATE TABLE `comment` (
     `id` BIGINT NOT NULL AUTO_INCREMENT,
     `article_id` BIGINT NOT NULL,
     `user_id` BIGINT NOT NULL,
-    `content` TEXT NOT NULL DEFAULT "",
-    `created` DATETIME(6) NOT NULL DEFAULT NOW(),
-    `modified` DATETIME(6) NOT NULL DEFAULT NOW(),
-    `upvote` BIGINT NOT NULL DEFAULT 0,
-    `downvote` BIGINT NOT NULL DEFAULT 0,
+    `content` TEXT NOT NULL,
+    `created` DATETIME(6) NOT NULL,
+    `modified` DATETIME(6) NOT NULL,
+    `upvote` BIGINT NOT NULL,
+    `downvote` BIGINT NOT NULL,
     PRIMARY KEY (`id`),
     FOREIGN KEY (`article_id`) REFERENCES `article` (`id`),
     FOREIGN KEY (`user_id`) REFERENCES `user` (`id`)
@@ -87,7 +87,7 @@ CREATE TABLE `comment` (
 CREATE TABLE `article_vote` (
     `article_id` BIGINT NOT NULL,
     `user_id` BIGINT NOT NULL,
-    `updown` TINYINT NOT NULL DEFAULT 0,
+    `updown` TINYINT NOT NULL,
     PRIMARY KEY (`article_id`, `user_id`, `updown`),
     FOREIGN KEY (`article_id`) REFERENCES `article` (`id`),
     FOREIGN KEY (`user_id`) REFERENCES `user` (`id`)
@@ -96,7 +96,7 @@ CREATE TABLE `article_vote` (
 CREATE TABLE `comment_vote` (
     `comment_id` BIGINT NOT NULL,
     `user_id` BIGINT NOT NULL,
-    `updown` TINYINT NOT NULL DEFAULT 0,
+    `updown` TINYINT NOT NULL,
     PRIMARY KEY (`comment_id`, `user_id`, `updown`),
     FOREIGN KEY (`comment_id`) REFERENCES `comment` (`id`),
     FOREIGN KEY (`user_id`) REFERENCES `user` (`id`)
