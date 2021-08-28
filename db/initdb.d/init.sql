@@ -46,6 +46,80 @@ CREATE TABLE problem_tag (
     FOREIGN KEY (tag_id) REFERENCES tag (id)
 ) ENGINE = InnoDB;
 
+CREATE TABLE `board` (
+    `id` BIGINT NOT NULL AUTO_INCREMENT,
+    `name` VARCHAR(191) NOT NULL DEFAULT "",
+    `seq` BIGINT NOT NULL DEFAULT 0,
+    CONSTRAINT PRIMARY KEY (`id`),
+    CONSTRAINT UNIQUE KEY (`name`),
+    CONSTRAINT UNIQUE KEY (`seq`)
+) ENGINE=INNODB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+
+CREATE TABLE `article` (
+    `id` BIGINT NOT NULL AUTO_INCREMENT,
+    `board_id` BIGINT NOT NULL,
+    `user_id` BIGINT NOT NULL,
+    `title` VARCHAR(191) NOT NULL DEFAULT "",
+    `content` TEXT NOT NULL DEFAULT "",
+    `created` datetime(6) NOT NULL DEFAULT NOW(),
+    `modified` datetime(6) NOT NULL DEFAULT NOW(),
+    `upvote` BIGINT NOT NULL DEFAULT 0,
+    `downvote` BIGINT NOT NULL DEFAULT 0,
+    CONSTRAINT PRIMARY KEY (`id`),
+    CONSTRAINT FOREIGN KEY (`board_id`) REFERENCES `board` (`id`),
+    CONSTRAINT FOREIGN KEY (`user_id`) REFERENCES `user` (`id`)
+) ENGINE=INNODB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+
+CREATE TABLE `comment` (
+    `id` BIGINT NOT NULL AUTO_INCREMENT,
+    `article_id` BIGINT NOT NULL,
+    `user_id` BIGINT NOT NULL,
+    `content` TEXT NOT NULL DEFAULT "",
+    `created` DATETIME(6) NOT NULL DEFAULT NOW(),
+    `modified` DATETIME(6) NOT NULL DEFAULT NOW(),
+    `upvote` BIGINT NOT NULL DEFAULT 0,
+    `downvote` BIGINT NOT NULL DEFAULT 0,
+    CONSTRAINT PRIMARY KEY (`id`),
+    CONSTRAINT FOREIGN KEY (`article_id`) REFERENCES `article` (`id`),
+    CONSTRAINT FOREIGN KEY (`user_id`) REFERENCES `user` (`id`)
+) ENGINE=INNODB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+
+CREATE TABLE `article_vote` (
+    `article_id` BIGINT NOT NULL,
+    `user_id` BIGINT NOT NULL,
+    `updown` TINYINT NOT NULL DEFAULT 0,
+    CONSTRAINT PRIMARY KEY (`article_id`, `user_id`, `updown`),
+    CONSTRAINT FOREIGN KEY (`article_id`) REFERENCES `article` (`id`),
+    CONSTRAINT FOREIGN KEY (`user_id`) REFERENCES `user` (`id`),
+    CONSTRAINT UNIQUE KEY (`article_id`, `user_id`, `updown`)
+) ENGINE=INNODB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+
+CREATE TABLE `comment_vote` (
+    `comment_id` BIGINT NOT NULL,
+    `user_id` BIGINT NOT NULL,
+    `updown` TINYINT NOT NULL DEFAULT 0,
+    CONSTRAINT PRIMARY KEY (`comment_id`, `user_id`, `updown`),
+    CONSTRAINT FOREIGN KEY (`comment_id`) REFERENCES `comment` (`id`),
+    CONSTRAINT FOREIGN KEY (`user_id`) REFERENCES `user` (`id`),
+    CONSTRAINT UNIQUE KEY (`comment_id`, `user_id`, `updown`)
+) ENGINE=INNODB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+
+CREATE TABLE `user` (
+    `id` BIGINT NOT NULL AUTO_INCREMENT,
+    `name` VARCHAR(30) NOT NULL,
+    `pw` VARCHAR(512) NOT NULL,
+    `nick` VARCHAR(30) NOT NULL,
+    `email` VARCHAR(191) NOT NULL,
+    `bio` VARCHAR(512) NOT NULL,
+    `created` DATETIME NOT NULL DEFAULT CURRENT_TIMESTAMP,
+    CONSTRAINT PRIMARY KEY (`id`),
+    CONSTRAINT UNIQUE KEY (name),
+    CONSTRAINT UNIQUE KEY (nick),
+    CONSTRAINT UNIQUE KEY (email)
+) ENGINE=INNODB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+
+
+
 INSERT INTO problem (title, content, input, output)
     VALUES ("A+B", "두 정수 A와 B를 입력받은 다음, A+B를 출력하는 프로그램을 작성하시오.", "첫째 줄에 A와 B가 주어진다. (0 < A, B < 10)", "첫째 줄에 A+B를 출력한다."),
            ("A-B", "두 정수 A와 B를 입력받은 다음, A-B를 출력하는 프로그램을 작성하시오.", "첫째 줄에 A와 B가 주어진다. (0 < A, B < 10)", "첫째 줄에 A-B를 출력한다."),
