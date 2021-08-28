@@ -1,7 +1,14 @@
-CREATE DATABASE kry
+CREATE DATABASE IF NOT EXISTS kry
     CHARACTER SET utf8mb4
     COLLATE utf8mb4_unicode_ci;
 USE kry;
+
+DROP TABLE IF EXISTS user;
+DROP TABLE IF EXISTS user_permgroup;
+DROP TABLE IF EXISTS user_permission;
+DROP TABLE IF EXISTS permgroup;
+DROP TABLE IF EXISTS permission;
+DROP TABLE IF EXISTS permission_permgroup;
 
 CREATE TABLE problem (
     id BIGINT NOT NULL AUTO_INCREMENT,
@@ -67,3 +74,98 @@ INSERT INTO problem_tag (problem_id, tag_id)
            (1000, 2),
            (1001, 1),
            (1001, 2);
+
+CREATE TABLE IF NOT EXISTS user (
+   id BIGINT NOT NULL AUTO_INCREMENT,
+   name VARCHAR(30) NOT NULL,
+   pw VARCHAR(512) NOT NULL,
+   nick VARCHAR(30) NOT NULL,
+   bio VARCHAR(512) NOT NULL,
+   email VARCHAR(191) NOT NULL,
+   created DATETIME(6) NOT NULL DEFAULT NOW(),
+   PRIMARY KEY (id),
+   UNIQUE (email),
+   UNIQUE (name),
+   UNIQUE (nick)
+) ENGINE=InnoDB;
+
+CREATE TABLE IF NOT EXISTS permgroup (
+   id BIGINT NOT NULL AUTO_INCREMENT,
+   name VARCHAR(191) NOT NULL,
+   PRIMARY KEY (id),
+   UNIQUE (name)
+) ENGINE=InnoDB;
+
+CREATE TABLE IF NOT EXISTS permission(
+   id BIGINT NOT NULL AUTO_INCREMENT,
+   name VARCHAR(191) NOT NULL,
+   PRIMARY KEY (id),
+   UNIQUE (name)
+) ENGINE=InnoDB;
+
+CREATE TABLE IF NOT EXISTS user_permgroup (
+   user_id BIGINT NOT NULL,
+   permgroup_id BIGINT NOT NULL,
+   PRIMARY KEY (permgroup_id, user_id),
+   FOREIGN KEY (user_id) REFERENCES user (id),
+   FOREIGN KEY (permgroup_id) REFERENCES permgroup (id)
+) ENGINE=InnoDB;
+
+CREATE TABLE IF NOT EXISTS user_permission (
+   user_id BIGINT NOT NULL,
+   permission_id BIGINT NOT NULL,
+   PRIMARY KEY (permission_id, user_id),
+   FOREIGN KEY (user_id) REFERENCES user (id),
+   FOREIGN KEY (permission_id) REFERENCES permission (id)
+) ENGINE=InnoDB;
+
+CREATE TABLE IF NOT EXISTS permgroup_permission(
+   permission_id BIGINT NOT NULL,
+   permgroup_id BIGINT NOT NULL,
+   PRIMARY KEY (permgroup_id, permission_id),
+   FOREIGN KEY (permission_id) REFERENCES permission (id),
+   FOREIGN KEY (permgroup_id) REFERENCES permgroup (id)
+) ENGINE=InnoDB;
+
+INSERT INTO user (name, pw, nick, bio, email)
+VALUES
+   ("user01", "PaSsWoRd01", "nick01", "Hello Wolrd!", "user01@email.com"),
+   ("user02", "PaSsWoRd02", "nick02", "In the end, we all felt like we ate too much.", "user02@email.com"),
+   ("user03", "PaSsWoRd03", "nick03", "헬로우 월드!", "user03@email.com"),
+   ("user04", "PaSsWoRd04", "nick04", "한글 바이오 Example 입니다.", "user04@email.com");
+
+INSERT INTO permgroup (name)
+VALUES
+   ("staff"),
+   ("admin"),
+   ("guest"),
+   ("moderator");
+
+INSERT INTO permission (name)
+VALUES
+   ("create"),
+   ("delete"),
+   ("read"),
+   ("update");
+
+INSERT INTO user_permgroup (user_id, permgroup_id)
+VALUES
+   (1, 4),
+   (2, 3),
+   (3, 2),
+   (4, 1);
+
+INSERT INTO user_permission (user_id, permission_id)
+VALUES
+   (1, 4),
+   (2, 3),
+   (3, 2),
+   (4, 1);
+
+INSERT INTO permgroup_permission(permission_id, permgroup_id)
+VALUES
+   (1, 4),
+   (2, 3),
+   (3, 2),
+   (4, 1);
+
