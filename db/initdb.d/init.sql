@@ -16,8 +16,8 @@ CREATE TABLE problem (
     memory_limit INTEGER NOT NULL DEFAULT 128,
     submit_count INTEGER NOT NULL DEFAULT 0,
     accept_count INTEGER NOT NULL DEFAULT 0,
-    CONSTRAINT PRIMARY KEY (id),
-    CONSTRAINT UNIQUE KEY (title)
+    PRIMARY KEY (id),
+    UNIQUE KEY (title)
 ) ENGINE = InnoDB;
 
 ALTER TABLE problem AUTO_INCREMENT = 1000;
@@ -28,31 +28,31 @@ CREATE TABLE testcase (
     input TEXT NOT NULL DEFAULT "",
     output TEXT NOT NULL DEFAULT "",
     problem_id BIGINT NOT NULL,
-    CONSTRAINT PRIMARY KEY (id),
-    CONSTRAINT FOREIGN KEY (problem_id) REFERENCES problem (id)
+    PRIMARY KEY (id),
+    FOREIGN KEY (problem_id) REFERENCES problem (id)
 ) ENGINE = InnoDB;
 
 CREATE TABLE tag (
     id BIGINT NOT NULL AUTO_INCREMENT,
     name VARCHAR(191) NOT NULL DEFAULT "",
-    CONSTRAINT PRIMARY KEY (id)
+    PRIMARY KEY (id)
 ) ENGINE = InnoDB;
 
 CREATE TABLE problem_tag (
     problem_id BIGINT NOT NULL,
     tag_id BIGINT NOT NULL,
-    CONSTRAINT PRIMARY KEY (problem_id, tag_id),
-    CONSTRAINT FOREIGN KEY (problem_id) REFERENCES problem (id),
-    CONSTRAINT FOREIGN KEY (tag_id) REFERENCES tag (id)
+    PRIMARY KEY (problem_id, tag_id),
+    FOREIGN KEY (problem_id) REFERENCES problem (id),
+    FOREIGN KEY (tag_id) REFERENCES tag (id)
 ) ENGINE = InnoDB;
 
 CREATE TABLE `board` (
     `id` BIGINT NOT NULL AUTO_INCREMENT,
     `name` VARCHAR(191) NOT NULL DEFAULT "",
     `seq` BIGINT NOT NULL DEFAULT 0,
-    CONSTRAINT PRIMARY KEY (`id`),
-    CONSTRAINT UNIQUE KEY (`name`),
-    CONSTRAINT UNIQUE KEY (`seq`)
+    PRIMARY KEY (`id`),
+    UNIQUE KEY (`name`),
+    UNIQUE KEY (`seq`)
 ) ENGINE=INNODB;
 
 CREATE TABLE `article` (
@@ -65,9 +65,9 @@ CREATE TABLE `article` (
     `modified` datetime(6) NOT NULL DEFAULT NOW(),
     `upvote` BIGINT NOT NULL DEFAULT 0,
     `downvote` BIGINT NOT NULL DEFAULT 0,
-    CONSTRAINT PRIMARY KEY (`id`),
-    CONSTRAINT FOREIGN KEY (`board_id`) REFERENCES `board` (`id`),
-    CONSTRAINT FOREIGN KEY (`user_id`) REFERENCES `user` (`id`)
+    PRIMARY KEY (`id`),
+    FOREIGN KEY (`board_id`) REFERENCES `board` (`id`),
+    FOREIGN KEY (`user_id`) REFERENCES `user` (`id`)
 ) ENGINE=INNODB;
 
 CREATE TABLE `comment` (
@@ -79,27 +79,27 @@ CREATE TABLE `comment` (
     `modified` DATETIME(6) NOT NULL DEFAULT NOW(),
     `upvote` BIGINT NOT NULL DEFAULT 0,
     `downvote` BIGINT NOT NULL DEFAULT 0,
-    CONSTRAINT PRIMARY KEY (`id`),
-    CONSTRAINT FOREIGN KEY (`article_id`) REFERENCES `article` (`id`),
-    CONSTRAINT FOREIGN KEY (`user_id`) REFERENCES `user` (`id`)
+    PRIMARY KEY (`id`),
+    FOREIGN KEY (`article_id`) REFERENCES `article` (`id`),
+    FOREIGN KEY (`user_id`) REFERENCES `user` (`id`)
 ) ENGINE=INNODB;
 
 CREATE TABLE `article_vote` (
     `article_id` BIGINT NOT NULL,
     `user_id` BIGINT NOT NULL,
     `updown` TINYINT NOT NULL DEFAULT 0,
-    CONSTRAINT PRIMARY KEY (`article_id`, `user_id`, `updown`),
-    CONSTRAINT FOREIGN KEY (`article_id`) REFERENCES `article` (`id`),
-    CONSTRAINT FOREIGN KEY (`user_id`) REFERENCES `user` (`id`)
+    PRIMARY KEY (`article_id`, `user_id`, `updown`),
+    FOREIGN KEY (`article_id`) REFERENCES `article` (`id`),
+    FOREIGN KEY (`user_id`) REFERENCES `user` (`id`)
 ) ENGINE=INNODB;
 
 CREATE TABLE `comment_vote` (
     `comment_id` BIGINT NOT NULL,
     `user_id` BIGINT NOT NULL,
     `updown` TINYINT NOT NULL DEFAULT 0,
-    CONSTRAINT PRIMARY KEY (`comment_id`, `user_id`, `updown`),
-    CONSTRAINT FOREIGN KEY (`comment_id`) REFERENCES `comment` (`id`),
-    CONSTRAINT FOREIGN KEY (`user_id`) REFERENCES `user` (`id`)
+    PRIMARY KEY (`comment_id`, `user_id`, `updown`),
+    FOREIGN KEY (`comment_id`) REFERENCES `comment` (`id`),
+    FOREIGN KEY (`user_id`) REFERENCES `user` (`id`)
 ) ENGINE=INNODB;
 
 
