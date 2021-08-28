@@ -3,6 +3,13 @@ CREATE DATABASE IF NOT EXISTS kry
     COLLATE utf8mb4_unicode_ci;
 USE kry;
 
+DROP TABLE IF EXISTS user;
+DROP TABLE IF EXISTS user_permgroup;
+DROP TABLE IF EXISTS user_permission;
+DROP TABLE IF EXISTS permgroup;
+DROP TABLE IF EXISTS permission;
+DROP TABLE IF EXISTS permission_permgroup;
+
 CREATE TABLE problem (
     id BIGINT NOT NULL AUTO_INCREMENT,
     title VARCHAR(191) NOT NULL DEFAULT "",
@@ -67,13 +74,6 @@ INSERT INTO problem_tag (problem_id, tag_id)
            (1000, 2),
            (1001, 1),
            (1001, 2);
-
-DROP TABLE IF EXISTS user;
-DROP TABLE IF EXISTS user_permgroup;
-DROP TABLE IF EXISTS user_permission;
-DROP TABLE IF EXISTS permgroup;
-DROP TABLE IF EXISTS permission;
-DROP TABLE IF EXISTS permission_permgroup;
 
 CREATE TABLE IF NOT EXISTS user (
    id BIGINT NOT NULL AUTO_INCREMENT,
