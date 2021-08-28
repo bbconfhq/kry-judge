@@ -53,7 +53,7 @@ CREATE TABLE `board` (
     CONSTRAINT PRIMARY KEY (`id`),
     CONSTRAINT UNIQUE KEY (`name`),
     CONSTRAINT UNIQUE KEY (`seq`)
-) ENGINE=INNODB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+) ENGINE=INNODB;
 
 CREATE TABLE `article` (
     `id` BIGINT NOT NULL AUTO_INCREMENT,
@@ -68,7 +68,7 @@ CREATE TABLE `article` (
     CONSTRAINT PRIMARY KEY (`id`),
     CONSTRAINT FOREIGN KEY (`board_id`) REFERENCES `board` (`id`),
     CONSTRAINT FOREIGN KEY (`user_id`) REFERENCES `user` (`id`)
-) ENGINE=INNODB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+) ENGINE=INNODB;
 
 CREATE TABLE `comment` (
     `id` BIGINT NOT NULL AUTO_INCREMENT,
@@ -82,7 +82,7 @@ CREATE TABLE `comment` (
     CONSTRAINT PRIMARY KEY (`id`),
     CONSTRAINT FOREIGN KEY (`article_id`) REFERENCES `article` (`id`),
     CONSTRAINT FOREIGN KEY (`user_id`) REFERENCES `user` (`id`)
-) ENGINE=INNODB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+) ENGINE=INNODB;
 
 CREATE TABLE `article_vote` (
     `article_id` BIGINT NOT NULL,
@@ -91,7 +91,7 @@ CREATE TABLE `article_vote` (
     CONSTRAINT PRIMARY KEY (`article_id`, `user_id`, `updown`),
     CONSTRAINT FOREIGN KEY (`article_id`) REFERENCES `article` (`id`),
     CONSTRAINT FOREIGN KEY (`user_id`) REFERENCES `user` (`id`)
-) ENGINE=INNODB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+) ENGINE=INNODB;
 
 CREATE TABLE `comment_vote` (
     `comment_id` BIGINT NOT NULL,
@@ -100,7 +100,7 @@ CREATE TABLE `comment_vote` (
     CONSTRAINT PRIMARY KEY (`comment_id`, `user_id`, `updown`),
     CONSTRAINT FOREIGN KEY (`comment_id`) REFERENCES `comment` (`id`),
     CONSTRAINT FOREIGN KEY (`user_id`) REFERENCES `user` (`id`)
-) ENGINE=INNODB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+) ENGINE=INNODB;
 
 
 
