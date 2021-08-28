@@ -104,8 +104,7 @@ CREATE TABLE `article_vote` (
     `updown` TINYINT NOT NULL DEFAULT 0,
     CONSTRAINT PRIMARY KEY (`article_id`, `user_id`, `updown`),
     CONSTRAINT FOREIGN KEY (`article_id`) REFERENCES `article` (`id`),
-    CONSTRAINT FOREIGN KEY (`user_id`) REFERENCES `user` (`id`),
-    CONSTRAINT UNIQUE KEY (`article_id`, `user_id`, `updown`)
+    CONSTRAINT FOREIGN KEY (`user_id`) REFERENCES `user` (`id`)
 ) ENGINE=INNODB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
 CREATE TABLE `comment_vote` (
@@ -114,8 +113,7 @@ CREATE TABLE `comment_vote` (
     `updown` TINYINT NOT NULL DEFAULT 0,
     CONSTRAINT PRIMARY KEY (`comment_id`, `user_id`, `updown`),
     CONSTRAINT FOREIGN KEY (`comment_id`) REFERENCES `comment` (`id`),
-    CONSTRAINT FOREIGN KEY (`user_id`) REFERENCES `user` (`id`),
-    CONSTRAINT UNIQUE KEY (`comment_id`, `user_id`, `updown`)
+    CONSTRAINT FOREIGN KEY (`user_id`) REFERENCES `user` (`id`)
 ) ENGINE=INNODB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
 
