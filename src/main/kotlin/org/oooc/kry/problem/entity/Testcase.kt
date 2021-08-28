@@ -10,7 +10,7 @@ class Testcase(
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     val id: Long = 0,
 
-    @Column(nullable = false)
+    @Column
     val visible: Boolean = false,
 
     @ManyToOne(fetch = FetchType.LAZY)
@@ -18,10 +18,10 @@ class Testcase(
     @JsonBackReference
     val problem: Problem = Problem(),
 
-    @Column(nullable = false, columnDefinition = "text")
+    @Column
     val input: String = "",
 
-    @Column(nullable = false, columnDefinition = "text")
+    @Column
     val output: String = ""
 ) : Serializable {
     override fun equals(other: Any?): Boolean {

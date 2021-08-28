@@ -9,7 +9,7 @@ class Tag(
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     val id: Long = 0,
 
-    @Column(nullable = false, length = 191)
+    @Column
     val name: String = ""
 ) : Serializable {
     override fun equals(other: Any?): Boolean {

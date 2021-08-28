@@ -22,37 +22,37 @@ class Problem(
     @JsonManagedReference
     var testcases: List<Testcase> = emptyList(),
 
-    @Column(nullable = false, unique = true, length = 191)
+    @Column
     var title: String = "",
 
-    @Column(nullable = false, columnDefinition = "text")
+    @Column
     var content: String = "",
 
-    @Column(nullable = false)
+    @Column
     val created: OffsetDateTime = OffsetDateTime.now(ZoneOffset.of("+00:00")),
 
-    @Column(nullable = false)
+    @Column
     var modified: OffsetDateTime = OffsetDateTime.now(ZoneOffset.of("+00:00")),
 
-    @Column(nullable = false, columnDefinition = "text")
+    @Column
     var input: String = "",
 
-    @Column(nullable = false, columnDefinition = "text")
+    @Column
     var output: String = "",
 
-    @Column(nullable = false, columnDefinition = "text")
+    @Column
     var note: String = "",
 
-    @Column(nullable = false, columnDefinition = "decimal(7, 5)")
+    @Column
     var timeLimit: Double = 1.0,
 
-    @Column(nullable = false)
+    @Column
     var memoryLimit: Int = 256,
 
-    @Column(nullable = false)
+    @Column
     val submitCount: Int = 0,
 
-    @Column(nullable = false)
+    @Column
     val acceptCount: Int = 0
 ) : Serializable {
     override fun equals(other: Any?): Boolean {
