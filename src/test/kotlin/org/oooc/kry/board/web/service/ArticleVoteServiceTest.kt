@@ -21,7 +21,7 @@ internal class ArticleVoteServiceTest(
     @Commit
     fun createArticleVote() {
         boardService.createBoard("board1", 100)
-        val article = articleService.createArticle("board1", "title1", "content1", OffsetDateTime.now())
+        val article = articleService.writeArticle("board1", "title1", "content1", OffsetDateTime.now())
         articleVoteService.createArticleVote("board1", article.id, -1)
     }
 

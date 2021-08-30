@@ -14,7 +14,10 @@ class BoardService(
         name: String,
         seq: Long
     ): Board {
-        val board = Board(name=name, seq=seq)
+        val board = Board(
+            name = name,
+            seq = seq
+        )
         return boardRepository.save(board)
     }
 
@@ -28,16 +31,17 @@ class BoardService(
         name: String,
         newName: String,
         newSeq: Long
-    ) {
-        var board = boardRepository.findByName(name).get()
+    ): Board {
+        val board = boardRepository.findByName(name).get()
         board.name = newName
         board.seq = newSeq
+        return board
     }
 
     fun deleteBoard(
         name: String
     ) {
-        var board = boardRepository.findByName(name).get()
+        val board = boardRepository.findByName(name).get()
         boardRepository.delete(board)
     }
 

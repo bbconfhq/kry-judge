@@ -1,8 +1,10 @@
 package org.oooc.kry.board.web.controller
 
-import org.oooc.kry.board.domain.dto.CommentVoteCreateRequestDTO
+import org.oooc.kry.board.domain.dto.CommentVotePostRequestDTO
+import org.oooc.kry.board.domain.dto.CommentVotePostResponseDTO
 import org.oooc.kry.board.domain.dto.CommentVoteDeleteRequestDTO
 import org.oooc.kry.board.web.service.CommentVoteService
+import org.oooc.kry.global.dto.APIResponse
 import org.springframework.web.bind.annotation.*
 
 @RestController
@@ -17,9 +19,21 @@ class CommentVoteController(
         @PathVariable boardName: String,
         @PathVariable articleNo: Long,
         @PathVariable commentNo: Long,
-        @RequestBody commentVoteCreateRequestDTO: CommentVoteCreateRequestDTO
-    ) {
-        commentVoteService.createCommentVote(boardName, articleNo, commentNo, commentVoteCreateRequestDTO.updown)
+        @RequestBody commentVotePostRequestDTO: CommentVotePostRequestDTO
+    ): APIResponse<CommentVotePostResponseDTO> {
+        val commentVote = commentVoteService.createCommentVote(
+            boardName = boardName,
+            articleNo = articleNo,
+            commentNo = commentNo,
+            updown = commentVotePostRequestDTO.updown
+        )
+        val respDTO = CommentVotePostResponseDTO(
+            comment = commentVote.comment,
+            updown = commentVote.updown
+        )
+        return APIResponse(
+            data = respDTO
+        )
     }
 
     // DELETE COMMENT_VOTE

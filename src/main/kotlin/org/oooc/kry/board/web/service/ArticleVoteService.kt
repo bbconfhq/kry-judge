@@ -16,11 +16,11 @@ class ArticleVoteService(
         boardName: String,
         articleNo: Long,
         updown: Byte
-    ) {
+    ): ArticleVote {
         val article = articleService.getArticle(boardName, articleNo)
         val articleVote = ArticleVote(article = article, updown = updown)
         article.articleVotes.add(articleVote)
-        articleVoteRepository.save(articleVote)
+        return articleVoteRepository.save(articleVote)
     }
 
     fun deleteArticleVote(

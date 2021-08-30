@@ -30,7 +30,7 @@ class Comment (
 //    val user: User = User()
 
     @Column(nullable = false, columnDefinition = "text")
-    val content: String = "",
+    var content: String = "",
 
     @JsonProperty("created")
     @JsonSerialize(using = OffsetDateTimeCustomSerializer::class)
@@ -42,13 +42,13 @@ class Comment (
     @JsonSerialize(using = OffsetDateTimeCustomSerializer::class)
     @JsonDeserialize(using = OffsetDateTimeCustomDeserializer::class)
     @Column(nullable = false)
-    val modified: OffsetDateTime = OffsetDateTime.now(ZoneOffset.of("+00:00")),
+    var modified: OffsetDateTime = OffsetDateTime.now(ZoneOffset.of("+00:00")),
 
     @Column(nullable = false)
-    val upVote: Long = 0,
+    val upvote: Long = 0,
 
     @Column(nullable = false)
-    val downVote: Long = 0,
+    val downvote: Long = 0,
 
 
 

@@ -21,9 +21,9 @@ internal class ArticleServiceTest(
     @Transactional
     fun write_article_test() {
         boardService.createBoard("board1", 1)
-        articleService.createArticle("board1", "title1", "content1", OffsetDateTime.now())
-        articleService.createArticle("board1", "title2", "content2", OffsetDateTime.now())
-        articleService.createArticle("board1", "title3", "content3", OffsetDateTime.now())
+        articleService.writeArticle("board1", "title1", "content1", OffsetDateTime.now())
+        articleService.writeArticle("board1", "title2", "content2", OffsetDateTime.now())
+        articleService.writeArticle("board1", "title3", "content3", OffsetDateTime.now())
 
         Assertions.assertThat(boardService.getBoard("board1").articles.size).isEqualTo(3)
     }
@@ -32,7 +32,7 @@ internal class ArticleServiceTest(
     @Transactional
     fun getArticleTest() {
         boardService.createBoard("board1", 1)
-        val articleId = articleService.createArticle("board1", "title1", "content1", OffsetDateTime.now()).id
+        val articleId = articleService.writeArticle("board1", "title1", "content1", OffsetDateTime.now()).id
         Assertions.assertThat(articleService.getArticle("board1", articleId).title).isEqualTo("title1")
     }
 
@@ -40,7 +40,7 @@ internal class ArticleServiceTest(
     @Transactional
     fun modifyArticleTest() {
         val board = boardService.createBoard("board1", 1)
-        val article = articleService.createArticle("board1", "title1", "content1", OffsetDateTime.now())
+        val article = articleService.writeArticle("board1", "title1", "content1", OffsetDateTime.now())
         articleService.modifyArticle(article.id, board, "newTitle", "newContent", OffsetDateTime.now())
         val findArticle = articleService.getArticle("board1", article.id)
         Assertions.assertThat(findArticle.title).isEqualTo("newTitle")
@@ -50,8 +50,8 @@ internal class ArticleServiceTest(
     @Transactional
     fun deleteArticleTest() {
         val board = boardService.createBoard("board1", 1)
-        val article1 = articleService.createArticle("board1", "title1", "content1", OffsetDateTime.now())
-        val article2 = articleService.createArticle("board1", "title2", "content2", OffsetDateTime.now())
+        val article1 = articleService.writeArticle("board1", "title1", "content1", OffsetDateTime.now())
+        val article2 = articleService.writeArticle("board1", "title2", "content2", OffsetDateTime.now())
 
         Assertions.assertThat(articleRepository.findAll().size).isEqualTo(2)
         articleService.deleteArticle("board1", article1.id)
@@ -62,8 +62,8 @@ internal class ArticleServiceTest(
     @Transactional
     fun getArticleListTest() {
         val board = boardService.createBoard("board1", 1)
-        val article1 = articleService.createArticle("board1", "title1", "content1", OffsetDateTime.now())
-        val article2 = articleService.createArticle("board1", "title2", "content2", OffsetDateTime.now())
+        val article1 = articleService.writeArticle("board1", "title1", "content1", OffsetDateTime.now())
+        val article2 = articleService.writeArticle("board1", "title2", "content2", OffsetDateTime.now())
         val articleList = articleService.getArticleList()
 
         Assertions.assertThat(articleList.size).isEqualTo(2)
@@ -74,11 +74,11 @@ internal class ArticleServiceTest(
     fun getArticleListWithBoardNameTest() {
         val board1 = boardService.createBoard("board1", 1)
         val board2 = boardService.createBoard("board2", 2)
-        val article1 = articleService.createArticle("board1", "title1", "content1", OffsetDateTime.now())
-        val article2 = articleService.createArticle("board1", "title2", "content2", OffsetDateTime.now())
-        val article3 = articleService.createArticle("board2", "title3", "content3", OffsetDateTime.now())
-        val article4 = articleService.createArticle("board2", "title4", "content4", OffsetDateTime.now())
-        val article5 = articleService.createArticle("board2", "title5", "content5", OffsetDateTime.now())
+        val article1 = articleService.writeArticle("board1", "title1", "content1", OffsetDateTime.now())
+        val article2 = articleService.writeArticle("board1", "title2", "content2", OffsetDateTime.now())
+        val article3 = articleService.writeArticle("board2", "title3", "content3", OffsetDateTime.now())
+        val article4 = articleService.writeArticle("board2", "title4", "content4", OffsetDateTime.now())
+        val article5 = articleService.writeArticle("board2", "title5", "content5", OffsetDateTime.now())
         val articleList = articleService.getArticleList("board2")
 
         Assertions.assertThat(articleList.size).isEqualTo(3)

@@ -19,8 +19,8 @@ internal class BoardTest(
     @Transactional
     fun 직렬화_상호참조_테스트() {
         var board = boardService.createBoard("board100", 100)
-        var article1 = articleService.createArticle("board100", "title1000", "content1000", OffsetDateTime.now())
-        var article2 = articleService.createArticle("board100", "title1001", "content1001", OffsetDateTime.now())
+        var article1 = articleService.writeArticle("board100", "title1000", "content1000", OffsetDateTime.now())
+        var article2 = articleService.writeArticle("board100", "title1001", "content1001", OffsetDateTime.now())
 
         var mapper = ObjectMapper()
         val jsonString1 = mapper.writeValueAsString(board)

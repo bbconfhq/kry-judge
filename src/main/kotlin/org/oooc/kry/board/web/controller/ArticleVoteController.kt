@@ -1,9 +1,11 @@
 package org.oooc.kry.board.web.controller
 
-import org.oooc.kry.board.domain.dto.ArticleVoteCreateRequestDTO
+import org.oooc.kry.board.domain.dto.ArticleVotePostRequestDTO
 import org.oooc.kry.board.domain.dto.ArticleVoteDeleteRequestDTO
-import org.oooc.kry.board.domain.entity.ArticleVote
+import org.oooc.kry.board.domain.dto.ArticleVotePostResponseDTO
 import org.oooc.kry.board.web.service.ArticleVoteService
+import org.oooc.kry.global.dto.APIResponse
+import org.oooc.kry.global.dto.CheckDTO
 import org.springframework.web.bind.annotation.*
 
 @RestController
@@ -17,9 +19,20 @@ class ArticleVoteController(
     fun createArticleVote(
         @PathVariable boardName: String,
         @PathVariable articleNo: Long,
-        @RequestBody articleVoteCreateRequestDTO: ArticleVoteCreateRequestDTO
-    ) {
-        articleVoteService.createArticleVote(boardName, articleNo, articleVoteCreateRequestDTO.updown)
+        @RequestBody articleVotePostRequestDTO: ArticleVotePostRequestDTO
+    ): APIResponse<ArticleVotePostResponseDTO> {
+        val articleVote = articleVoteService.createArticleVote(
+            boardName = boardName,
+            articleNo = articleNo,
+            updown = articleVotePostRequestDTO.updown
+        )
+        val respDTO = ArticleVotePostResponseDTO(
+            article = articleVote.article,
+            updown = articleVote.updown
+        )
+        return APIResponse(
+            data = respDTO
+        )
     }
 
     // DELETE ARTICLE_VOTE
@@ -28,8 +41,17 @@ class ArticleVoteController(
         @PathVariable boardName: String,
         @PathVariable articleNo: Long,
         @RequestBody articleVoteDeleteRequestDTO: ArticleVoteDeleteRequestDTO
-    ) {
-        articleVoteService.deleteArticleVote(boardName, articleNo, articleVoteDeleteRequestDTO.updown)
+    ): APIResponse<CheckDTO> {
+        articleVoteService.deleteArticleVote(
+            boardName = boardName,
+            articleNo = articleNo,
+            updown = articleVoteDeleteRequestDTO.updown
+        )
+        return APIResponse(
+            data = CheckDTO(
+                success = true
+            )
+        )
     }
 
 }

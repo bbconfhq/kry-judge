@@ -1,9 +1,9 @@
 package org.oooc.kry.board.web.controller
 
-import org.oooc.kry.board.domain.dto.CommentCreateRequestDTO
-import org.oooc.kry.board.domain.dto.CommentGetResponseDTO
-import org.oooc.kry.board.domain.dto.CommentsGetResponseDTO
+import org.oooc.kry.board.domain.dto.*
 import org.oooc.kry.board.web.service.CommentService
+import org.oooc.kry.global.dto.APIResponse
+import org.oooc.kry.global.dto.CheckDTO
 import org.springframework.web.bind.annotation.*
 
 @RestController
@@ -12,58 +12,111 @@ class CommentController(
     val commentService: CommentService
 ) {
 
-    // CREATE COMMENT
     @PostMapping("/{boardName}/article/{articleNo}/comment")
     fun postComment(
         @PathVariable boardName: String,
         @PathVariable articleNo: Long,
-        @RequestBody commentCreateRequestDTO: CommentCreateRequestDTO
-    ) {
-        commentService.createComment(boardName,
-            articleNo,
-            commentCreateRequestDTO.content,
-            commentCreateRequestDTO.created
+        @RequestBody commentPostRequestDTO: CommentPostRequestDTO
+    ): APIResponse<CommentPostResponseDTO> {
+        val comment = commentService.writeComment(
+            boardName = boardName,
+            articleNo = articleNo,
+            content = commentPostRequestDTO.content,
+            created = commentPostRequestDTO.created
         )
-    }
-
-    // GET COMMENT
-    @GetMapping("/{boardName}/article/{articleNo}/comment/{commentNo}")
-    fun getComment(
-        @PathVariable boardName: String,
-        @PathVariable articleNo: Long,
-        @PathVariable commentNo: Long
-    ): CommentGetResponseDTO {
-        val comment = commentService.getComment(boardName, articleNo, commentNo)
-        return CommentGetResponseDTO(
+        val respDTO = CommentPostResponseDTO(
             id = comment.id,
             article = comment.article,
             content = comment.content,
             created = comment.created,
             modified = comment.modified,
-            upVote = comment.upVote,
-            downVote = comment.downVote,
-            commentVotes = comment.commentVotes
+            upvote = comment.upvote,
+            downvote = comment.downvote
+        )
+        return APIResponse(
+            data = respDTO
         )
     }
 
-    // DELETE COMMENT
+    @GetMapping("/{boardName}/article/{articleNo}/comment/{commentNo}")
+    fun getComment(
+        @PathVariable boardName: String,
+        @PathVariable articleNo: Long,
+        @PathVariable commentNo: Long
+    ): APIResponse<CommentGetResponseDTO> {
+        val comment = commentService.getComment(
+            boardName = boardName,
+            articleNo = articleNo,
+            commentNo = commentNo
+        )
+        val respDTO =  CommentGetResponseDTO(
+            id = comment.id,
+            article = comment.article,
+            content = comment.content,
+            created = comment.created,
+            modified = comment.modified,
+            upvote = comment.upvote,
+            downvote = comment.downvote
+        )
+        return APIResponse(
+            data = respDTO
+        )
+    }
+
+    @PutMapping("/{boardName}/article/{articleNo}/comment/{commentNo}")
+    fun putComment(
+        @PathVariable boardName: String,
+        @PathVariable articleNo: Long,
+        @PathVariable commentNo: Long,
+        @RequestBody commentPutRequestDTO: CommentPutRequestDTO
+    ): APIResponse<CommentPutResponseDTO> {
+        val comment = commentService.modifyComment(
+            boardName = boardName,
+            articleNo = articleNo,
+            commentNo = commentNo,
+            newContent = commentPutRequestDTO.content,
+            modified = commentPutRequestDTO.modified
+        )
+        val respDTO = CommentPutResponseDTO(
+            id = comment.id,
+            article = comment.article,
+            content = comment.content,
+            created = comment.created,
+            modified = comment.modified,
+            upvote = comment.upvote,
+            downvote = comment.downvote
+        )
+        return APIResponse(
+            data = respDTO
+        )
+    }
+
     @DeleteMapping("/{boardName}/article/{articleNo}/comment/{commentNo}")
     fun deleteComment(
         @PathVariable boardName: String,
         @PathVariable articleNo: Long,
         @PathVariable commentNo: Long
-    ) {
+    ): APIResponse<CheckDTO> {
         commentService.deleteComment(boardName, articleNo, commentNo)
+        return APIResponse(
+            data = CheckDTO(
+                success = true
+            )
+        )
     }
 
-    // GET LIST OF COMMENTS
     @GetMapping("/{boardName}/article/{articleNo}/comment")
     fun getComments(
         @PathVariable boardName: String,
         @PathVariable articleNo: Long
-    ): CommentsGetResponseDTO {
-        val commentsList = commentService.getCommentsList(boardName, articleNo)
-        return CommentsGetResponseDTO(commentsList)
+    ): APIResponse<CommentsGetResponseDTO> {
+        val comments = commentService.getCommentsList(boardName, articleNo)
+        val respDTO = CommentsGetResponseDTO(
+            comments = comments
+        )
+        return APIResponse(
+            data = respDTO
+        )
     }
 
 }

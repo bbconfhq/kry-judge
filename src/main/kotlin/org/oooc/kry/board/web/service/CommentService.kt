@@ -11,7 +11,7 @@ class CommentService(
     val articleService: ArticleService,
     val commentRepository: CommentRepository
 ) {
-    fun createComment(
+    fun writeComment(
         boardName: String,
         articleNo: Long,
         content: String,
@@ -32,6 +32,19 @@ class CommentService(
         commentNo: Long
     ): Comment {
         return commentRepository.findById(commentNo).get()
+    }
+
+    fun modifyComment(
+        boardName: String,
+        articleNo: Long,
+        commentNo: Long,
+        newContent: String,
+        modified: OffsetDateTime
+    ): Comment {
+        val comment = commentRepository.findById(commentNo).get()
+        comment.content = newContent
+        comment.modified = modified
+        return comment
     }
 
     fun deleteComment(
