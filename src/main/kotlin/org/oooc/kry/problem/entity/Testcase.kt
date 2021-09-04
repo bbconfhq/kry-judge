@@ -11,18 +11,18 @@ class Testcase(
     val id: Long = 0,
 
     @Column
-    val visible: Boolean = false,
+    var visible: Boolean = false,
 
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "problem_id")
     @JsonBackReference
-    val problem: Problem = Problem(),
+    var problem: Problem = Problem(),
 
     @Column
-    val input: String = "",
+    var input: String = "",
 
     @Column
-    val output: String = ""
+    var output: String = ""
 ) : Serializable {
     override fun equals(other: Any?): Boolean {
         if (this === other) return true
