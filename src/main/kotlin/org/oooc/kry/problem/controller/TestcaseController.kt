@@ -3,11 +3,9 @@ package org.oooc.kry.problem.controller
 import org.oooc.kry.global.dto.APIResponse
 import org.oooc.kry.problem.dto.TestcaseAddDTO
 import org.oooc.kry.problem.dto.TestcaseDTO
+import org.oooc.kry.problem.dto.TestcaseUpdateDTO
 import org.oooc.kry.problem.service.TestcaseService
-import org.springframework.web.bind.annotation.PostMapping
-import org.springframework.web.bind.annotation.RequestBody
-import org.springframework.web.bind.annotation.RequestMapping
-import org.springframework.web.bind.annotation.RestController
+import org.springframework.web.bind.annotation.*
 
 @RestController
 @RequestMapping("/testcase")
@@ -20,6 +18,16 @@ class TestcaseController(
     ): APIResponse<TestcaseDTO> {
         return APIResponse(
             data = testcaseService.addTestcase(testcaseAddDTO)
+        )
+    }
+
+    @PutMapping("/{testcase_id}")
+    fun updateTestcase(
+        @PathVariable(name = "testcase_id") testcaseId: Long,
+        @RequestBody testcaseUpdateDTO: TestcaseUpdateDTO
+    ): APIResponse<TestcaseDTO> {
+        return APIResponse(
+            data = testcaseService.updateTestcase(testcaseId, testcaseUpdateDTO)
         )
     }
 }

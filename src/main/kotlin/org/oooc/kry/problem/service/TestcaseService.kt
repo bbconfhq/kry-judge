@@ -2,8 +2,10 @@ package org.oooc.kry.problem.service
 
 import org.oooc.kry.problem.dto.TestcaseAddDTO
 import org.oooc.kry.problem.dto.TestcaseDTO
+import org.oooc.kry.problem.dto.TestcaseUpdateDTO
 import org.oooc.kry.problem.entity.Testcase
 import org.oooc.kry.problem.exception.ProblemNotFoundException
+import org.oooc.kry.problem.exception.TestcaseNotFoundException
 import org.oooc.kry.problem.repository.ProblemRepository
 import org.oooc.kry.problem.repository.TestcaseRepository
 import org.springframework.data.repository.findByIdOrNull
@@ -26,5 +28,18 @@ class TestcaseService(
         )
 
         return TestcaseDTO.of(testcaseRepository.save(testcase))
+    }
+
+    fun updateTestcase(testcaseId: Long, testcaseUpdateDTO: TestcaseUpdateDTO): TestcaseDTO {
+        val testcase = testcaseRepository.findByIdOrNull(testcaseId) ?: throw TestcaseNotFoundException()
+        val updatedProblem = problemRepository.findByIdOrNull(testcaseUpdateDTO.problemId) ?: throw ProblemNotFoundException()
+        val updatedTestcase = testcase.apply {
+            problem = updatedProblem
+            visible = testcaseUpdateDTO.visible
+            input = testcaseUpdateDTO.input
+            output = testcaseUpdateDTO.output
+        }
+
+        return TestcaseDTO.of(updatedTestcase)
     }
 }
