@@ -1,11 +1,11 @@
 package org.oooc.kry.board.domain.dto
 
 import org.oooc.kry.board.domain.entity.Article
+import javax.validation.constraints.NotNull
 
 data class ArticleVotePostRequestDTO(
-    val updown: Byte
+    @field:NotNull val updown: Byte
 )
-
 
 data class ArticleVotePostResponseDTO(
     val article: Article,
@@ -13,5 +13,5 @@ data class ArticleVotePostResponseDTO(
 )
 
 data class ArticleVoteDeleteRequestDTO(
-    val updown: Byte
+    @field:NotNull val updown: Byte
 )

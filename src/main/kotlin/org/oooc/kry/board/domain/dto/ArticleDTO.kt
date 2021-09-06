@@ -3,11 +3,13 @@ package org.oooc.kry.board.domain.dto
 import org.oooc.kry.board.domain.entity.Article
 import org.oooc.kry.board.domain.entity.Board
 import java.time.OffsetDateTime
+import javax.validation.constraints.NotEmpty
+import javax.validation.constraints.NotNull
 
 data class ArticlePostRequestDTO(
-    val title: String,
-    val content: String,
-    val created: OffsetDateTime
+    @field:NotEmpty val title: String,
+    @field:NotNull val content: String,
+    @field:NotNull val created: OffsetDateTime
 )
 
 data class ArticlePostResponseDTO(
@@ -30,10 +32,10 @@ data class ArticleGetResponseDTO(
 )
 
 data class ArticlePutRequestDTO(
-    val board: Board = Board(),
-    val title: String = "",
-    val content: String = "",
-    val modified: OffsetDateTime
+    @field:NotNull val board: Board,
+    @field:NotEmpty val title: String,
+    @field:NotNull val content: String,
+    @field:NotNull val modified: OffsetDateTime
 )
 
 data class ArticlePutResponseDTO(

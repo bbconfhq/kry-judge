@@ -1,10 +1,12 @@
 package org.oooc.kry.board.domain.dto
 
 import org.oooc.kry.board.domain.entity.Board
+import javax.validation.constraints.NotEmpty
+import javax.validation.constraints.NotNull
 
 data class BoardPostRequestDTO(
-    val name: String,
-    val seq: Long
+    @field:NotEmpty val name: String,
+    @field:NotNull val seq: Long
 )
 
 data class BoardPostResponseDTO(
@@ -20,8 +22,8 @@ data class BoardGetResponseDTO(
 )
 
 data class BoardPutRequestDTO(
-    val name: String,
-    val seq: Long
+    @field:NotEmpty val name: String,
+    @field:NotNull val seq: Long
 )
 
 data class BoardPutResponseDTO(

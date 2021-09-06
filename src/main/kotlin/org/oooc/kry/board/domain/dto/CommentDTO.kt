@@ -3,10 +3,12 @@ package org.oooc.kry.board.domain.dto
 import org.oooc.kry.board.domain.entity.Article
 import org.oooc.kry.board.domain.entity.Comment
 import java.time.OffsetDateTime
+import javax.validation.constraints.NotEmpty
+import javax.validation.constraints.NotNull
 
 data class CommentPostRequestDTO(
-    val content: String,
-    val created: OffsetDateTime
+    @field:NotEmpty val content: String,
+    @field:NotNull val created: OffsetDateTime
 )
 
 data class CommentPostResponseDTO(
@@ -30,8 +32,8 @@ data class CommentGetResponseDTO(
 )
 
 data class CommentPutRequestDTO(
-    val content: String,
-    val modified: OffsetDateTime
+    @field:NotEmpty val content: String,
+    @field:NotNull val modified: OffsetDateTime
 )
 
 data class CommentPutResponseDTO(

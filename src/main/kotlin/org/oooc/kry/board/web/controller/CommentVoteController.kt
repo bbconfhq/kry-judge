@@ -6,6 +6,7 @@ import org.oooc.kry.board.domain.dto.CommentVoteDeleteRequestDTO
 import org.oooc.kry.board.web.service.CommentVoteService
 import org.oooc.kry.global.dto.APIResponse
 import org.springframework.web.bind.annotation.*
+import javax.validation.Valid
 
 @RestController
 @RequestMapping("board")
@@ -19,7 +20,7 @@ class CommentVoteController(
         @PathVariable boardName: String,
         @PathVariable articleNo: Long,
         @PathVariable commentNo: Long,
-        @RequestBody commentVotePostRequestDTO: CommentVotePostRequestDTO
+        @RequestBody @Valid commentVotePostRequestDTO: CommentVotePostRequestDTO
     ): APIResponse<CommentVotePostResponseDTO> {
         val commentVote = commentVoteService.createCommentVote(
             boardName = boardName,
@@ -42,7 +43,7 @@ class CommentVoteController(
         @PathVariable boardName: String,
         @PathVariable articleNo: Long,
         @PathVariable commentNo: Long,
-        @RequestBody commentVoteDeleteRequestDTO: CommentVoteDeleteRequestDTO
+        @RequestBody @Valid commentVoteDeleteRequestDTO: CommentVoteDeleteRequestDTO
     ) {
         commentVoteService.deleteCommentVote(boardName, articleNo, commentNo, commentVoteDeleteRequestDTO.updown)
     }

@@ -5,6 +5,7 @@ import org.oooc.kry.board.web.service.CommentService
 import org.oooc.kry.global.dto.APIResponse
 import org.oooc.kry.global.dto.CheckDTO
 import org.springframework.web.bind.annotation.*
+import javax.validation.Valid
 
 @RestController
 @RequestMapping("board")
@@ -16,7 +17,7 @@ class CommentController(
     fun postComment(
         @PathVariable boardName: String,
         @PathVariable articleNo: Long,
-        @RequestBody commentPostRequestDTO: CommentPostRequestDTO
+        @RequestBody @Valid commentPostRequestDTO: CommentPostRequestDTO
     ): APIResponse<CommentPostResponseDTO> {
         val comment = commentService.writeComment(
             boardName = boardName,
@@ -68,7 +69,7 @@ class CommentController(
         @PathVariable boardName: String,
         @PathVariable articleNo: Long,
         @PathVariable commentNo: Long,
-        @RequestBody commentPutRequestDTO: CommentPutRequestDTO
+        @RequestBody @Valid commentPutRequestDTO: CommentPutRequestDTO
     ): APIResponse<CommentPutResponseDTO> {
         val comment = commentService.modifyComment(
             boardName = boardName,

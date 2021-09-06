@@ -5,6 +5,7 @@ import org.oooc.kry.board.web.service.BoardService
 import org.oooc.kry.global.dto.APIResponse
 import org.oooc.kry.global.dto.CheckDTO
 import org.springframework.web.bind.annotation.*
+import javax.validation.Valid
 
 @RestController
 @RequestMapping("board")
@@ -14,7 +15,7 @@ class BoardController(
 
     @PostMapping("/")
     fun postBoard(
-        @RequestBody boardPostRequestDTO: BoardPostRequestDTO
+        @RequestBody @Valid boardPostRequestDTO: BoardPostRequestDTO
     ): APIResponse<BoardPostResponseDTO> {
         val board = boardService.createBoard(
             name = boardPostRequestDTO.name,
@@ -50,7 +51,7 @@ class BoardController(
     @PutMapping("/{boardName}")
     fun putBoard(
         @PathVariable boardName: String,
-        @RequestBody boardPutRequestDTO: BoardPutRequestDTO
+        @RequestBody @Valid boardPutRequestDTO: BoardPutRequestDTO
     ): APIResponse<BoardPutResponseDTO> {
         val board = boardService.modifyBoard(
             name = boardName,

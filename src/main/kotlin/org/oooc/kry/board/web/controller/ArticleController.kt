@@ -5,6 +5,7 @@ import org.oooc.kry.board.web.service.ArticleService
 import org.oooc.kry.global.dto.APIResponse
 import org.oooc.kry.global.dto.CheckDTO
 import org.springframework.web.bind.annotation.*
+import javax.validation.Valid
 
 @RestController
 @RequestMapping("board")
@@ -14,7 +15,7 @@ class ArticleController(
     @PostMapping("/{boardName}/article")
     fun postArticle(
         @PathVariable boardName: String,
-        @RequestBody articlePostRequestDTO: ArticlePostRequestDTO
+        @RequestBody @Valid articlePostRequestDTO: ArticlePostRequestDTO
     ): APIResponse<ArticlePostResponseDTO> {
         val article = articleService.writeArticle(
             boardName = boardName,
@@ -58,7 +59,7 @@ class ArticleController(
     @PutMapping("/{boardName}/article/{articleNo}")
     fun putArticle(
         @PathVariable articleNo: Long,
-        @RequestBody articlePutRequestDTO: ArticlePutRequestDTO
+        @RequestBody @Valid articlePutRequestDTO: ArticlePutRequestDTO
     ): APIResponse<ArticlePutResponseDTO> {
         val article = articleService.modifyArticle(
             articleNo = articleNo,

@@ -1,14 +1,10 @@
 package org.oooc.kry.board.domain.entity
 
 import com.fasterxml.jackson.annotation.JsonBackReference
-import com.fasterxml.jackson.annotation.JsonFormat
 import com.fasterxml.jackson.annotation.JsonManagedReference
 import com.fasterxml.jackson.annotation.JsonProperty
-import com.fasterxml.jackson.databind.DeserializationFeature
 import com.fasterxml.jackson.databind.annotation.JsonDeserialize
 import com.fasterxml.jackson.databind.annotation.JsonSerialize
-import com.fasterxml.jackson.datatype.jsr310.deser.key.OffsetDateTimeKeyDeserializer
-import com.fasterxml.jackson.datatype.jsr310.ser.OffsetDateTimeSerializer
 import org.oooc.kry.global.json.OffsetDateTimeCustomDeserializer
 import org.oooc.kry.global.json.OffsetDateTimeCustomSerializer
 import java.io.Serializable

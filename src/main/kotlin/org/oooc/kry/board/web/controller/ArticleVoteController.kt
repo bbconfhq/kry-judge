@@ -7,6 +7,7 @@ import org.oooc.kry.board.web.service.ArticleVoteService
 import org.oooc.kry.global.dto.APIResponse
 import org.oooc.kry.global.dto.CheckDTO
 import org.springframework.web.bind.annotation.*
+import javax.validation.Valid
 
 @RestController
 @RequestMapping("board")
@@ -19,7 +20,7 @@ class ArticleVoteController(
     fun createArticleVote(
         @PathVariable boardName: String,
         @PathVariable articleNo: Long,
-        @RequestBody articleVotePostRequestDTO: ArticleVotePostRequestDTO
+        @RequestBody @Valid articleVotePostRequestDTO: ArticleVotePostRequestDTO
     ): APIResponse<ArticleVotePostResponseDTO> {
         val articleVote = articleVoteService.createArticleVote(
             boardName = boardName,
@@ -40,7 +41,7 @@ class ArticleVoteController(
     fun deleteArticleVote(
         @PathVariable boardName: String,
         @PathVariable articleNo: Long,
-        @RequestBody articleVoteDeleteRequestDTO: ArticleVoteDeleteRequestDTO
+        @RequestBody @Valid articleVoteDeleteRequestDTO: ArticleVoteDeleteRequestDTO
     ): APIResponse<CheckDTO> {
         articleVoteService.deleteArticleVote(
             boardName = boardName,
