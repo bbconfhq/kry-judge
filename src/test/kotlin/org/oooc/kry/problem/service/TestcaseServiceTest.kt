@@ -58,4 +58,16 @@ class TestcaseServiceTest {
 
         assertThat(findTestcase.input).isEqualTo("3 7")
     }
+
+    @Test
+    fun deleteTestcase() {
+        val problem = problemRepository.findByIdOrNull(1000)
+        val testcases = testcaseRepository.findAllByProblem(problem!!)
+
+        testcaseService.deleteTestcase(1)
+
+        val testcasesAfterDelete = testcaseRepository.findAllByProblem(problem)
+
+        assertThat(testcasesAfterDelete.size).isEqualTo(testcases.size - 1)
+    }
 }

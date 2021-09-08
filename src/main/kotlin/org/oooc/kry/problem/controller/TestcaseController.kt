@@ -1,6 +1,7 @@
 package org.oooc.kry.problem.controller
 
 import org.oooc.kry.global.dto.APIResponse
+import org.oooc.kry.global.dto.CheckDTO
 import org.oooc.kry.problem.dto.TestcaseAddDTO
 import org.oooc.kry.problem.dto.TestcaseDTO
 import org.oooc.kry.problem.dto.TestcaseUpdateDTO
@@ -28,6 +29,15 @@ class TestcaseController(
     ): APIResponse<TestcaseDTO> {
         return APIResponse(
             data = testcaseService.updateTestcase(testcaseId, testcaseUpdateDTO)
+        )
+    }
+
+    @DeleteMapping("/{testcase_id}")
+    fun deleteTestcase(
+        @PathVariable(name = "testcase_id") testcaseId: Long
+    ): APIResponse<CheckDTO> {
+        return APIResponse(
+            data = testcaseService.deleteTestcase(testcaseId)
         )
     }
 }
