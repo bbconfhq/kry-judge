@@ -12,6 +12,7 @@ import org.springframework.data.repository.findByIdOrNull
 import org.springframework.transaction.annotation.Transactional
 
 @SpringBootTest
+@Transactional
 class TestcaseServiceTest {
     @Autowired
     private lateinit var testcaseService: TestcaseService
@@ -23,7 +24,6 @@ class TestcaseServiceTest {
     private lateinit var problemRepository: ProblemRepository
 
     @Test
-    @Transactional
     fun addTestcase() {
         val testcaseAddDTO = TestcaseAddDTO(
             problemId = 1000,
@@ -43,7 +43,6 @@ class TestcaseServiceTest {
     }
 
     @Test
-    @Transactional
     fun updateTestcase() {
         val testcaseUpdateDTO = TestcaseUpdateDTO(
             problemId = 1000,
