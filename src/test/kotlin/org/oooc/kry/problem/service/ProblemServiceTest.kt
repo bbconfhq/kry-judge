@@ -11,6 +11,7 @@ import org.springframework.boot.test.context.SpringBootTest
 import org.springframework.transaction.annotation.Transactional
 
 @SpringBootTest
+@Transactional
 class ProblemServiceTest {
     @Autowired
     private lateinit var problemService: ProblemService
@@ -23,7 +24,6 @@ class ProblemServiceTest {
     }
 
     @Test
-    @Transactional
     fun addProblem() {
         val problemAddDto = ProblemAddDTO(
             title = "테스트 문제",
@@ -39,7 +39,6 @@ class ProblemServiceTest {
     }
 
     @Test
-    @Transactional
     fun updateProblem() {
         val problemUpdateDto = ProblemUpdateDTO(
             title = "업데이트된 A+B",
@@ -55,7 +54,6 @@ class ProblemServiceTest {
     }
 
     @Test
-    @Transactional
     fun deleteProblem() {
         problemService.deleteProblem(1000)
 

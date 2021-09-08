@@ -10,19 +10,19 @@ class Testcase(
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     val id: Long = 0,
 
-    @Column(nullable = false)
-    val visible: Boolean = false,
+    @Column
+    var visible: Boolean = false,
 
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "problem_id")
     @JsonBackReference
-    val problem: Problem = Problem(),
+    var problem: Problem = Problem(),
 
-    @Column(nullable = false, columnDefinition = "text")
-    val input: String = "",
+    @Column
+    var input: String = "",
 
-    @Column(nullable = false, columnDefinition = "text")
-    val output: String = ""
+    @Column
+    var output: String = ""
 ) : Serializable {
     override fun equals(other: Any?): Boolean {
         if (this === other) return true
