@@ -1,6 +1,7 @@
 package org.oooc.kry.user.domain.entity
 
-import org.oooc.kry.user.domain.dto.UserDto
+import org.oooc.kry.auth.domain.entity.UserPermgroup
+import org.oooc.kry.auth.domain.entity.UserPermission
 import java.io.Serializable
 import java.time.OffsetDateTime
 import java.time.ZoneOffset
