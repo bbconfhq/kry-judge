@@ -11,10 +11,13 @@ import org.springframework.security.crypto.password.PasswordEncoder
 import org.springframework.stereotype.Service
 
 @Service
-class UserService(private val userRepository: UserRepository,
-                  private val passwordEncoder: PasswordEncoder
+class UserService(
+    private val userRepository: UserRepository,
+    private val passwordEncoder: PasswordEncoder
 ) {
-    fun findAll(sort: Sort) = userRepository.findAll(sort)
+    /** TODO(Jerry): 2021-09-14 Add find all feature
+     * fun findAll(sort: Sort) = userRepository.findAll(sort)
+     */
 
     fun getUserPublic(nick: String): UserPublicDTO {
         val user = userRepository.findByNick(nick) ?: throw UserNotFoundException()

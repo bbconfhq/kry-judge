@@ -1,5 +1,6 @@
 package org.oooc.kry.auth.domain.entity
 
+import com.fasterxml.jackson.annotation.JsonBackReference
 import java.io.Serializable
 import javax.persistence.*
 

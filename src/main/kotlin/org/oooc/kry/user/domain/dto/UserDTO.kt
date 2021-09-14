@@ -1,6 +1,6 @@
 package org.oooc.kry.user.domain.dto
 
-data class UserDto(
+data class UserDTO(
     val name: String = "",
     val pw: String = "",
     val nick: String = "",

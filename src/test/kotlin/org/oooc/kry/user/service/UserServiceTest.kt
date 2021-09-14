@@ -23,11 +23,11 @@ class UserServiceTest {
         val seq = "06"
 
         val payload = UserAddDTO(
-            name="user$seq",
-            pw="1234",
-            nick="nick_name$seq",
-            bio="Hello world!",
-            email= "user$seq@email.com"
+            name = "user$seq",
+            pw = "1234",
+            nick = "nick_name$seq",
+            bio = "Hello world!",
+            email = "user$seq@email.com"
         )
 
         val user = userService.addUser(payload)
@@ -52,7 +52,7 @@ class UserServiceTest {
     fun delete() {
         var seq = "01"
         val payload = UserDeleteDTO(
-            name =    "user$seq",
+            name = "user$seq",
             pw = "1234"
         )
 

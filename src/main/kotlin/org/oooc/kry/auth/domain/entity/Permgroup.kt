@@ -1,6 +1,6 @@
 package org.oooc.kry.auth.domain.entity
 
-import org.oooc.kry.auth.domain.entity.UserPermgroup
+import com.fasterxml.jackson.annotation.JsonManagedReference
 import java.io.Serializable
 import javax.persistence.*
 
@@ -12,12 +12,6 @@ class Permgroup (
 
     @Column(nullable = false, unique = true, length = 191)
     val name: String = "",
-
-    @OneToMany(mappedBy = "permgroup")
-    val userPermgroups: List<UserPermgroup> = emptyList(),
-
-    @OneToMany(mappedBy = "permgroup")
-    val permgroupPermissions: List<PermgroupPermission> = emptyList(),
 ): Serializable {
     override fun equals(other: Any?): Boolean {
         if (this === other) return true
