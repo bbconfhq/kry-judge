@@ -1,9 +1,9 @@
 package org.oooc.kry.auth.domain.repository
 
-import org.oooc.kry.auth.domain.dto.PermgroupDto
+import org.oooc.kry.auth.domain.dto.PremgroupGetResponseDTO
 import org.oooc.kry.auth.domain.entity.Permgroup
 import org.springframework.data.jpa.repository.JpaRepository
 
 interface PermgroupRepository: JpaRepository<Permgroup, Long> {
-    fun findAllDtoProjectionBy(): List<PermgroupDto>
+    fun findAllResponseDTOProjectionBy(): List<PremgroupGetResponseDTO>
 }

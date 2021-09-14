@@ -1,11 +1,13 @@
 package org.oooc.kry.auth.web.controller
 
-import org.oooc.kry.auth.domain.dto.PermgroupDto
+import org.oooc.kry.auth.domain.dto.PermgroupPostRequestDTO
+import org.oooc.kry.auth.domain.dto.PermgroupPostResponseDTO
+import org.oooc.kry.auth.domain.dto.PremgroupGetResponseDTO
+import org.oooc.kry.auth.domain.dto.PermissionGetResponseDTO
 import org.oooc.kry.auth.web.service.AuthService
 import org.oooc.kry.global.dto.APIResponse
-import org.springframework.web.bind.annotation.GetMapping
-import org.springframework.web.bind.annotation.RequestMapping
-import org.springframework.web.bind.annotation.RestController
+import org.springframework.web.bind.annotation.*
+import javax.validation.Valid
 
 @RestController
 @RequestMapping("/auth")
@@ -13,7 +15,15 @@ class AuthController (
     private val authService: AuthService
 ) {
     @GetMapping("/permgroup/list")
-    fun getPermgroupList(): APIResponse<List<PermgroupDto>> {
+    fun getPermgroupList(): APIResponse<List<PremgroupGetResponseDTO>> {
         return APIResponse(authService.getPermgroupList())
+    }
+    @GetMapping("permission/list")
+    fun getPermissionList(): APIResponse<List<PermissionGetResponseDTO>> {
+        return APIResponse(authService.getPermissionList())
+    }
+    @PostMapping("/permgroup")
+    fun addPermgroup(@RequestBody @Valid permgroupPostRequestDTO: PermgroupPostRequestDTO): APIResponse<PermgroupPostResponseDTO> {
+        return APIResponse(authService.addPermgroup(permgroupPostRequestDTO))
     }
 }
