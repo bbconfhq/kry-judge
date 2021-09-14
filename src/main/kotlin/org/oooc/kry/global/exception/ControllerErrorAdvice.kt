@@ -4,6 +4,7 @@ import org.oooc.kry.global.dto.APIResponse
 import org.oooc.kry.global.dto.ErrorResponse
 import org.oooc.kry.global.enum.ErrorCode
 import org.oooc.kry.problem.exception.ProblemNotFoundException
+import org.oooc.kry.user.web.exception.UserNotFoundException
 import org.springframework.web.bind.MethodArgumentNotValidException
 import org.springframework.web.bind.annotation.ExceptionHandler
 import org.springframework.web.bind.annotation.RestControllerAdvice
@@ -14,6 +15,13 @@ class ControllerErrorAdvice {
     fun handleProblemNotFoundException(exception: ProblemNotFoundException): APIResponse<ErrorResponse> {
         return APIResponse(
             error = ErrorResponse(code = ErrorCode.PROBLEM_NOT_FOUND, message = exception.message)
+        )
+    }
+
+    @ExceptionHandler(UserNotFoundException::class)
+    fun handleUserNotFoundException(exception: UserNotFoundException): APIResponse<ErrorResponse> {
+        return APIResponse(
+                error = ErrorResponse(code = ErrorCode.USER_NOT_FOUND, message = exception.message)
         )
     }
 
