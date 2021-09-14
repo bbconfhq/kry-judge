@@ -13,7 +13,7 @@ class AuthService (
     private val userPermgroupRepository: UserPermgroupRepository,
     private val userPermissionRepository: UserPermissionRepository
 ) {
-    fun getPermgroupList(): List<PremgroupGetResponseDTO> {
+    fun getPermgroupList(): List<PermgroupGetResponseDTO> {
         return permgroupRepository.findAllResponseDTOProjectionBy()
     }
 

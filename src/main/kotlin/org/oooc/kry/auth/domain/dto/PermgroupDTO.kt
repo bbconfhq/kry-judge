@@ -2,7 +2,7 @@ package org.oooc.kry.auth.domain.dto
 
 import javax.validation.constraints.NotEmpty
 
-interface PremgroupGetResponseDTO {
+interface PermgroupGetResponseDTO {
     val name: String
 }
 
