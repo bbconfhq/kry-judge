@@ -19,8 +19,24 @@ class ControllerErrorAdvice {
 
     @ExceptionHandler(MethodArgumentNotValidException::class)
     fun handleMethodArgumentNotValidException(exception: MethodArgumentNotValidException): APIResponse<ErrorResponse> {
+        val bindingResult = exception.bindingResult
+
+        val sb = StringBuilder()
+        for (fieldError in bindingResult.fieldErrors) {
+            sb.append('[')
+            sb.append(fieldError.field)
+            sb.append("]")
+            sb.append("은(는) ")
+            sb.append(fieldError.defaultMessage)
+            sb.append(" 입력된 값: ")
+            sb.append('[')
+            sb.append(fieldError.rejectedValue)
+            sb.append(']')
+        }
+        val message = sb.toString()
+
         return APIResponse(
-            error = ErrorResponse(code = ErrorCode.METHOD_ARGUMENT_NOT_VALID, message = "Method argument is not valid.")
+            error = ErrorResponse(code = ErrorCode.METHOD_ARGUMENT_NOT_VALID, message = message)
         )
     }
 }
