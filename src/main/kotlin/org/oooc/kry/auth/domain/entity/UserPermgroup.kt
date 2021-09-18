@@ -17,12 +17,17 @@ class UserPermgroup (
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "permgroup_id")
     val permgroup: Permgroup = Permgroup()
-): Serializable {
+): Serializable
+
+class UserPermgroupId(
+    val user: Long = 0,
+    val permgroup: Long = 0
+) : Serializable {
     override fun equals(other: Any?): Boolean {
         if (this === other) return true
         if (javaClass != other?.javaClass) return false
 
-        other as UserPermgroup
+        other as UserPermgroupId
 
         if (user != other.user) return false
         if (permgroup!= other.permgroup) return false
@@ -37,8 +42,4 @@ class UserPermgroup (
     }
 }
 
-class UserPermgroupId(
-    val user: User = User(),
-    val permgroup: Permgroup = Permgroup()
-) : Serializable
 

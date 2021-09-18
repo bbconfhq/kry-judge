@@ -16,12 +16,17 @@ class UserPermission(
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "permission_id")
     val permission: Permission = Permission()
-): Serializable {
+): Serializable
+
+class UserPermissionId(
+    val user: Long = 0,
+    val permission: Long = 0
+) : Serializable {
     override fun equals(other: Any?): Boolean {
         if (this === other) return true
         if (javaClass != other?.javaClass) return false
 
-        other as UserPermission
+        other as UserPermissionId
 
         if (user != other.user) return false
         if (permission != other.permission) return false
@@ -35,8 +40,3 @@ class UserPermission(
         return result
     }
 }
-
-class UserPermissionId(
-    val user: User = User(),
-    val permission: Permission = Permission()
-) : Serializable
