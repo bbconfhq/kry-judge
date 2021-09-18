@@ -11,9 +11,24 @@ import javax.validation.Valid
 class AuthController (
     private val authService: AuthService
 ) {
-//    @GetMapping("/permgroup")
-//    fun getUserPrivate(): APIResponse<PermgroupDTO> {
-//
-//        return
-//    }
+    @GetMapping("/permgroup/list")
+    fun getPermgroupList(): APIResponse<List<PermgroupDTO>> {
+        return APIResponse(
+            data = authService.getPermgroupList()
+        )
+    }
+
+    @PostMapping("/permgroup")
+    fun addPermgroup(@RequestParam name: String): APIResponse<PermgroupDTO> {
+        return APIResponse(
+            data = authService.addPermgroup(name)
+        )
+    }
+
+    @PostMapping("/permgroup/permission")
+    fun addPermissionToPermgroup(@RequestBody permgroupPermissionAddDTO: PermgroupPermissionAddDTO): APIResponse<PermgroupPermissionDTO> {
+        return APIResponse(
+            data = authService.addPermissionToPermgroup(permgroupPermissionAddDTO)
+        )
+    }
 }
