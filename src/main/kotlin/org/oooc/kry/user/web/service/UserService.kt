@@ -3,10 +3,8 @@ package org.oooc.kry.user.web.service
 import org.oooc.kry.global.dto.CheckDTO
 import org.oooc.kry.user.domain.dto.*
 import org.oooc.kry.user.domain.entity.User
-import org.oooc.kry.user.domain.repository.UserRepository
-import org.oooc.kry.user.web.exception.UserNotFoundException
-import org.oooc.kry.user.web.exception.WrongPasswordException
-import org.springframework.data.domain.Sort
+import org.oooc.kry.user.web.repository.UserRepository
+import org.oooc.kry.user.domain.exception.UserNotFoundException
 import org.springframework.security.crypto.password.PasswordEncoder
 import org.springframework.stereotype.Service
 
