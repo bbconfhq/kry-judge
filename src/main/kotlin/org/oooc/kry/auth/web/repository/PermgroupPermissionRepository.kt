@@ -1,4 +1,4 @@
-package org.oooc.kry.auth.domain.repository
+package org.oooc.kry.auth.web.repository
 
 import org.oooc.kry.auth.domain.entity.PermgroupPermission
 import org.oooc.kry.auth.domain.entity.PermgroupPermissionId
