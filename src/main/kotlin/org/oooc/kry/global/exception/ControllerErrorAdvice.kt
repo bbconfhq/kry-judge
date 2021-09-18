@@ -4,9 +4,8 @@ import org.oooc.kry.global.dto.APIResponse
 import org.oooc.kry.global.dto.ErrorResponse
 import org.oooc.kry.global.enum.ErrorCode
 import org.oooc.kry.problem.exception.ProblemNotFoundException
-import org.oooc.kry.user.web.exception.UserNotFoundException
+import org.oooc.kry.user.domain.exception.UserNotFoundException
 import org.springframework.validation.BindingResult
-import org.springframework.validation.FieldError
 import org.springframework.web.bind.MethodArgumentNotValidException
 import org.springframework.web.bind.annotation.ExceptionHandler
 import org.springframework.web.bind.annotation.RestControllerAdvice
@@ -32,19 +31,19 @@ class ControllerErrorAdvice {
 
         val bindingResult: BindingResult = exception.bindingResult
 
-        var builder: StringBuilder = StringBuilder()
+        val builder: StringBuilder = StringBuilder()
 
-        builder.append("[");
+        builder.append("[")
         for(fieldError in bindingResult.getFieldErrors()) {
-            builder.append("{");
-            builder.append(fieldError.getField());
+            builder.append("{")
+            builder.append(fieldError.getField())
             builder.append(" : ")
-            builder.append(fieldError.getRejectedValue());
+            builder.append(fieldError.getRejectedValue())
             builder.append("}")
-            builder.append(", ");
+            builder.append(", ")
         }
         builder.setLength(builder.length-2)
-        builder.append("]");
+        builder.append("]")
 
         return APIResponse(
             error = ErrorResponse(code = ErrorCode.METHOD_ARGUMENT_NOT_VALID, message = "Method argument" + builder.toString() + "is not valid.")
