@@ -11,7 +11,7 @@ class Permgroup (
     val id: Long = 0,
 
     @Column(nullable = false, unique = true, length = 191)
-    val name: String = "",
+    var name: String = "",
 ): Serializable {
     override fun equals(other: Any?): Boolean {
         if (this === other) return true
