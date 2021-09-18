@@ -63,13 +63,13 @@ class UserService(
     }
 
     fun updateUser(userUpdateDTO: UserUpdateDTO): UserPrivateDTO {
-        var newUser = userRepository.findByName(userUpdateDTO.name) ?: throw UserNotFoundException()
+        val user = userRepository.findByName(userUpdateDTO.name) ?: throw UserNotFoundException()
 
         /** TODO(Jerry): 2021-08-26 Session check
          * 세션의 유저와 업데이트할 유저가 동일한지 확인
          */
 
-        newUser.apply {
+        val newUser = user.apply {
             /** TODO(Jerry): 2021-08-26 hashing password
              * pw = passwordEncoder.encode(userUpdateDTO.pw)
              */
