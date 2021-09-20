@@ -17,7 +17,6 @@ class AuthService (
     private val permgroupRepository: PermgroupRepository,
     private val permissionRepository: PermissionRepository,
     private val userPermgroupRepository: UserPermgroupRepository,
-    private val userPermissionRepository: UserPermissionRepository
 ) {
     fun getPermgroupList(): List<PermgroupDTO> {
         val permgroups = permgroupRepository.findAll()
