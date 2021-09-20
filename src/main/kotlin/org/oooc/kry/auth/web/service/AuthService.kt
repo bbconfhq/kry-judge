@@ -3,11 +3,12 @@ package org.oooc.kry.auth.web.service
 import org.oooc.kry.auth.domain.dto.*
 import org.oooc.kry.auth.domain.entity.Permgroup
 import org.oooc.kry.auth.domain.entity.PermgroupPermission
+import org.oooc.kry.auth.domain.entity.PermgroupPermissionId
 import org.oooc.kry.auth.domain.entity.Permission
 import org.oooc.kry.auth.domain.exception.PermgroupNotFoundException
 import org.oooc.kry.auth.domain.exception.PermissionNotFoundException
 import org.oooc.kry.auth.web.repository.*
-import org.oooc.kry.global.dto.APIResponse
+import org.oooc.kry.global.dto.CheckDTO
 import org.springframework.data.repository.findByIdOrNull
 import org.springframework.stereotype.Service
 
@@ -21,21 +22,32 @@ class AuthService (
     fun getPermgroupList(): List<PermgroupDTO> {
         val permgroups = permgroupRepository.findAll()
         val permgroupDTOs = permgroups.map { permgroup ->
-            val permissions = permgroupPermissionRepository.findAllByPermgroup(permgroup).map { it.permission }
             PermgroupDTO(
                 id = permgroup.id,
                 name = permgroup.name,
-                permissions = permissions
+//                permissions = permgroup.permgroupPermissions.map { PermissionDTO(it.permission.id, it.permission.name)}
             )
         }
 
         return permgroupDTOs
     }
 
-    fun addPermgroup(name: String): PermgroupDTO {
+    fun getPermissionsOfPermgroup(permgroupId: Long): List<PermissionDTO> {
+        val permgroups = permgroupRepository.findByIdOrNull(permgroupId) ?: throw PermgroupNotFoundException()
+        val permissionDTOs = permgroups.permgroupPermissions.map { permgroupPermission ->
+            PermissionDTO(
+                id = permgroupPermission.permission.id,
+                name = permgroupPermission.permission.name
+            )
+        }
+
+        return permissionDTOs
+    }
+
+    fun addPermgroup(permgroupAddDTO: PermgroupAddDTO): PermgroupDTO {
         val permgroup = permgroupRepository.save(
             Permgroup(
-                name = name
+                name = permgroupAddDTO.name
             )
         )
         return PermgroupDTO(
@@ -55,6 +67,16 @@ class AuthService (
         )
     }
 
+    fun deletePermgroup(permgroupId: Long): CheckDTO {
+        val permgroup = permgroupRepository.findByIdOrNull(permgroupId) ?: throw PermgroupNotFoundException()
+
+        permgroupRepository.deleteById(permgroup.id)
+
+        return CheckDTO(
+            success = true
+        )
+    }
+
     fun getPermissionList(): List<PermissionDTO> {
         val permissions = permissionRepository.findAll()
         val permissionDTOs = permissions.map { permission ->
@@ -64,10 +86,10 @@ class AuthService (
         return permissionDTOs
     }
 
-    fun addPermission(name: String): PermissionDTO {
+    fun addPermission(permissionAddDTO: PermissionAddDTO): PermissionDTO {
         val permission = permissionRepository.save(
             Permission(
-                name = name
+                name = permissionAddDTO.name
             )
         )
 
@@ -77,8 +99,8 @@ class AuthService (
         )
     }
 
-    fun updatePermission(permissionUpdateDTO: PermissionUpdateDTO): PermissionDTO {
-        val permission = permissionRepository.findByIdOrNull(permissionUpdateDTO.id) ?: throw PermissionNotFoundException()
+    fun updatePermission(permissionId:Long, permissionUpdateDTO: PermissionUpdateDTO): PermissionDTO {
+        val permission = permissionRepository.findByIdOrNull(permissionId) ?: throw PermissionNotFoundException()
         val newPermission = permission.apply {
             name = permissionUpdateDTO.name
         }
@@ -101,8 +123,29 @@ class AuthService (
         )
 
         return PermgroupPermissionDTO(
-            permgroup = permgroupPermission.permgroup,
-            permission = permgroupPermission.permission
+            permgroup = PermgroupDTO(
+                id = permgroupPermission.permgroup.id,
+                name = permgroupPermission.permgroup.name
+            ),
+            permission = PermissionDTO(
+                id = permgroupPermission.permission.id,
+                name = permgroupPermission.permission.name
+            )
+        )
+    }
+
+    fun deletePermissionFromPermgroup(permgroupPermissionDeleteDTO: PermgroupPermissionDeleteDTO): CheckDTO {
+        val permgroup = permgroupRepository.findByIdOrNull(permgroupPermissionDeleteDTO.permgroupId) ?: throw PermgroupNotFoundException()
+        val permission = permissionRepository.findByIdOrNull(permgroupPermissionDeleteDTO.permissionId) ?: throw PermissionNotFoundException()
+
+        permgroupPermissionRepository.deleteById(
+            PermgroupPermissionId(
+                permgroup = permgroup.id,
+                permission = permission.id
+            )
+        )
+        return CheckDTO(
+            success = true
         )
     }
 }
