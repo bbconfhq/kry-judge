@@ -9,7 +9,7 @@ import javax.persistence.*
 class PermgroupPermission (
     @Id
     @ManyToOne(fetch = FetchType.LAZY)
-    @JoinColumn(name = "permgroup_id")
+    @JoinColumn(name = "permgroup_id", insertable = false, updatable = false)
     val permgroup: Permgroup = Permgroup(),
 
     @Id
