@@ -4,7 +4,6 @@ CREATE DATABASE IF NOT EXISTS `kry`
 USE `kry`;
 
 DROP TABLE IF EXISTS `user`;
-DROP TABLE IF EXISTS `user_permgroup`;
 DROP TABLE IF EXISTS `user_permission`;
 DROP TABLE IF EXISTS `permgroup`;
 DROP TABLE IF EXISTS `permission`;
@@ -39,15 +38,6 @@ CREATE TABLE IF NOT EXISTS `permission`
     `name` VARCHAR(191) NOT NULL,
     PRIMARY KEY (`id`),
     UNIQUE (`name`)
-) ENGINE = InnoDB;
-
-CREATE TABLE IF NOT EXISTS `user_permgroup`
-(
-    `user_id`      BIGINT NOT NULL,
-    `permgroup_id` BIGINT NOT NULL,
-    PRIMARY KEY (`permgroup_id`, `user_id`),
-    FOREIGN KEY (`user_id`) REFERENCES `user` (`id`),
-    FOREIGN KEY (`permgroup_id`) REFERENCES `permgroup` (`id`)
 ) ENGINE = InnoDB;
 
 CREATE TABLE IF NOT EXISTS `user_permission`
