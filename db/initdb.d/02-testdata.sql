@@ -40,7 +40,7 @@ VALUES ('create'),
        ('read'),
        ('update');
 
-INSERT INTO `user_permission` (`user_id`, `permission_id`)
+INSERT INTO `user_permgroup` (`user_id`, `permgroup_id`)
 VALUES (1, 4),
        (2, 3),
        (3, 2),
