@@ -1,7 +1,6 @@
 package org.oooc.kry.user.domain.entity
 
 import org.oooc.kry.auth.domain.entity.UserPermgroup
-import org.oooc.kry.auth.domain.entity.UserPermission
 import java.io.Serializable
 import java.time.OffsetDateTime
 import java.time.ZoneOffset
@@ -33,9 +32,6 @@ class User (
 
     @OneToMany(mappedBy = "user")
     val userPermgroups: List<UserPermgroup> = emptyList(),
-
-    @OneToMany(mappedBy = "user")
-    val userPermissions: List<UserPermission> = emptyList(),
 
     /** TODO(Jerry): 2021/07/10 join problem entity
      * @OneToMany(mappedBy = "user")
