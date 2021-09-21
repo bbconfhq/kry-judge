@@ -1,6 +1,4 @@
-package org.oooc.kry.auth.domain.dto
-
-import org.oooc.kry.auth.domain.entity.Permission
+package org.oooc.kry.admin.domain.dto
 
 data class PermgroupDTO(
     val id: Long = 0,

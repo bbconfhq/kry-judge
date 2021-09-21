@@ -31,6 +31,7 @@ class UserServiceTest {
         bio = "unit test sample bio",
         email = "d685cc4c@junit.com"
     )
+
     fun getUserAddDTO(user: User): UserAddDTO {
        return UserAddDTO(
            name = testUser.name,

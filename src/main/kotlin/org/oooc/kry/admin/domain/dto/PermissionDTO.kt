@@ -1,4 +1,4 @@
-package org.oooc.kry.auth.domain.dto
+package org.oooc.kry.admin.domain.dto
 
 data class PermissionDTO(
     val id: Long = 0,
