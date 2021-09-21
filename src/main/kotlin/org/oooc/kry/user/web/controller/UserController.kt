@@ -6,7 +6,7 @@ import org.oooc.kry.user.web.service.UserService
 import org.springframework.web.bind.annotation.*
 
 @RestController
-@RequestMapping("/user")
+@RequestMapping("/users")
 class UserController(private val userService: UserService) {
 
     // 공개된 정보는 닉네임을 통해 조회. username은 로그인 할 때만 사용합니다.
