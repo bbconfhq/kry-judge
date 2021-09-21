@@ -10,7 +10,7 @@ class Permgroup (
     val id: Long = 0,
 
     @Column(nullable = false, unique = true, length = 191)
-    var name: String = "",
+    val name: String = "",
 
     @OneToMany(mappedBy = "permgroup")
     val userPermgroups: List<UserPermgroup> = emptyList(),

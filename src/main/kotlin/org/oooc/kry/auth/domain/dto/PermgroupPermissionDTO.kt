@@ -6,11 +6,11 @@ data class PermgroupPermissionDTO(
 )
 
 data class PermgroupPermissionAddDTO(
-    val permgroupId: Long,
-    val permissionId: Long
+    val permgroup: PermgroupDTO,
+    val permission: PermissionDTO
 )
 
 data class PermgroupPermissionDeleteDTO(
-    val permgroupId: Long = 0,
-    val permissionId: Long = 0
+    val permgroup: PermgroupDTO,
+    val permission: PermissionDTO
 )

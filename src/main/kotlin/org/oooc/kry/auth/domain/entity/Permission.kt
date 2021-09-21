@@ -10,7 +10,7 @@ class Permission (
     val id: Long = 0,
 
     @Column(nullable = false, unique = true, length = 191)
-    var name: String = "",
+    val name: String = "",
 ): Serializable {
     override fun equals(other: Any?): Boolean {
         if (this === other) return true

@@ -5,11 +5,6 @@ data class PermgroupDTO(
     val name: String = "",
 )
 
-data class PermgroupUpdateDTO(
-    val id: Long = 0,
-    val name: String = ""
-)
-
 data class PermgroupAddDTO(
     val name: String = "",
 )

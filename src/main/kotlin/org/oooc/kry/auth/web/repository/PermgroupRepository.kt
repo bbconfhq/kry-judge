@@ -6,4 +6,5 @@ import org.springframework.stereotype.Repository
 
 @Repository
 interface PermgroupRepository: JpaRepository<Permgroup, Long> {
+    fun findByName(name: String): Permgroup?
 }

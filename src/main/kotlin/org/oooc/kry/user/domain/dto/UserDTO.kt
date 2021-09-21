@@ -33,3 +33,8 @@ data class UserDeleteDTO(
     val name: String = "",
     val pw: String = "",
 )
+
+data class UserAuthDTO(
+    val id: Long = 0,
+    val nick: String = "",
+)
