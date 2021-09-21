@@ -18,28 +18,28 @@ class AuthController (
         )
     }
 
-    @GetMapping("/permgroup/{permgroup_id}/permissions")
+    @GetMapping("/permgroups/{permgroup_id}/permissions")
     fun getPermissionsOfPermgroup(@PathVariable(name = "permgroup_id") permgroupId: Long): APIResponse<List<PermissionDTO>> {
         return APIResponse(
             data = authService.getPermissionsOfPermgroup(permgroupId)
         )
     }
 
-    @PostMapping("/permgroup")
+    @PostMapping("/permgroups")
     fun addPermgroup(@RequestBody permgroupAddDTO: PermgroupAddDTO): APIResponse<PermgroupDTO> {
         return APIResponse(
             data = authService.addPermgroup(permgroupAddDTO)
         )
     }
 
-    @PostMapping("/permgroup/permission")
+    @PostMapping("/permgroups/permissions")
     fun addPermissionToPermgroup(@RequestBody permgroupPermissionAddDTO: PermgroupPermissionAddDTO): APIResponse<PermgroupPermissionDTO> {
         return APIResponse(
             data = authService.addPermissionToPermgroup(permgroupPermissionAddDTO)
         )
     }
 
-    @DeleteMapping("/permgroup/{permgroup_id}")
+    @DeleteMapping("/permgroups/{permgroup_id}")
     fun deletePermgroup(@PathVariable(name = "permgroup_id") permgroupId: Long): APIResponse<CheckDTO> {
         return APIResponse(
             data = authService.deletePermgroup(permgroupId)
@@ -53,7 +53,7 @@ class AuthController (
         )
     }
 
-    @PostMapping("/permission")
+    @PostMapping("/permissions")
     fun addPermission(@RequestBody permissionAddDTO: PermissionAddDTO): APIResponse<PermissionDTO> {
         return APIResponse(
             data = authService.addPermission(permissionAddDTO)
