@@ -51,8 +51,8 @@ CREATE TABLE IF NOT EXISTS `user_permgroup`
 
 CREATE TABLE IF NOT EXISTS `permgroup_permission`
 (
-    `permission_id` BIGINT NOT NULL,
     `permgroup_id`  BIGINT NOT NULL,
+    `permission_id` BIGINT NOT NULL,
     PRIMARY KEY (`permgroup_id`, `permission_id`),
     FOREIGN KEY (`permission_id`) REFERENCES `permission` (`id`) ON DELETE CASCADE,
     FOREIGN KEY (`permgroup_id`) REFERENCES `permgroup` (`id`)  ON DELETE CASCADE

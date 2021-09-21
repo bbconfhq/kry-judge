@@ -32,13 +32,18 @@ INSERT INTO `permgroup` (`name`)
 VALUES ('staff'),
        ('admin'),
        ('guest'),
+       ('user'),
        ('moderator');
 
 INSERT INTO `permission` (`name`)
-VALUES ('create'),
-       ('delete'),
-       ('read'),
-       ('update');
+VALUES ('post_read'),
+       ('post_write'),
+       ('problem_read'),
+       ('problem_write'),
+       ('comment_read'),
+       ('comment_write'),
+       ('board_read'),
+       ('board_write');
 
 INSERT INTO `user_permgroup` (`user_id`, `permgroup_id`)
 VALUES (1, 4),
@@ -46,8 +51,22 @@ VALUES (1, 4),
        (3, 2),
        (4, 1);
 
-INSERT INTO `permgroup_permission`(`permission_id`, `permgroup_id`)
-VALUES (1, 4),
-       (2, 3),
-       (3, 2),
-       (4, 1);
+INSERT INTO `permgroup_permission`(`permgroup_id`, `permission_id`)
+VALUES ((SELECT `id` FROM `permgroup` WHERE `name` = 'guest'), (SELECT `id` FROM `permission` WHERE `name` = 'post_read')),
+       ((SELECT `id` FROM `permgroup` WHERE `name` = 'guest'), (SELECT `id` FROM `permission` WHERE `name` = 'post_write')),
+       ((SELECT `id` FROM `permgroup` WHERE `name` = 'user'),  (SELECT `id` FROM `permission` WHERE `name` = 'post_read')),
+       ((SELECT `id` FROM `permgroup` WHERE `name` = 'user'),  (SELECT `id` FROM `permission` WHERE `name` = 'post_write')),
+       ((SELECT `id` FROM `permgroup` WHERE `name` = 'user'),  (SELECT `id` FROM `permission` WHERE `name` = 'comment_read')),
+       ((SELECT `id` FROM `permgroup` WHERE `name` = 'user'),  (SELECT `id` FROM `permission` WHERE `name` = 'comment_write')),
+       ((SELECT `id` FROM `permgroup` WHERE `name` = 'staff'), (SELECT `id` FROM `permission` WHERE `name` = 'post_read')),
+       ((SELECT `id` FROM `permgroup` WHERE `name` = 'staff'), (SELECT `id` FROM `permission` WHERE `name` = 'post_write')),
+       ((SELECT `id` FROM `permgroup` WHERE `name` = 'staff'), (SELECT `id` FROM `permission` WHERE `name` = 'problem_read')),
+       ((SELECT `id` FROM `permgroup` WHERE `name` = 'staff'), (SELECT `id` FROM `permission` WHERE `name` = 'problem_write')),
+       ((SELECT `id` FROM `permgroup` WHERE `name` = 'staff'), (SELECT `id` FROM `permission` WHERE `name` = 'board_read')),
+       ((SELECT `id` FROM `permgroup` WHERE `name` = 'staff'), (SELECT `id` FROM `permission` WHERE `name` = 'board_write')),
+       ((SELECT `id` FROM `permgroup` WHERE `name` = 'staff'), (SELECT `id` FROM `permission` WHERE `name` = 'comment_read')),
+       ((SELECT `id` FROM `permgroup` WHERE `name` = 'staff'), (SELECT `id` FROM `permission` WHERE `name` = 'comment_write')),
+       ((SELECT `id` FROM `permgroup` WHERE `name` = 'admin'), (SELECT `id` FROM `permission` WHERE `name` = 'permission_read')),
+       ((SELECT `id` FROM `permgroup` WHERE `name` = 'admin'), (SELECT `id` FROM `permission` WHERE `name` = 'permission_write')),
+       ((SELECT `id` FROM `permgroup` WHERE `name` = 'admin'), (SELECT `id` FROM `permission` WHERE `name` = 'permgroup_read')),
+       ((SELECT `id` FROM `permgroup` WHERE `name` = 'admin'), (SELECT `id` FROM `permission` WHERE `name` = 'permgroup_write'));
