@@ -43,7 +43,11 @@ VALUES ('post_read'),
        ('comment_read'),
        ('comment_write'),
        ('board_read'),
-       ('board_write');
+       ('board_write'),
+       ('permission_read'),
+       ('permission_write'),
+       ('permgroup_read'),
+       ('permgroup_write');
 
 INSERT INTO `user_permgroup` (`user_id`, `permgroup_id`)
 VALUES (1, 4),
