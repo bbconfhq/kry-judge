@@ -26,12 +26,8 @@ class UserService(
         )
     }
 
-    fun getUserPrivate(): UserPrivateDTO {
-        val user = User()
-
-        /** TODO(Jerry): 2021-08-26 Session check
-         * 유저 개인정보는 세션에서 가져올 것
-         */
+    fun getUserPrivate(name: String): UserPrivateDTO {
+        val user = userRepository.findByName(name) ?: throw UserNotFoundException()
 
         return  UserPrivateDTO(
             user.name,
@@ -41,7 +37,7 @@ class UserService(
         )
     }
 
-    fun addUser(userAddDTO: UserAddDTO): UserPublicDTO {
+    fun addUser(userAddDTO: UserAddDTO): UserPrivateDTO {
         val user = userRepository.save(
             User(
                 name = userAddDTO.name,
@@ -55,7 +51,8 @@ class UserService(
             )
         )
 
-        return UserPublicDTO(
+        return UserPrivateDTO(
+            user.name,
             user.nick,
             user.email,
             user.bio

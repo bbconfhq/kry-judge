@@ -19,13 +19,17 @@ class UserController(private val userService: UserService) {
 
     @GetMapping("")
     fun getUserPrivate(): APIResponse<UserPrivateDTO> {
+        /**
+         * TODO(Jerry) 세션에서 유저 이름 가져오기
+         */
+        val name = ""
         return APIResponse(
-            data = userService.getUserPrivate()
+            data = userService.getUserPrivate(name)
         )
     }
 
     @PostMapping("")
-    fun addUser(@RequestBody userAddDTO: UserAddDTO): APIResponse<UserPublicDTO> {
+    fun addUser(@RequestBody userAddDTO: UserAddDTO): APIResponse<UserPrivateDTO> {
         return APIResponse(
             data = userService.addUser(userAddDTO)
         )
