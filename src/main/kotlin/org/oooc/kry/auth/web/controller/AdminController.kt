@@ -1,7 +1,7 @@
-package org.oooc.kry.admin.web.controller
+package org.oooc.kry.auth.web.controller
 
-import org.oooc.kry.admin.domain.dto.*
-import org.oooc.kry.admin.web.service.AdminService
+import org.oooc.kry.auth.domain.dto.*
+import org.oooc.kry.auth.web.service.AdminService
 import org.oooc.kry.global.dto.APIResponse
 import org.oooc.kry.global.dto.CheckDTO
 import org.springframework.web.bind.annotation.*

@@ -1,13 +1,13 @@
-package org.oooc.kry.admin.web.service
+package org.oooc.kry.auth.web.service
 
-import org.oooc.kry.admin.domain.dto.*
-import org.oooc.kry.admin.domain.entity.Permgroup
-import org.oooc.kry.admin.domain.entity.PermgroupPermission
-import org.oooc.kry.admin.domain.entity.PermgroupPermissionId
-import org.oooc.kry.admin.domain.entity.Permission
-import org.oooc.kry.admin.domain.exception.PermgroupNotFoundException
-import org.oooc.kry.admin.domain.exception.PermissionNotFoundException
-import org.oooc.kry.admin.web.repository.*
+import org.oooc.kry.auth.domain.dto.*
+import org.oooc.kry.auth.domain.entity.Permgroup
+import org.oooc.kry.auth.domain.entity.PermgroupPermission
+import org.oooc.kry.auth.domain.entity.PermgroupPermissionId
+import org.oooc.kry.auth.domain.entity.Permission
+import org.oooc.kry.auth.domain.exception.PermgroupNotFoundException
+import org.oooc.kry.auth.domain.exception.PermissionNotFoundException
+import org.oooc.kry.auth.web.repository.*
 import org.oooc.kry.global.dto.CheckDTO
 import org.springframework.data.repository.findByIdOrNull
 import org.springframework.stereotype.Service

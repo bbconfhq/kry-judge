@@ -1,4 +1,4 @@
-package org.oooc.kry.admin.domain.dto
+package org.oooc.kry.auth.domain.dto
 
 data class PermgroupPermissionDTO(
     val permgroup: PermgroupDTO,

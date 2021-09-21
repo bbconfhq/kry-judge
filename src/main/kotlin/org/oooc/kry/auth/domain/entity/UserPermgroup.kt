@@ -1,4 +1,4 @@
-package org.oooc.kry.admin.domain.entity
+package org.oooc.kry.auth.domain.entity
 
 import org.oooc.kry.user.domain.entity.User
 import java.io.Serializable
