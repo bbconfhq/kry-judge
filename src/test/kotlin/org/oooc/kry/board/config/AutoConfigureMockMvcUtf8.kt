@@ -8,8 +8,8 @@ import org.springframework.web.filter.CharacterEncodingFilter
 @Target(AnnotationTarget.CLASS)
 @Retention(AnnotationRetention.RUNTIME)
 @AutoConfigureMockMvc
-@Import(AutoConfigureMockMvcWithCharacterEncodingFilterOfUtf8.Config::class)
-annotation class AutoConfigureMockMvcWithCharacterEncodingFilterOfUtf8 {
+@Import(AutoConfigureMockMvcUtf8.Config::class)
+annotation class AutoConfigureMockMvcUtf8 {
     class Config {
         @Bean
         fun characterEncodingFilter(): CharacterEncodingFilter = CharacterEncodingFilter("UTF-8", true)

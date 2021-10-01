@@ -1,9 +1,11 @@
 package org.oooc.kry.global.exception
 
+import org.oooc.kry.board.exception.BoardNotFoundException
 import org.oooc.kry.global.dto.APIResponse
 import org.oooc.kry.global.dto.ErrorResponse
 import org.oooc.kry.global.enum.ErrorCode
 import org.oooc.kry.problem.exception.ProblemNotFoundException
+import org.springframework.dao.DataIntegrityViolationException
 import org.springframework.web.bind.MethodArgumentNotValidException
 import org.springframework.web.bind.annotation.ExceptionHandler
 import org.springframework.web.bind.annotation.RestControllerAdvice
@@ -14,6 +16,13 @@ class ControllerErrorAdvice {
     fun handleProblemNotFoundException(exception: ProblemNotFoundException): APIResponse<ErrorResponse> {
         return APIResponse(
             error = ErrorResponse(code = ErrorCode.PROBLEM_NOT_FOUND, message = exception.message)
+        )
+    }
+
+    @ExceptionHandler(BoardNotFoundException::class)
+    fun handleBoardNotFoundException(exception: BoardNotFoundException): APIResponse<ErrorResponse> {
+        return APIResponse(
+            error = ErrorResponse(code = ErrorCode.BOARD_NOT_FOUND, message = exception.message)
         )
     }
 
@@ -37,6 +46,13 @@ class ControllerErrorAdvice {
 
         return APIResponse(
             error = ErrorResponse(code = ErrorCode.METHOD_ARGUMENT_NOT_VALID, message = message)
+        )
+    }
+
+    @ExceptionHandler(DataIntegrityViolationException::class)
+    fun handleDataIntegrityViolationException(exception: DataIntegrityViolationException): APIResponse<ErrorResponse> {
+        return APIResponse(
+            error = ErrorResponse(code = ErrorCode.DATA_INTEGRITY_VIOLATION, message = exception.message)
         )
     }
 }

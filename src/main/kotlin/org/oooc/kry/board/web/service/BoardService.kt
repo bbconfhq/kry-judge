@@ -1,6 +1,7 @@
 package org.oooc.kry.board.web.service
 
 import org.oooc.kry.board.domain.entity.Board
+import org.oooc.kry.board.exception.BoardNotFoundException
 import org.oooc.kry.board.web.repository.BoardRepository
 import org.springframework.stereotype.Service
 import org.springframework.transaction.annotation.Transactional
@@ -24,7 +25,7 @@ class BoardService(
     fun getBoard(
         name: String
     ): Board {
-        return boardRepository.findByName(name).get()
+        return boardRepository.findByName(name) ?: throw BoardNotFoundException()
     }
 
     fun modifyBoard(
@@ -32,16 +33,16 @@ class BoardService(
         newName: String,
         newSeq: Long
     ): Board {
-        val board = boardRepository.findByName(name).get()
+        val board = boardRepository.findByName(name) ?: throw BoardNotFoundException()
         board.name = newName
         board.seq = newSeq
-        return board
+        return boardRepository.saveAndFlush(board)
     }
 
     fun deleteBoard(
         name: String
     ) {
-        val board = boardRepository.findByName(name).get()
+        val board = boardRepository.findByName(name) ?: throw BoardNotFoundException()
         boardRepository.delete(board)
     }
 
