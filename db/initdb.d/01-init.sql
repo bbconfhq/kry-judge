@@ -5,7 +5,6 @@ USE `kry`;
 
 DROP TABLE IF EXISTS `user`;
 DROP TABLE IF EXISTS `user_permgroup`;
-DROP TABLE IF EXISTS `user_permission`;
 DROP TABLE IF EXISTS `permgroup`;
 DROP TABLE IF EXISTS `permission`;
 DROP TABLE IF EXISTS `permission_permgroup`;
@@ -50,22 +49,13 @@ CREATE TABLE IF NOT EXISTS `user_permgroup`
     FOREIGN KEY (`permgroup_id`) REFERENCES `permgroup` (`id`)
 ) ENGINE = InnoDB;
 
-CREATE TABLE IF NOT EXISTS `user_permission`
-(
-    `user_id`       BIGINT NOT NULL,
-    `permission_id` BIGINT NOT NULL,
-    PRIMARY KEY (`permission_id`, `user_id`),
-    FOREIGN KEY (`user_id`) REFERENCES `user` (`id`),
-    FOREIGN KEY (`permission_id`) REFERENCES `permission` (`id`)
-) ENGINE = InnoDB;
-
 CREATE TABLE IF NOT EXISTS `permgroup_permission`
 (
-    `permission_id` BIGINT NOT NULL,
     `permgroup_id`  BIGINT NOT NULL,
+    `permission_id` BIGINT NOT NULL,
     PRIMARY KEY (`permgroup_id`, `permission_id`),
-    FOREIGN KEY (`permission_id`) REFERENCES `permission` (`id`),
-    FOREIGN KEY (`permgroup_id`) REFERENCES `permgroup` (`id`)
+    FOREIGN KEY (`permission_id`) REFERENCES `permission` (`id`) ON DELETE CASCADE,
+    FOREIGN KEY (`permgroup_id`) REFERENCES `permgroup` (`id`)  ON DELETE CASCADE
 ) ENGINE = InnoDB;
 
 CREATE TABLE `problem`
